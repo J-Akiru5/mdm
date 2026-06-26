@@ -103,28 +103,29 @@
 }
 
 .copyright {
-  text-align: center;
-  padding: var(--space-lg) 0 0;
   font-size: 13px;
   color: var(--color-gray-600);
-  border-top: none;
+  margin: 0;
+}
+
+.bottomBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg) 0 0;
 }
 
 .creditPill {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 6px;
-  margin-top: var(--space-md);
   padding: 8px 20px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 100px;
   font-size: 12px;
   color: var(--color-gray-400);
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
+  flex-shrink: 0;
 }
 
 .creditPill a {
@@ -178,6 +179,12 @@
   .grid {
     grid-template-columns: 1fr;
     gap: var(--space-lg);
+  }
+
+  .bottomBar {
+    flex-direction: column;
+    gap: var(--space-md);
+    text-align: center;
   }
 
   .watermark {

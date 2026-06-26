@@ -66,20 +66,21 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className={styles.copyright}>
-          <p>&copy; {new Date().getFullYear()} MDM Events Management. All Rights Reserved.</p>
-        </div>
-
-        <div className={styles.creditPill}>
-          <span>Powered by</span>{" "}
-          <a href="https://zenlabs.me/" target="_blank" rel="noopener noreferrer">
-            ZenLabs
-          </a>
-          <span className={styles.creditDivider}>|</span>
-          <span>Built with</span>{" "}
-          <a href="https://www.syntaxure.dev/" target="_blank" rel="noopener noreferrer">
-            Syntaxure Labs
-          </a>
+        <div className={styles.bottomBar}>
+          <p className={styles.copyright}>
+            &copy; {new Date().getFullYear()} MDM Events Management. All Rights Reserved.
+          </p>
+          <div className={styles.creditPill}>
+            <span>Powered by</span>{" "}
+            <a href="https://zenlabs.me/" target="_blank" rel="noopener noreferrer">
+              ZenLabs
+            </a>
+            <span className={styles.creditDivider}>|</span>
+            <span>Built with</span>{" "}
+            <a href="https://www.syntaxure.dev/" target="_blank" rel="noopener noreferrer">
+              Syntaxure Labs
+            </a>
+          </div>
         </div>
       </div>
 

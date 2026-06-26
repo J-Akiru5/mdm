@@ -90,7 +90,7 @@ export default function AboutPage() {
           <div className={styles.leaderCard}>
             <ScrollReveal animation="fadeInLeft" className={styles.leaderImageWrap}>
               <Image
-                src="/images/team/mary_ann.jpg"
+                src="/images/portfolio/profile.png"
                 alt="Mary Ann Matiling"
                 width={260}
                 height={260}
