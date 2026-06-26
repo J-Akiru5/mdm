@@ -3,6 +3,7 @@
 import { useState } from "react";
 import QuoteModal from "@/components/ui/QuoteModal";
 import HeroSection from "@/components/home/HeroSection";
+import ClientMarquee from "@/components/home/ClientMarquee";
 import WhyChooseUs from "@/components/home/WhyChooseUs";
 import AboutPreview from "@/components/home/AboutPreview";
 import WhatWeDo from "@/components/home/WhatWeDo";
@@ -16,6 +17,7 @@ export default function HomePage() {
   return (
     <>
       <HeroSection onQuoteOpen={() => setQuoteOpen(true)} />
+      <ClientMarquee />
       <WhyChooseUs />
       <AboutPreview />
       <WhatWeDo onQuoteOpen={() => setQuoteOpen(true)} />
