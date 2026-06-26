@@ -23,8 +23,7 @@ yarn-error.log*
 .env
 .env*.local
 
-# Legacy
-prisma/
+
 
 # Vercel
 .vercel
