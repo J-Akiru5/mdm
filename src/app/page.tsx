@@ -9,6 +9,7 @@ import AboutPreview from "@/components/home/AboutPreview";
 import WhatWeDo from "@/components/home/WhatWeDo";
 import PortfolioPreview from "@/components/home/PortfolioPreview";
 import CTABanner from "@/components/home/CTABanner";
+import Affiliations from "@/components/home/Affiliations";
 import ContactSection from "@/components/home/ContactSection";
 
 export default function HomePage() {
@@ -22,6 +23,7 @@ export default function HomePage() {
       <AboutPreview />
       <WhatWeDo onQuoteOpen={() => setQuoteOpen(true)} />
       <PortfolioPreview />
+      <Affiliations />
       <CTABanner onQuoteOpen={() => setQuoteOpen(true)} />
       <ContactSection />
       <QuoteModal isOpen={quoteOpen} onClose={() => setQuoteOpen(false)} />
