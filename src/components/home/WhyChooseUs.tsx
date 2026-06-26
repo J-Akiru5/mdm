@@ -1,3 +1,4 @@
+import SectionHeading from "../ui/SectionHeading";
 import styles from "./WhyChooseUs.module.css";
 
 const reasons = [
@@ -32,6 +33,7 @@ export default function WhyChooseUs() {
   return (
     <section className={styles.section}>
       <div className="container">
+        <SectionHeading subtitle="Our Edge" title="Why Choose Us" align="center" />
         <div className={styles.inner}>
           {reasons.map((reason) => (
             <div key={reason.number} className={styles.item}>

@@ -183,39 +183,6 @@ export default function AboutPage() {
 
       <WhyChooseUs />
 
-      {/* Services Overview */}
-      <section className="section section-off-white">
-        <div className="container">
-          <SectionHeading subtitle="What We Offer" title="Our Services" align="center" />
-          <div className={styles.servicesList}>
-            <div className={styles.serviceItem}>
-              <div className={styles.serviceBullet} />
-              <span>Event Conceptualization and Design</span>
-            </div>
-            <div className={styles.serviceItem}>
-              <div className={styles.serviceBullet} />
-              <span>Venue Selection and Management</span>
-            </div>
-            <div className={styles.serviceItem}>
-              <div className={styles.serviceBullet} />
-              <span>Catering and Beverage Services</span>
-            </div>
-            <div className={styles.serviceItem}>
-              <div className={styles.serviceBullet} />
-              <span>Entertainment and Talent Management</span>
-            </div>
-            <div className={styles.serviceItem}>
-              <div className={styles.serviceBullet} />
-              <span>Logistics and Coordination</span>
-            </div>
-            <div className={styles.serviceItem}>
-              <div className={styles.serviceBullet} />
-              <span>Marketing and Promotion</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA */}
       <section className="section section-dark" style={{ textAlign: "center" }}>
         <div className="container">

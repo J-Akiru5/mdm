@@ -17,8 +17,8 @@ export default function HomePage() {
   return (
     <>
       <HeroSection onQuoteOpen={() => setQuoteOpen(true)} />
-      <ClientMarquee />
       <CoreValues />
+      <ClientMarquee />
       <AboutPreview />
       <WhatWeDo onQuoteOpen={() => setQuoteOpen(true)} />
       <PortfolioPreview />
