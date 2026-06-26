@@ -67,7 +67,7 @@ export default function ServiceCatalog() {
               className={`${styles.item} ${activeId === svc.id ? styles.active : ""}`}
               onClick={() => scrollTo(svc.id)}
             >
-              <span className={styles.index}>0{i + 1}</span>
+              <span className={styles.index}>{String(i + 1).padStart(2, "0")}</span>
               <span>{svc.title}</span>
             </button>
           </li>

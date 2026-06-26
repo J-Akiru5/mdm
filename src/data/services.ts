@@ -220,6 +220,42 @@ export const services: Service[] = [
       },
     ],
   },
+  {
+    id: "technology-digital-solutions",
+    title: "Technology and Digital Solutions",
+    tagline: "Powering events with cutting-edge tech.",
+    description:
+      "Leverage the power of technology to elevate every touchpoint of your event. From live-streaming and hybrid event platforms to registration systems, LED walls, and interactive experiences, our tech team integrates the right digital solutions to ensure seamless connectivity and maximum audience engagement.",
+    image: "/images/services/technology.png",
+    offerings: [
+      "Hybrid and virtual event platform setup",
+      "Live streaming and broadcast production",
+      "Online and on-site registration systems",
+      "LED walls, screens, and digital signage",
+      "Event apps and audience interaction tools",
+      "Wi-Fi infrastructure and AV integration",
+    ],
+    process: [
+      {
+        step: "01",
+        title: "Assess",
+        description:
+          "We evaluate your event's technical requirements and audience engagement goals.",
+      },
+      {
+        step: "02",
+        title: "Integrate",
+        description:
+          "We deploy and configure the right technology stack for seamless event delivery.",
+      },
+      {
+        step: "03",
+        title: "Support",
+        description:
+          "Our tech team provides real-time on-site and remote support throughout your event.",
+      },
+    ],
+  },
 ];
 
 export const serviceCategories = [

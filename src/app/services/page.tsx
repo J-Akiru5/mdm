@@ -125,7 +125,7 @@ export default function ServicesPage() {
                 <div
                   className={`${styles.sectionText} ${isEven ? styles.textRight : styles.textLeft}`}
                 >
-                  <span className={styles.sectionIndex}>0{i + 1}</span>
+                  <span className={styles.sectionIndex}>{String(i + 1).padStart(2, "0")}</span>
                   <h2 className={styles.sectionTitle}>{svc.title}</h2>
                   <p className={styles.sectionTagline}>{svc.tagline}</p>
                   <p className={styles.sectionDesc}>{svc.description}</p>
