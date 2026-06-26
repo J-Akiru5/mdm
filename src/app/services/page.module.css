@@ -137,42 +137,113 @@
 }
 
 .workflowGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-lg);
-  margin-top: var(--space-xl);
+  max-width: 1100px;
+  margin: var(--space-xl) auto 0;
+}
+
+.workflowRow {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
 }
 
 .workflowStep {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-lg) var(--space-md);
   background-color: var(--color-white);
   border: 1px solid var(--color-gray-100);
   border-radius: var(--border-radius-md);
-  padding: var(--space-lg);
-  text-align: center;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-  transition:
-    box-shadow 0.3s ease,
-    transform 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
 }
 
 .workflowStep:hover {
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  transform: translateY(-4px);
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+  border-color: rgba(213, 28, 36, 0.25);
+  z-index: 2;
+}
+
+/* Animated horizontal connectors between steps */
+.connector {
+  flex: 0 0 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.connector::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: repeating-linear-gradient(
+    to right,
+    var(--color-primary) 0px,
+    var(--color-primary) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+  background-size: 20px 3px;
+  animation: dashFlowRight 1.2s linear infinite;
+  opacity: 0.45;
+}
+
+/* Animated vertical connector between rows */
+.rowConnector {
+  display: flex;
+  justify-content: center;
+  height: 50px;
+  position: relative;
+}
+
+.rowConnector::after {
+  content: "";
+  width: 3px;
+  height: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--color-primary) 0px,
+    var(--color-primary) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+  background-size: 3px 20px;
+  animation: dashFlowDown 1.2s linear infinite;
+  opacity: 0.45;
 }
 
 .stepNumber {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
   color: var(--color-white);
   font-family: var(--font-dm-sans), "DM Sans", sans-serif;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 800;
   margin-bottom: var(--space-md);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  z-index: 1;
+}
+
+.workflowStep:hover .stepNumber {
+  transform: scale(1.15);
+  box-shadow:
+    0 0 0 10px rgba(213, 28, 36, 0.1),
+    0 0 24px rgba(213, 28, 36, 0.18);
 }
 
 .stepTitle {
@@ -189,6 +260,24 @@
   color: var(--color-gray-600);
   line-height: 1.6;
   margin: 0;
+}
+
+@keyframes dashFlowRight {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 20px 0;
+  }
+}
+
+@keyframes dashFlowDown {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 20px;
+  }
 }
 
 /* CTA Banner */
@@ -218,14 +307,39 @@
 }
 
 @media (max-width: 1024px) {
-  .workflowGrid {
-    grid-template-columns: repeat(2, 1fr);
+  .connector {
+    flex: 0 0 30px;
   }
 }
 
 @media (max-width: 768px) {
-  .workflowGrid {
-    grid-template-columns: 1fr;
+  .workflowRow {
+    flex-direction: column;
+  }
+
+  .connector {
+    flex: 0 0 40px;
+    width: 100%;
+  }
+
+  .connector::after {
+    width: 3px;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--color-primary) 0px,
+      var(--color-primary) 10px,
+      transparent 10px,
+      transparent 20px
+    );
+    background-size: 3px 20px;
+  }
+
+  .rowConnector {
+    height: 40px;
   }
   .sectionInner {
     grid-template-columns: 1fr;

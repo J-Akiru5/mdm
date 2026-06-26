@@ -41,48 +41,61 @@ export default function ServicesPage() {
             align="center"
           />
           <div className={styles.workflowGrid}>
-            <div className={styles.workflowStep}>
-              <span className={styles.stepNumber}>01</span>
-              <h3 className={styles.stepTitle}>Discovery &amp; Consultation</h3>
-              <p className={styles.stepDesc}>
-                We begin by understanding your vision, goals, audience, and brand identity.
-              </p>
+            <div className={styles.workflowRow}>
+              <div className={styles.workflowStep}>
+                <span className={styles.stepNumber}>01</span>
+                <h3 className={styles.stepTitle}>Discovery &amp; Consultation</h3>
+                <p className={styles.stepDesc}>
+                  We begin by understanding your vision, goals, audience, and brand identity.
+                </p>
+              </div>
+              <div className={styles.connector} aria-hidden="true" />
+              <div className={styles.workflowStep}>
+                <span className={styles.stepNumber}>02</span>
+                <h3 className={styles.stepTitle}>Concept Development &amp; Proposal</h3>
+                <p className={styles.stepDesc}>
+                  We present a creative direction, theme, and strategy tailored to your objectives.
+                </p>
+              </div>
+              <div className={styles.connector} aria-hidden="true" />
+              <div className={styles.workflowStep}>
+                <span className={styles.stepNumber}>03</span>
+                <h3 className={styles.stepTitle}>Planning &amp; Coordination</h3>
+                <p className={styles.stepDesc}>
+                  Detailed project timeline, vendor sourcing, and logistics planning come together.
+                </p>
+              </div>
             </div>
-            <div className={styles.workflowStep}>
-              <span className={styles.stepNumber}>02</span>
-              <h3 className={styles.stepTitle}>Concept Development &amp; Proposal</h3>
-              <p className={styles.stepDesc}>
-                We present a creative direction, theme, and strategy tailored to your objectives.
-              </p>
-            </div>
-            <div className={styles.workflowStep}>
-              <span className={styles.stepNumber}>03</span>
-              <h3 className={styles.stepTitle}>Planning &amp; Coordination</h3>
-              <p className={styles.stepDesc}>
-                Detailed project timeline, vendor sourcing, and logistics planning come together.
-              </p>
-            </div>
-            <div className={styles.workflowStep}>
-              <span className={styles.stepNumber}>04</span>
-              <h3 className={styles.stepTitle}>Design &amp; Production</h3>
-              <p className={styles.stepDesc}>
-                We handle all aesthetics—stage, branding, tech, d&eacute;cor, and digital elements.
-              </p>
-            </div>
-            <div className={styles.workflowStep}>
-              <span className={styles.stepNumber}>05</span>
-              <h3 className={styles.stepTitle}>Event Execution</h3>
-              <p className={styles.stepDesc}>
-                On-site management, coordination, and contingency handling&mdash;all hands on deck.
-              </p>
-            </div>
-            <div className={styles.workflowStep}>
-              <span className={styles.stepNumber}>06</span>
-              <h3 className={styles.stepTitle}>Post-Event Evaluation</h3>
-              <p className={styles.stepDesc}>
-                We wrap up with performance metrics, client feedback, and continuous improvement
-                insights.
-              </p>
+
+            <div className={styles.rowConnector} aria-hidden="true" />
+
+            <div className={styles.workflowRow}>
+              <div className={styles.workflowStep}>
+                <span className={styles.stepNumber}>04</span>
+                <h3 className={styles.stepTitle}>Design &amp; Production</h3>
+                <p className={styles.stepDesc}>
+                  We handle all aesthetics—stage, branding, tech, d&eacute;cor, and digital
+                  elements.
+                </p>
+              </div>
+              <div className={styles.connector} aria-hidden="true" />
+              <div className={styles.workflowStep}>
+                <span className={styles.stepNumber}>05</span>
+                <h3 className={styles.stepTitle}>Event Execution</h3>
+                <p className={styles.stepDesc}>
+                  On-site management, coordination, and contingency handling&mdash;all hands on
+                  deck.
+                </p>
+              </div>
+              <div className={styles.connector} aria-hidden="true" />
+              <div className={styles.workflowStep}>
+                <span className={styles.stepNumber}>06</span>
+                <h3 className={styles.stepTitle}>Post-Event Evaluation</h3>
+                <p className={styles.stepDesc}>
+                  We wrap up with performance metrics, client feedback, and continuous improvement
+                  insights.
+                </p>
+              </div>
             </div>
           </div>
         </div>
