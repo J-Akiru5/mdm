@@ -38,7 +38,7 @@
 }
 
 .logoText {
-  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
   font-size: 24px;
   font-weight: 700;
   color: var(--color-white);
@@ -46,7 +46,7 @@
 }
 
 .logoSub {
-  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
   font-size: 10px;
   font-weight: 500;
   color: var(--color-primary);
@@ -61,7 +61,7 @@
 }
 
 .columnTitle {
-  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
   font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;

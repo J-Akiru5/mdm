@@ -16,64 +16,64 @@ This section defines the immutable design tokens and rules for the entire websit
 
 ### 🎨 Color Palette
 
-| Token | Hex | Usage |
-|---|---|---|
-| `--color-primary` | `#9B1B30` | Primary brand red — CTAs, headings, accents, active nav |
-| `--color-primary-dark` | `#7A1526` | Hover state for primary, darker accents |
-| `--color-primary-light` | `#C42B42` | Lighter red for gradients, highlights |
-| `--color-secondary` | `#1A1A2E` | Deep navy/charcoal — hero overlays, dark sections |
-| `--color-dark` | `#0D0D1A` | Header, footer, darkest backgrounds |
-| `--color-white` | `#FFFFFF` | Card backgrounds, text on dark |
-| `--color-off-white` | `#F7F7F8` | Alternate section backgrounds |
-| `--color-gray-100` | `#E8E8EC` | Borders, dividers |
-| `--color-gray-300` | `#B0B0BC` | Muted text, placeholders |
-| `--color-gray-600` | `#5A5A6E` | Body text on light backgrounds |
-| `--color-gray-900` | `#1C1C28` | Heading text on light backgrounds |
-| `--color-accent-gold` | `#D4A853` | Sparkle/premium accents (sparingly) |
+| Token                   | Hex       | Usage                                                   |
+| ----------------------- | --------- | ------------------------------------------------------- |
+| `--color-primary`       | `#9B1B30` | Primary brand red — CTAs, headings, accents, active nav |
+| `--color-primary-dark`  | `#7A1526` | Hover state for primary, darker accents                 |
+| `--color-primary-light` | `#C42B42` | Lighter red for gradients, highlights                   |
+| `--color-secondary`     | `#1A1A2E` | Deep navy/charcoal — hero overlays, dark sections       |
+| `--color-dark`          | `#0D0D1A` | Header, footer, darkest backgrounds                     |
+| `--color-white`         | `#FFFFFF` | Card backgrounds, text on dark                          |
+| `--color-off-white`     | `#F7F7F8` | Alternate section backgrounds                           |
+| `--color-gray-100`      | `#E8E8EC` | Borders, dividers                                       |
+| `--color-gray-300`      | `#B0B0BC` | Muted text, placeholders                                |
+| `--color-gray-600`      | `#5A5A6E` | Body text on light backgrounds                          |
+| `--color-gray-900`      | `#1C1C28` | Heading text on light backgrounds                       |
+| `--color-accent-gold`   | `#D4A853` | Sparkle/premium accents (sparingly)                     |
 
 ### 🔤 Typography
 
-| Role | Font | Weight | Size (Desktop) | Size (Mobile) |
-|---|---|---|---|---|
-| Display / H1 | **Playfair Display** (serif) | 700–900 | 56–64px | 36–40px |
-| H2 | **Playfair Display** | 700 | 40–48px | 28–32px |
-| H3 | **Playfair Display** | 600 | 28–32px | 22–24px |
-| Subtitle / Label | **Inter** (sans-serif) | 600 | 14px uppercase, letter-spacing 3px | 12px |
-| Body | **Inter** | 400 | 16–18px | 15–16px |
-| Small / Caption | **Inter** | 400 | 13–14px | 12–13px |
-| Nav Link | **Inter** | 500 | 15px | 14px |
-| Button | **Inter** | 600 | 15px | 14px |
+| Role             | Font                         | Weight  | Size (Desktop)                     | Size (Mobile) |
+| ---------------- | ---------------------------- | ------- | ---------------------------------- | ------------- |
+| Display / H1     | **Playfair Display** (serif) | 700–900 | 56–64px                            | 36–40px       |
+| H2               | **Playfair Display**         | 700     | 40–48px                            | 28–32px       |
+| H3               | **Playfair Display**         | 600     | 28–32px                            | 22–24px       |
+| Subtitle / Label | **Inter** (sans-serif)       | 600     | 14px uppercase, letter-spacing 3px | 12px          |
+| Body             | **Inter**                    | 400     | 16–18px                            | 15–16px       |
+| Small / Caption  | **Inter**                    | 400     | 13–14px                            | 12–13px       |
+| Nav Link         | **Inter**                    | 500     | 15px                               | 14px          |
+| Button           | **Inter**                    | 600     | 15px                               | 14px          |
 
 > [!IMPORTANT]
 > The serif font (Playfair Display) is used **exclusively** for headings and hero text. All body copy, navigation, buttons, and labels use Inter.
 
 ### 📐 Spacing & Layout
 
-| Token | Value | Usage |
-|---|---|---|
-| `--space-xs` | `4px` | Icon gaps |
-| `--space-sm` | `8px` | Tight padding |
-| `--space-md` | `16px` | Card padding, element gaps |
-| `--space-lg` | `24px` | Section padding intra |
-| `--space-xl` | `48px` | Section vertical padding |
-| `--space-2xl` | `80px` | Major section vertical spacing |
-| `--space-3xl` | `120px` | Hero height padding |
-| `--container-max` | `1200px` | Content max-width |
-| `--container-wide` | `1400px` | Edge-to-edge sections |
-| `--border-radius-sm` | `4px` | Buttons, inputs |
-| `--border-radius-md` | `8px` | Cards |
-| `--border-radius-lg` | `16px` | Feature cards |
-| `--border-radius-pill` | `50px` | Pill buttons |
+| Token                  | Value    | Usage                          |
+| ---------------------- | -------- | ------------------------------ |
+| `--space-xs`           | `4px`    | Icon gaps                      |
+| `--space-sm`           | `8px`    | Tight padding                  |
+| `--space-md`           | `16px`   | Card padding, element gaps     |
+| `--space-lg`           | `24px`   | Section padding intra          |
+| `--space-xl`           | `48px`   | Section vertical padding       |
+| `--space-2xl`          | `80px`   | Major section vertical spacing |
+| `--space-3xl`          | `120px`  | Hero height padding            |
+| `--container-max`      | `1200px` | Content max-width              |
+| `--container-wide`     | `1400px` | Edge-to-edge sections          |
+| `--border-radius-sm`   | `4px`    | Buttons, inputs                |
+| `--border-radius-md`   | `8px`    | Cards                          |
+| `--border-radius-lg`   | `16px`   | Feature cards                  |
+| `--border-radius-pill` | `50px`   | Pill buttons                   |
 
 ### 🧩 Component Design Rules
 
 #### Buttons
 
-| Variant | Background | Text | Border | Hover |
-|---|---|---|---|---|
-| **Primary** | `--color-primary` | White | None | `--color-primary-dark`, slight scale(1.02) |
-| **Outline** | Transparent | White or `--color-primary` | 2px solid matching | Fill with `--color-primary`, text → white |
-| **Ghost** | Transparent | `--color-gray-600` | None | Text → `--color-primary` |
+| Variant     | Background        | Text                       | Border             | Hover                                      |
+| ----------- | ----------------- | -------------------------- | ------------------ | ------------------------------------------ |
+| **Primary** | `--color-primary` | White                      | None               | `--color-primary-dark`, slight scale(1.02) |
+| **Outline** | Transparent       | White or `--color-primary` | 2px solid matching | Fill with `--color-primary`, text → white  |
+| **Ghost**   | Transparent       | `--color-gray-600`         | None               | Text → `--color-primary`                   |
 
 - Border radius: `--border-radius-sm` (4px)
 - Padding: `14px 32px`
@@ -92,6 +92,7 @@ This section defines the immutable design tokens and rules for the entire websit
 #### Section Pattern
 
 Alternating backgrounds:
+
 1. White (`--color-white`)
 2. Off-white (`--color-off-white`)
 3. Dark (`--color-dark` or `--color-secondary`) with white text
@@ -108,16 +109,16 @@ Every section has `padding: var(--space-2xl) 0` and is contained within `--conta
 
 ### 🎬 Animation Rules
 
-| Element | Animation | Trigger |
-|---|---|---|
-| Sections | `fadeInUp` (opacity 0→1, translateY 30px→0) | Scroll into viewport (IntersectionObserver) |
-| Cards | `fadeInUp` with staggered delay (0.1s per card) | Scroll into viewport |
-| Stats counter | Count-up from 0 to target value | Scroll into viewport |
-| Hero text | `fadeInLeft` for heading, `fadeInRight` for image | On page load |
-| Buttons | `scale(1.02)` + shadow lift | Hover |
-| Nav links | Underline slides in from left | Hover |
-| Service icons | `pulse` subtle glow | Hover |
-| Modal | `fadeIn` + `scaleUp` from 0.9→1 | Open trigger |
+| Element       | Animation                                         | Trigger                                     |
+| ------------- | ------------------------------------------------- | ------------------------------------------- |
+| Sections      | `fadeInUp` (opacity 0→1, translateY 30px→0)       | Scroll into viewport (IntersectionObserver) |
+| Cards         | `fadeInUp` with staggered delay (0.1s per card)   | Scroll into viewport                        |
+| Stats counter | Count-up from 0 to target value                   | Scroll into viewport                        |
+| Hero text     | `fadeInLeft` for heading, `fadeInRight` for image | On page load                                |
+| Buttons       | `scale(1.02)` + shadow lift                       | Hover                                       |
+| Nav links     | Underline slides in from left                     | Hover                                       |
+| Service icons | `pulse` subtle glow                               | Hover                                       |
+| Modal         | `fadeIn` + `scaleUp` from 0.9→1                   | Open trigger                                |
 
 All animations use `prefers-reduced-motion: reduce` media query to disable for accessibility.
 
@@ -210,6 +211,7 @@ S:\dev\Monorepo\MDM\
 - Generate AI placeholder images for hero, about, services, portfolio
 
 #### [NEW] [globals.css](file:///S:/dev/Monorepo/MDM/src/app/globals.css)
+
 - All CSS custom properties (design tokens from constitution above)
 - CSS reset / normalize
 - Global typography rules
@@ -222,6 +224,7 @@ S:\dev\Monorepo\MDM\
 ### Phase 1 — Shared Components
 
 #### [NEW] [Header.tsx](file:///S:/dev/Monorepo/MDM/src/components/layout/Header.tsx)
+
 - Sticky navigation with glassmorphism backdrop
 - Logo (left) + nav links (center) + "Get a Quote" button (right)
 - Links: Home, About Us, Services, Portfolio, Contact
@@ -230,12 +233,14 @@ S:\dev\Monorepo\MDM\
 - Scroll-triggered background opacity change
 
 #### [NEW] [Footer.tsx](file:///S:/dev/Monorepo/MDM/src/components/layout/Footer.tsx)
+
 - 4-column layout: Brand (logo + tagline), Quick Links, Services, Contact Info
 - Social media icon row (Facebook, Instagram, YouTube, TikTok)
 - Copyright bar at bottom
 - Dark background (`--color-dark`)
 
 #### [NEW] [QuoteModal.tsx](file:///S:/dev/Monorepo/MDM/src/components/ui/QuoteModal.tsx)
+
 - Full-screen overlay with centered card
 - Form fields: Full Name, Email, Phone, Company, Event Type (dropdown), Event Date, Message
 - Close button (X) + click-outside-to-close
@@ -243,6 +248,7 @@ S:\dev\Monorepo\MDM\
 - Non-functional submit for prototype (just closes with a "thank you" state)
 
 #### [NEW] Reusable UI components
+
 - `Button.tsx` — Primary, Outline, Ghost variants
 - `SectionHeading.tsx` — Subtitle label + serif heading + optional description
 - `Card.tsx` — Image + content pattern with hover effects
@@ -355,11 +361,13 @@ S:\dev\Monorepo\MDM\
 ## Verification Plan
 
 ### Automated Tests
+
 ```bash
 npm run build    # Verify static export compiles without errors
 ```
 
 ### Manual Verification
+
 - Browser preview of all 5 pages at desktop (1440px), tablet (768px), and mobile (375px)
 - Verify all navigation links work between pages
 - Verify "Get a Quote" modal opens/closes correctly

@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import QuoteModal from '@/components/ui/QuoteModal';
-import SectionHeading from '@/components/ui/SectionHeading';
-import StatCounter from '@/components/ui/StatCounter';
-import ScrollReveal from '@/components/ui/ScrollReveal';
-import Button from '@/components/ui/Button';
-import Image from 'next/image';
-import { stats } from '@/data/stats';
-import styles from './page.module.css';
+import { useState } from "react";
+import QuoteModal from "@/components/ui/QuoteModal";
+import SectionHeading from "@/components/ui/SectionHeading";
+import StatCounter from "@/components/ui/StatCounter";
+import ScrollReveal from "@/components/ui/ScrollReveal";
+import Button from "@/components/ui/Button";
+import Image from "next/image";
+import { stats } from "@/data/stats";
+import styles from "./page.module.css";
 
 export default function AboutPage() {
   const [quoteOpen, setQuoteOpen] = useState(false);
@@ -17,7 +17,7 @@ export default function AboutPage() {
     <>
       {/* Hero */}
       <section className={styles.hero}>
-        <div className="container" style={{ textAlign: 'center' }}>
+        <div className="container" style={{ textAlign: "center" }}>
           <span className={styles.heroLabel}>ABOUT US</span>
           <h1 className={styles.heroTitle}>We Bring Your Vision to Life.</h1>
           <p className={styles.heroSub}>
@@ -35,16 +35,14 @@ export default function AboutPage() {
                 src="/images/about_team.jpg"
                 alt="MDM Events Management Team"
                 fill
-                style={{ objectFit: 'cover', borderRadius: '12px' }}
+                style={{ objectFit: "cover", borderRadius: "12px" }}
                 sizes="(max-width:768px) 100vw, 50vw"
                 unoptimized
               />
             </ScrollReveal>
             <ScrollReveal animation="fadeInRight" className={styles.textWrap}>
               <span className={styles.sectionLabel}>WHO WE ARE</span>
-              <h2 className={styles.sectionHeading}>
-                Your Event. Professionally Handled.
-              </h2>
+              <h2 className={styles.sectionHeading}>Your Event. Professionally Handled.</h2>
               <p className={styles.text}>
                 MDM Events Management is a team of passionate planners, creatives, and
                 problem-solvers committed to delivering events that inspire and connect.
@@ -56,7 +54,10 @@ export default function AboutPage() {
               <div className={styles.statsRow}>
                 {stats.map((stat) => (
                   <div key={stat.label} className={styles.miniStat}>
-                    <span className={styles.miniStatValue}>{stat.value}{stat.suffix}</span>
+                    <span className={styles.miniStatValue}>
+                      {stat.value}
+                      {stat.suffix}
+                    </span>
                     <span className={styles.miniStatLabel}>{stat.label}</span>
                   </div>
                 ))}
@@ -87,7 +88,14 @@ export default function AboutPage() {
             <ScrollReveal>
               <div className={styles.missionCard}>
                 <div className={styles.missionIconWrap}>
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
                     <circle cx="12" cy="12" r="10" />
                     <circle cx="12" cy="12" r="6" />
                     <circle cx="12" cy="12" r="2" />
@@ -96,14 +104,22 @@ export default function AboutPage() {
                 <h3 className={styles.missionTitle}>Our Mission</h3>
                 <p className={styles.missionText}>
                   To create meaningful events that inspire, connect, and leave a lasting impact
-                  through strategic planning, creative execution, and unwavering commitment to excellence.
+                  through strategic planning, creative execution, and unwavering commitment to
+                  excellence.
                 </p>
               </div>
             </ScrollReveal>
             <ScrollReveal delay={0.15}>
               <div className={styles.missionCard}>
                 <div className={styles.missionIconWrap}>
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
                     <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                     <circle cx="12" cy="12" r="3" />
                   </svg>
@@ -120,7 +136,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="section section-dark" style={{ textAlign: 'center' }}>
+      <section className="section section-dark" style={{ textAlign: "center" }}>
         <div className="container">
           <h2 className={styles.ctaTitle}>Let&apos;s Work Together</h2>
           <p className={styles.ctaText}>Have an event in mind? We&apos;d love to hear about it.</p>

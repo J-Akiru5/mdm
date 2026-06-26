@@ -1,6 +1,3 @@
 {
-  "cSpell.ignorePaths": [
-    "**/.env",
-    "**/.env.*"
-  ]
+  "cSpell.ignorePaths": ["**/.env", "**/.env.*"]
 }

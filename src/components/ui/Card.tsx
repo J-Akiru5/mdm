@@ -6,16 +6,8 @@ interface CardProps {
   hover?: boolean;
 }
 
-export default function Card({
-  children,
-  className = "",
-  hover = true,
-}: CardProps) {
+export default function Card({ children, className = "", hover = true }: CardProps) {
   return (
-    <div
-      className={`${styles.card} ${hover ? styles.hover : ""} ${className}`}
-    >
-      {children}
-    </div>
+    <div className={`${styles.card} ${hover ? styles.hover : ""} ${className}`}>{children}</div>
   );
 }

@@ -55,7 +55,7 @@
 }
 
 .label {
-  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
   font-size: 12px;
   font-weight: 700;
   color: var(--color-gray-900);

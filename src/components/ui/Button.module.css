@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-sm);
-  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;

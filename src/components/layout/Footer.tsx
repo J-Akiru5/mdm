@@ -30,9 +30,7 @@ export default function Footer() {
                 className={styles.logoImg}
               />
             </Link>
-            <p className={styles.tagline}>
-              Events That Move People, Brands, and Communities.
-            </p>
+            <p className={styles.tagline}>Events That Move People, Brands, and Communities.</p>
           </div>
 
           <div className={styles.column}>

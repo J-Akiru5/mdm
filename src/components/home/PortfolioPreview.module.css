@@ -6,7 +6,7 @@
 }
 
 .filterBtn {
-  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
   font-size: 13px;
   font-weight: 600;
   text-transform: uppercase;
@@ -57,7 +57,7 @@
   padding: var(--space-md);
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
   color: var(--color-white);
-  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
   font-size: 14px;
   font-weight: 600;
   opacity: 0;

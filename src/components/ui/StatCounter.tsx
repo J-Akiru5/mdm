@@ -9,11 +9,7 @@ interface StatCounterProps {
   label: string;
 }
 
-export default function StatCounter({
-  value,
-  suffix = "",
-  label,
-}: StatCounterProps) {
+export default function StatCounter({ value, suffix = "", label }: StatCounterProps) {
   const [count, setCount] = useState(0);
   const [hasAnimated, setHasAnimated] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -37,7 +33,7 @@ export default function StatCounter({
           }, duration / 60);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
 
     if (ref.current) observer.observe(ref.current);

@@ -16,16 +16,10 @@ export default function SectionHeading({
   dark = false,
 }: SectionHeadingProps) {
   return (
-    <div
-      className={`${styles.heading} ${styles[align]} ${dark ? styles.dark : ""}`}
-    >
-      {subtitle && (
-        <span className={styles.subtitle}>{subtitle}</span>
-      )}
+    <div className={`${styles.heading} ${styles[align]} ${dark ? styles.dark : ""}`}>
+      {subtitle && <span className={styles.subtitle}>{subtitle}</span>}
       <h2 className={styles.title}>{title}</h2>
-      {description && (
-        <p className={styles.description}>{description}</p>
-      )}
+      {description && <p className={styles.description}>{description}</p>}
     </div>
   );
 }

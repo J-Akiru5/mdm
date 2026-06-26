@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Button from '../ui/Button';
-import styles from './CTABanner.module.css';
+import Button from "../ui/Button";
+import styles from "./CTABanner.module.css";
 
 interface CTABannerProps {
   onQuoteOpen: () => void;

@@ -1,8 +1,10 @@
 .hero {
   position: relative;
   height: 610px;
-  background: linear-gradient(90deg, #070707d9, #07070755),
-    url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1800&q=85") center / cover;
+  background:
+    linear-gradient(90deg, #070707d9, #07070755),
+    url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1800&q=85")
+      center / cover;
   overflow: hidden;
 }
 
@@ -23,12 +25,12 @@
   letter-spacing: 2px;
   font-size: 11px;
   font-weight: 700;
-  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
   margin-bottom: 15px;
 }
 
 .title {
-  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
   font-size: 60px;
   font-weight: 700;
   color: var(--color-white);
@@ -42,7 +44,7 @@
 }
 
 .subtitle {
-  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
   font-size: 18px;
   color: var(--color-white);
   line-height: 1.65;

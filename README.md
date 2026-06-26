@@ -94,5 +94,5 @@ The exported site will be generated in the `out/` folder, ready to be deployed o
 
 ### Typography
 
-- **Headings & Hero Text:** *Playfair Display* (Serif)
-- **Body, Nav & Buttons:** *Inter* (Sans-serif)
+- **Headings & Hero Text:** _Playfair Display_ (Serif)
+- **Body, Nav & Buttons:** _Inter_ (Sans-serif)

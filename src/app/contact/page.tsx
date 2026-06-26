@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import QuoteModal from '@/components/ui/QuoteModal';
-import SectionHeading from '@/components/ui/SectionHeading';
-import Button from '@/components/ui/Button';
-import styles from './page.module.css';
+import { useState } from "react";
+import QuoteModal from "@/components/ui/QuoteModal";
+import SectionHeading from "@/components/ui/SectionHeading";
+import Button from "@/components/ui/Button";
+import styles from "./page.module.css";
 
 export default function ContactPage() {
   const [quoteOpen, setQuoteOpen] = useState(false);
@@ -20,7 +20,7 @@ export default function ContactPage() {
     <>
       {/* Hero */}
       <section className={styles.hero}>
-        <div className="container" style={{ textAlign: 'center' }}>
+        <div className="container" style={{ textAlign: "center" }}>
           <span className={styles.heroLabel}>CONTACT US</span>
           <h1 className={styles.heroTitle}>Let&apos;s Create Something Amazing Together.</h1>
         </div>
@@ -41,8 +41,15 @@ export default function ContactPage() {
               <div className={styles.infoItems}>
                 <div className={styles.infoItem}>
                   <div className={styles.infoIconWrap}>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.92 12a19.79 19.79 0 01-3.07-8.67A2 2 0 012.83 1.2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.93a16 16 0 006.16 6.16l1.1-1.1a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7a2 2 0 011.72 2.03z"/>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.92 12a19.79 19.79 0 01-3.07-8.67A2 2 0 012.83 1.2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.93a16 16 0 006.16 6.16l1.1-1.1a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7a2 2 0 011.72 2.03z" />
                     </svg>
                   </div>
                   <div>
@@ -53,9 +60,16 @@ export default function ContactPage() {
 
                 <div className={styles.infoItem}>
                   <div className={styles.infoIconWrap}>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                      <polyline points="22,6 12,13 2,6"/>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                      <polyline points="22,6 12,13 2,6" />
                     </svg>
                   </div>
                   <div>
@@ -66,9 +80,16 @@ export default function ContactPage() {
 
                 <div className={styles.infoItem}>
                   <div className={styles.infoIconWrap}>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
-                      <circle cx="12" cy="10" r="3"/>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                      <circle cx="12" cy="10" r="3" />
                     </svg>
                   </div>
                   <div>
@@ -79,9 +100,16 @@ export default function ContactPage() {
 
                 <div className={styles.infoItem}>
                   <div className={styles.infoIconWrap}>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <circle cx="12" cy="12" r="10"/>
-                      <polyline points="12,6 12,12 16,14"/>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <polyline points="12,6 12,12 16,14" />
                     </svg>
                   </div>
                   <div>
@@ -93,30 +121,37 @@ export default function ContactPage() {
 
               {/* Social Links */}
               <div className={styles.socials}>
-                {['facebook', 'instagram', 'youtube', 'tiktok'].map((s) => (
+                {["facebook", "instagram", "youtube", "tiktok"].map((s) => (
                   <a key={s} href="#" className={styles.social} aria-label={s}>
                     <span className={styles.socialIcon}>
-                      {s === 'facebook' && (
+                      {s === "facebook" && (
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+                          <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
                         </svg>
                       )}
-                      {s === 'instagram' && (
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                          <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
-                          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                      {s === "instagram" && (
+                        <svg
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                          <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
+                          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                         </svg>
                       )}
-                      {s === 'youtube' && (
+                      {s === "youtube" && (
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.95C18.88 4 12 4 12 4s-6.88 0-8.59.47a2.78 2.78 0 00-1.95 1.95A29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/>
-                          <polygon points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02" fill="white"/>
+                          <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.95C18.88 4 12 4 12 4s-6.88 0-8.59.47a2.78 2.78 0 00-1.95 1.95A29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z" />
+                          <polygon points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02" fill="white" />
                         </svg>
                       )}
-                      {s === 'tiktok' && (
+                      {s === "tiktok" && (
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.31 6.31 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.75a8.16 8.16 0 004.77 1.52V6.8a4.85 4.85 0 01-1-.11z"/>
+                          <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.31 6.31 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.75a8.16 8.16 0 004.77 1.52V6.8a4.85 4.85 0 01-1-.11z" />
                         </svg>
                       )}
                     </span>
@@ -138,28 +173,52 @@ export default function ContactPage() {
                   <div className={styles.formRow}>
                     <div className={styles.formGroup}>
                       <label htmlFor="fullName">Full Name</label>
-                      <input id="fullName" type="text" placeholder="Juan dela Cruz" className={styles.input} required />
+                      <input
+                        id="fullName"
+                        type="text"
+                        placeholder="Juan dela Cruz"
+                        className={styles.input}
+                        required
+                      />
                     </div>
                     <div className={styles.formGroup}>
                       <label htmlFor="company">Company / Organization</label>
-                      <input id="company" type="text" placeholder="Company Name" className={styles.input} />
+                      <input
+                        id="company"
+                        type="text"
+                        placeholder="Company Name"
+                        className={styles.input}
+                      />
                     </div>
                   </div>
                   <div className={styles.formRow}>
                     <div className={styles.formGroup}>
                       <label htmlFor="email">Email Address</label>
-                      <input id="email" type="email" placeholder="you@example.com" className={styles.input} required />
+                      <input
+                        id="email"
+                        type="email"
+                        placeholder="you@example.com"
+                        className={styles.input}
+                        required
+                      />
                     </div>
                     <div className={styles.formGroup}>
                       <label htmlFor="phone">Phone Number</label>
-                      <input id="phone" type="tel" placeholder="+63 912 345 6789" className={styles.input} />
+                      <input
+                        id="phone"
+                        type="tel"
+                        placeholder="+63 912 345 6789"
+                        className={styles.input}
+                      />
                     </div>
                   </div>
                   <div className={styles.formRow}>
                     <div className={styles.formGroup}>
                       <label htmlFor="eventType">Event Type</label>
                       <select id="eventType" className={styles.input} defaultValue="">
-                        <option value="" disabled>Select event type</option>
+                        <option value="" disabled>
+                          Select event type
+                        </option>
                         <option value="corporate">Corporate Event</option>
                         <option value="government">Government Event</option>
                         <option value="launch">Brand Launch</option>
@@ -175,9 +234,16 @@ export default function ContactPage() {
                   </div>
                   <div className={styles.formGroup}>
                     <label htmlFor="message">Your Message</label>
-                    <textarea id="message" placeholder="Tell us about your event..." className={styles.textarea} rows={5} />
+                    <textarea
+                      id="message"
+                      placeholder="Tell us about your event..."
+                      className={styles.textarea}
+                      rows={5}
+                    />
                   </div>
-                  <Button type="submit" className={styles.submitBtn}>Send Message</Button>
+                  <Button type="submit" className={styles.submitBtn}>
+                    Send Message
+                  </Button>
                 </>
               )}
             </form>
@@ -191,7 +257,7 @@ export default function ContactPage() {
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62782.39867741693!2d122.50780849999999!3d10.7201794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33aee56d7f20cfc5%3A0x1db37a10e3a7aa24!2sIloilo%20City%2C%20Iloilo!5e0!3m2!1sen!2sph!4v1700000000000!5m2!1sen!2sph"
           width="100%"
           height="400"
-          style={{ border: 0, display: 'block' }}
+          style={{ border: 0, display: "block" }}
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"

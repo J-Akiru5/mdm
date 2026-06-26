@@ -2,7 +2,7 @@ import styles from "./Button.module.css";
 
 interface ButtonProps {
   children: React.ReactNode;
-  variant?: 'primary' | 'outline' | 'outlineDark' | 'ghost';
+  variant?: "primary" | "outline" | "outlineDark" | "ghost";
   as?: "button" | "a";
   href?: string;
   onClick?: () => void;
@@ -21,9 +21,7 @@ export default function Button({
   className = "",
   disabled = false,
 }: ButtonProps) {
-  const classNames = [styles.button, styles[variant], className]
-    .filter(Boolean)
-    .join(" ");
+  const classNames = [styles.button, styles[variant], className].filter(Boolean).join(" ");
 
   if (as === "a" && href) {
     return (
