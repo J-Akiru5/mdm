@@ -6,6 +6,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import Button from "@/components/ui/Button";
 import Image from "next/image";
+import Link from "next/link";
 import { services } from "@/data/services";
 import styles from "./page.module.css";
 
@@ -38,9 +39,10 @@ export default function ServicesPage() {
       <section className="section">
         <div className="container">
           <div className={styles.grid}>
-            {services.map((service, i) => (
-              <ScrollReveal key={service.id} delay={(i % 3) * 0.1}>
-                <div className={styles.card}>
+            {services.map((service, i) => {
+              const isTech = service.id === "technology-support";
+              const cardContent = (
+                <div className={`${styles.card} ${isTech ? styles.cardLinked : ""}`}>
                   <div className={styles.cardImageWrap}>
                     <Image
                       src={serviceImages[service.id] || "/images/hero_event.jpg"}
@@ -56,8 +58,20 @@ export default function ServicesPage() {
                     <p className={styles.cardDesc}>{service.description}</p>
                   </div>
                 </div>
-              </ScrollReveal>
-            ))}
+              );
+              if (isTech) {
+                return (
+                  <Link href="/services/technology" key={service.id} className={styles.cardLink}>
+                    {cardContent}
+                  </Link>
+                );
+              }
+              return (
+                <ScrollReveal key={service.id} delay={(i % 3) * 0.1}>
+                  {cardContent}
+                </ScrollReveal>
+              );
+            })}
           </div>
         </div>
       </section>

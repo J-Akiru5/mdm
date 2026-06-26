@@ -1,13 +1,18 @@
 .footer {
   background-color: var(--color-dark);
   color: var(--color-gray-300);
-  padding: var(--space-2xl) 0 0;
+  padding: var(--space-2xl) 0 var(--space-md);
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 !important; /* Ensure sharp edges */
 }
 
 .inner {
   max-width: var(--container-wide);
   margin: 0 auto;
   padding: 0 6%;
+  position: relative;
+  z-index: 2; /* Content sits above watermark */
 }
 
 .grid {
@@ -28,6 +33,7 @@
   display: flex;
   align-items: center;
   text-decoration: none;
+  border-radius: 0 !important;
 }
 
 .logoImg {
@@ -35,10 +41,11 @@
   max-height: 60px;
   width: auto;
   height: auto;
+  border-radius: 0 !important;
 }
 
 .logoText {
-  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
+  font-family: var(--font-heading);
   font-size: 24px;
   font-weight: 700;
   color: var(--color-white);
@@ -46,7 +53,7 @@
 }
 
 .logoSub {
-  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
+  font-family: var(--font-heading);
   font-size: 10px;
   font-weight: 500;
   color: var(--color-primary);
@@ -61,7 +68,7 @@
 }
 
 .columnTitle {
-  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
+  font-family: var(--font-heading);
   font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
@@ -74,32 +81,74 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
+  padding: 0;
+  list-style: none;
 }
 
 .columnLinks a {
   font-size: 14px;
   color: var(--color-gray-300);
   transition: color 0.3s;
+  text-decoration: none;
+  border-radius: 0 !important;
 }
 
 .columnLinks a:hover {
-  color: var(--color-primary);
+  color: var(--color-primary-light);
 }
 
 .columnLinks li {
   font-size: 14px;
+  line-height: 1.6;
 }
 
 .copyright {
   text-align: center;
-  padding: var(--space-lg) 0;
+  padding: var(--space-lg) 0 0;
   font-size: 13px;
   color: var(--color-gray-600);
+  border-top: none;
 }
 
-@media (max-width: 768px) {
+/* Modern large watermark styling with sharp/brutalist type design */
+.watermark {
+  position: absolute;
+  bottom: -4.5vw; /* Positioned overlapping the bottom layout */
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-heading);
+  font-size: 16.5vw; /* Large, responsive typography */
+  font-weight: 900;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.022); /* Ultra-low opacity white for watermark look */
+  letter-spacing: -0.04em;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+@media (max-width: 850px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .watermark {
+    font-size: 18vw;
+    bottom: -5vw;
+  }
+}
+
+@media (max-width: 500px) {
   .grid {
     grid-template-columns: 1fr;
     gap: var(--space-lg);
+  }
+
+  .watermark {
+    font-size: 20vw;
+    bottom: -6vw;
   }
 }

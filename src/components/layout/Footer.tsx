@@ -69,6 +69,11 @@ export default function Footer() {
           <p>&copy; {new Date().getFullYear()} MDM Events Management. All Rights Reserved.</p>
         </div>
       </div>
+
+      {/* Huge modern watermark background with sharp design styling */}
+      <div className={styles.watermark} aria-hidden="true">
+        MDMevents
+      </div>
     </footer>
   );
 }
