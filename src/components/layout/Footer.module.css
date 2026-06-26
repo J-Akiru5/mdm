@@ -1,11 +1,10 @@
 .footer {
-  background-color: var(--color-white);
-  color: var(--color-gray-600);
+  background-color: var(--color-dark);
+  color: var(--color-gray-300);
   padding: var(--space-2xl) 0 var(--space-md);
   position: relative;
   overflow: hidden;
   border-radius: 0 !important; /* Ensure sharp edges */
-  border-top: 1px solid var(--color-gray-100);
 }
 
 .inner {
@@ -21,7 +20,7 @@
   grid-template-columns: 2fr 1fr 1fr 1.5fr;
   gap: var(--space-xl);
   padding-bottom: var(--space-xl);
-  border-bottom: 1px solid var(--color-gray-100);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .brand {
@@ -74,7 +73,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: var(--color-gray-900);
+  color: var(--color-white);
   margin-bottom: var(--space-lg);
 }
 
@@ -88,14 +87,14 @@
 
 .columnLinks a {
   font-size: 14px;
-  color: var(--color-gray-600);
+  color: var(--color-gray-300);
   transition: color 0.3s;
   text-decoration: none;
   border-radius: 0 !important;
 }
 
 .columnLinks a:hover {
-  color: var(--color-primary);
+  color: var(--color-primary-light);
 }
 
 .columnLinks li {
@@ -121,7 +120,7 @@
   font-size: 16.5vw; /* Large, responsive typography */
   font-weight: 900;
   text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.015); /* Ultra-low opacity black for watermark look */
+  color: rgba(255, 255, 255, 0.022); /* Ultra-low opacity white for watermark look */
   letter-spacing: -0.04em;
   line-height: 1;
   pointer-events: none;

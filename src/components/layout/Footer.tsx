@@ -23,7 +23,7 @@ export default function Footer() {
           <div className={styles.brand}>
             <Link href="/" className={styles.logo}>
               <Image
-                src="/logo/mdm_logo.png"
+                src="/logo/mdm_logo.jpg"
                 alt="MDM Events Management Logo"
                 width={106}
                 height={60}
