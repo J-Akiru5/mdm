@@ -1,21 +1,20 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import QuoteModal from '@/components/ui/QuoteModal';
-import SectionHeading from '@/components/ui/SectionHeading';
-import ScrollReveal from '@/components/ui/ScrollReveal';
-import Button from '@/components/ui/Button';
-import Image from 'next/image';
-import { services } from '@/data/services';
-import styles from './page.module.css';
+import { useState } from "react";
+import QuoteModal from "@/components/ui/QuoteModal";
+import SectionHeading from "@/components/ui/SectionHeading";
+import ScrollReveal from "@/components/ui/ScrollReveal";
+import Button from "@/components/ui/Button";
+import Image from "next/image";
+import { services } from "@/data/services";
+import styles from "./page.module.css";
 
 const serviceImages: Record<string, string> = {
-  'event-planning': '/images/services/planning.jpg',
-  'event-production': '/images/services/production.jpg',
-  'event-management': '/images/services/management.jpg',
-  'venue-supplier': '/images/services/venue.jpg',
-  'registration': '/images/services/registration.jpg',
-  'branding-design': '/images/services/branding.jpg',
+  "event-planning": "/images/services/planning.jpg",
+  "event-production": "/images/services/production.jpg",
+  "event-management": "/images/services/management.jpg",
+  "branding-design": "/images/services/branding.jpg",
+  "technology-support": "/images/services/technology.png",
 };
 
 export default function ServicesPage() {
@@ -25,11 +24,12 @@ export default function ServicesPage() {
     <>
       {/* Hero */}
       <section className={styles.hero}>
-        <div className="container" style={{ textAlign: 'center' }}>
+        <div className="container" style={{ textAlign: "center" }}>
           <span className={styles.heroLabel}>OUR SERVICES</span>
           <h1 className={styles.heroTitle}>Solutions for Every Type of Event.</h1>
           <p className={styles.heroSub}>
-            From planning to production, we provide end-to-end event management services tailored to your needs.
+            From planning to production, we provide end-to-end event management services tailored to
+            your needs.
           </p>
         </div>
       </section>
@@ -43,10 +43,10 @@ export default function ServicesPage() {
                 <div className={styles.card}>
                   <div className={styles.cardImageWrap}>
                     <Image
-                      src={serviceImages[service.id] || '/images/hero_event.jpg'}
+                      src={serviceImages[service.id] || "/images/hero_event.jpg"}
                       alt={service.title}
                       fill
-                      style={{ objectFit: 'cover' }}
+                      style={{ objectFit: "cover" }}
                       sizes="(max-width:768px) 100vw, 33vw"
                       unoptimized
                     />

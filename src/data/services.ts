@@ -25,22 +25,16 @@ export const services: Service[] = [
     icon: "users",
   },
   {
-    id: "venue-supplier",
-    title: "Venue & Supplier Management",
-    description: "Sourcing and coordinating the best venues and vendors for your event.",
-    icon: "map-pin",
-  },
-  {
-    id: "registration",
-    title: "Registration & Guest Management",
-    description: "Attendee registration, check-in systems, and guest experience management.",
-    icon: "check-square",
-  },
-  {
     id: "branding-design",
     title: "Branding & Design",
     description: "Backdrops, signage, booth design, and marketing materials for your brand.",
     icon: "pen-tool",
+  },
+  {
+    id: "technology-support",
+    title: "Technology & Support",
+    description: "Live streaming, event apps, AV systems, and on-site technical support.",
+    icon: "cpu",
   },
 ];
 
