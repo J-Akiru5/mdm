@@ -8,6 +8,7 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import Button from "@/components/ui/Button";
 import { services } from "@/data/services";
 import HeroGlobe from "@/components/ui/HeroGlobe";
+import ServiceCatalog from "@/components/services/ServiceCatalog";
 import styles from "./page.module.css";
 
 export default function ServicesPage() {
@@ -27,11 +28,16 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      <ServiceCatalog />
+
       {services.map((svc, i) => {
         const isEven = i % 2 === 0;
         return (
           <ScrollReveal key={svc.id}>
-            <section className={`${styles.section} ${isEven ? "" : styles.sectionAlt}`}>
+            <section
+              id={`service-${svc.id}`}
+              className={`${styles.section} ${isEven ? "" : styles.sectionAlt}`}
+            >
               <div className={`container ${styles.sectionInner}`}>
                 <div
                   className={`${styles.sectionImage} ${isEven ? styles.imageLeft : styles.imageRight}`}
