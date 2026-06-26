@@ -1,15 +1,15 @@
 "use client";
 
-import { serviceCategories } from "@/data/services";
+import { services } from "@/data/services";
 import SectionHeading from "../ui/SectionHeading";
 import ScrollReveal from "../ui/ScrollReveal";
 import styles from "./WhatWeDo.module.css";
 
-const categoryIcons: Record<string, React.ReactNode> = {
-  corporate: (
+const serviceIcons: Record<string, React.ReactNode> = {
+  "event-conceptualization-design": (
     <svg
-      width="28"
-      height="28"
+      width="22"
+      height="22"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -17,14 +17,14 @@ const categoryIcons: Record<string, React.ReactNode> = {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
-      <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" />
+      <circle cx="12" cy="12" r="3" />
+      <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
     </svg>
   ),
-  government: (
+  "venue-selection-management": (
     <svg
-      width="28"
-      height="28"
+      width="22"
+      height="22"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -32,18 +32,15 @@ const categoryIcons: Record<string, React.ReactNode> = {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <line x1="3" y1="22" x2="21" y2="22" />
-      <line x1="6" y1="18" x2="6" y2="11" />
-      <line x1="10" y1="18" x2="10" y2="11" />
-      <line x1="14" y1="18" x2="14" y2="11" />
-      <line x1="18" y1="18" x2="18" y2="11" />
-      <polygon points="12,2 20,7 4,7" />
+      <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+      <line x1="8" y1="21" x2="16" y2="21" />
+      <line x1="12" y1="17" x2="12" y2="21" />
     </svg>
   ),
-  "brand-activations": (
+  "catering-beverage-services": (
     <svg
-      width="28"
-      height="28"
+      width="22"
+      height="22"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -51,13 +48,17 @@ const categoryIcons: Record<string, React.ReactNode> = {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
+      <path d="M18 8h1a4 4 0 010 8h-1" />
+      <path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z" />
+      <line x1="6" y1="1" x2="6" y2="4" />
+      <line x1="10" y1="1" x2="10" y2="4" />
+      <line x1="14" y1="1" x2="14" y2="4" />
     </svg>
   ),
-  festivals: (
+  "entertainment-talent-management": (
     <svg
-      width="28"
-      height="28"
+      width="22"
+      height="22"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -70,10 +71,10 @@ const categoryIcons: Record<string, React.ReactNode> = {
       <circle cx="18" cy="16" r="3" />
     </svg>
   ),
-  exhibits: (
+  "logistics-coordination": (
     <svg
-      width="28"
-      height="28"
+      width="22"
+      height="22"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -81,15 +82,14 @@ const categoryIcons: Record<string, React.ReactNode> = {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-      <line x1="3" y1="9" x2="21" y2="9" />
-      <line x1="9" y1="21" x2="9" y2="9" />
+      <circle cx="12" cy="12" r="10" />
+      <polyline points="12 6 12 12 16 14" />
     </svg>
   ),
-  production: (
+  "marketing-promotion": (
     <svg
-      width="28"
-      height="28"
+      width="22"
+      height="22"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -97,8 +97,9 @@ const categoryIcons: Record<string, React.ReactNode> = {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <polygon points="23,7 16,12 23,17" />
-      <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+      <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
+      <line x1="12" y1="6" x2="12" y2="14" />
+      <line x1="8" y1="10" x2="16" y2="10" />
     </svg>
   ),
 };
@@ -119,12 +120,12 @@ export default function WhatWeDo({ onQuoteOpen }: WhatWeDoProps) {
           align="center"
         />
         <div className={styles.grid}>
-          {serviceCategories.map((cat, i) => (
-            <ScrollReveal key={cat.id} delay={i * 0.1}>
+          {services.map((svc, i) => (
+            <ScrollReveal key={svc.id} delay={i * 0.1}>
               <div className={styles.card}>
-                <div className={styles.iconWrap}>{categoryIcons[cat.id]}</div>
-                <h3 className={styles.cardTitle}>{cat.title}</h3>
-                <p className={styles.cardDesc}>{cat.description}</p>
+                <div className={styles.iconWrap}>{serviceIcons[svc.id]}</div>
+                <h3 className={styles.cardTitle}>{svc.title}</h3>
+                <p className={styles.cardDesc}>{svc.tagline}</p>
               </div>
             </ScrollReveal>
           ))}

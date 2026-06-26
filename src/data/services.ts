@@ -14,174 +14,209 @@ export interface Service {
 
 export const services: Service[] = [
   {
-    id: "event-planning",
-    title: "Event Planning",
-    tagline: "From concept to execution, we plan every detail.",
+    id: "event-conceptualization-design",
+    title: "Event Conceptualization and Design",
+    tagline: "Where big ideas take shape.",
     description:
-      "Great events don\u2019t happen by chance. Our planning process starts with a deep understanding of your vision, goals, and audience. From venue selection and budget management to timeline creation and vendor coordination, we build a comprehensive roadmap that ensures every detail is accounted for long before the doors open.",
-    image: "/images/services/planning.jpg",
+      "Every unforgettable event starts with a powerful idea. Our creative team works closely with you to conceptualize and design events that align with your brand, captivate your audience, and deliver measurable impact. From theme development to visual storytelling, we turn your vision into a compelling event blueprint.",
+    image: "/images/services/conceptualization.jpg",
     offerings: [
-      "Venue selection, sourcing, and contract negotiation",
-      "Budget planning, tracking, and reconciliation",
-      "Timeline and milestone creation",
-      "Vendor sourcing, vetting, and coordination",
-      "Risk assessment and contingency planning",
       "Creative concept and theme development",
-    ],
-    process: [
-      {
-        step: "01",
-        title: "Discovery",
-        description: "We learn your brand, goals, audience, and budget to shape the vision.",
-      },
-      {
-        step: "02",
-        title: "Strategy",
-        description: "We build a detailed plan covering venue, vendors, timeline, and logistics.",
-      },
-      {
-        step: "03",
-        title: "Execution",
-        description: "We oversee every detail from setup to breakdown, ensuring a seamless event.",
-      },
-    ],
-  },
-  {
-    id: "event-production",
-    title: "Event Production",
-    tagline: "Stage, lights, sound \u2014 we bring your vision to life.",
-    description:
-      "Production is where your event comes alive. Our technical team designs, rigs, and operates state-of-the-art stage setups, lighting rigs, sound systems, and visual displays. Whether it\u2019s an intimate presentation or a large-scale concert, we deliver production value that captivates audiences and elevates your brand.",
-    image: "/images/services/production.jpg",
-    offerings: [
-      "Stage design, construction, and dressing",
-      "Professional sound engineering and PA systems",
-      "Architectural and stage lighting design",
-      "LED walls, projection, and video processing",
-      "Audio-visual equipment and systems integration",
-      "Multi-camera live streaming and recording",
-    ],
-    process: [
-      {
-        step: "01",
-        title: "Design",
-        description:
-          "We translate your vision into technical drawings, rigging plans, and gear lists.",
-      },
-      {
-        step: "02",
-        title: "Build",
-        description: "Our crew installs, configures, and tests all systems before show day.",
-      },
-      {
-        step: "03",
-        title: "Deliver",
-        description:
-          "We run the show with precision \u2014 live mixing, switching, and real-time adjustments.",
-      },
-    ],
-  },
-  {
-    id: "event-management",
-    title: "Event Management",
-    tagline: "Flawless on-ground execution, every time.",
-    description:
-      "On the day, every second counts. Our on-site management team coordinates vendors, directs staff, manages guest flow, and handles real-time logistics so you can focus on your guests and your message. From registration to teardown, we keep everything running smoothly behind the scenes.",
-    image: "/images/services/management.jpg",
-    offerings: [
-      "On-site vendor management and communication",
-      "Staff briefing, scheduling, and supervision",
-      "Guest registration, check-in, and hospitality",
-      "Transportation, accommodation, and catering logistics",
-      "Real-time troubleshooting and crisis management",
-      "Post-event reporting and debrief",
-    ],
-    process: [
-      {
-        step: "01",
-        title: "Plan",
-        description:
-          "We develop detailed run-of-show documents, staff rosters, and contingency plans.",
-      },
-      {
-        step: "02",
-        title: "Execute",
-        description: "Our team manages every moving part on the ground, from load-in to load-out.",
-      },
-      {
-        step: "03",
-        title: "Review",
-        description:
-          "We gather feedback, analyze metrics, and deliver a comprehensive post-event report.",
-      },
-    ],
-  },
-  {
-    id: "branding-design",
-    title: "Branding & Design",
-    tagline: "Your brand, unforgettable at every touchpoint.",
-    description:
-      "Your event is an extension of your brand. Our design team creates cohesive visual experiences that communicate your identity across every element \u2014 from stage backdrops and signage to digital assets and printed materials. We ensure your brand looks and feels consistent, professional, and impactful.",
-    image: "/images/services/branding.jpg",
-    offerings: [
-      "Custom stage backdrop and set design",
-      "Directional signage, banners, and wayfinding",
-      "Trade show booth design and fabrication",
-      "Marketing collateral, invitations, and programs",
-      "Digital assets, social graphics, and presentations",
-      "Brand guidelines and visual identity systems",
+      "Mood boards and visual storytelling",
+      "Program flow and experience design",
+      "Budget-aligned creative proposals",
+      "Brand integration and messaging",
+      "Presentation decks and pitch materials",
     ],
     process: [
       {
         step: "01",
         title: "Discover",
         description:
-          "We study your brand identity, audience, and event theme to inform the design direction.",
+          "We dive deep into your brand, goals, audience, and budget to uncover the core idea.",
       },
       {
         step: "02",
-        title: "Design",
+        title: "Conceptualize",
         description:
-          "We create mood boards, mockups, and production-ready artwork for your approval.",
+          "We craft a creative direction, theme, and program flow that brings your vision to life.",
       },
       {
         step: "03",
-        title: "Deploy",
-        description: "We produce, print, and install all branded elements at the venue.",
+        title: "Design",
+        description:
+          "We produce mood boards, renderings, and detailed proposals for your approval.",
       },
     ],
   },
   {
-    id: "technology-support",
-    title: "Technology & Support",
-    tagline: "Technology that powers modern events.",
+    id: "venue-selection-management",
+    title: "Venue Selection and Management",
+    tagline: "The perfect setting for every moment.",
     description:
-      "Beyond organizing events, MDM integrates technology that makes every event smarter, more engaging, and more measurable. From registration software and event apps to LED walls and AI-powered engagement tools, we deliver complete technology solutions tailored to your event.",
-    image: "/images/services/technology.png",
+      "The venue sets the stage for your entire event. We leverage our extensive network of partners to find, negotiate, and manage the ideal venue for your occasion — whether it's a grand ballroom, an open-air festival ground, or an intimate corporate boardroom. We handle site inspections, contracts, and on-site coordination so you don't have to.",
+    image: "/images/services/venue.jpg",
     offerings: [
-      "Event registration and ticketing platforms",
-      "Mobile event applications and attendee portals",
-      "LED walls, digital signage, and AV systems",
-      "Livestream and hybrid event platforms",
-      "Wi-Fi and network infrastructure",
-      "On-site technical support and help desk",
+      "Venue sourcing and shortlisting",
+      "Site inspection coordination",
+      "Contract negotiation and booking",
+      "Permits and compliance management",
+      "Floor plan and layout planning",
+      "On-site venue coordination",
     ],
     process: [
       {
         step: "01",
-        title: "Assess",
+        title: "Source",
         description:
-          "We evaluate your technical requirements, venue infrastructure, and attendee needs.",
+          "We identify and shortlist venues that match your vision, guest count, and budget.",
       },
       {
         step: "02",
-        title: "Integrate",
-        description: "We deploy, configure, and test all hardware and software systems.",
+        title: "Secure",
+        description: "We negotiate contracts, manage deposits, and secure all necessary permits.",
       },
       {
         step: "03",
-        title: "Support",
-        description: "We provide on-site engineers and remote monitoring throughout your event.",
+        title: "Manage",
+        description: "We coordinate with venue staff and oversee every on-site detail.",
+      },
+    ],
+  },
+  {
+    id: "catering-beverage-services",
+    title: "Catering and Beverage Services",
+    tagline: "Exceptional food, unforgettable experiences.",
+    description:
+      "Great food leaves a lasting impression. Our catering partners deliver culinary experiences tailored to your theme, audience, and dietary requirements — from elegant sit-down dinners and buffet spreads to vibrant cocktail receptions and festival food parks. Every menu is crafted to delight and satisfy.",
+    image: "/images/services/catering.jpg",
+    offerings: [
+      "Menu planning and customization",
+      "Fine dining, buffet, and cocktail setups",
+      "Dietary accommodation (halal, vegan, gluten-free)",
+      "Food tasting and quality control",
+      "Beverage bar and mixology services",
+      "Waitstaff and service team management",
+    ],
+    process: [
+      {
+        step: "01",
+        title: "Plan",
+        description:
+          "We work with you to design a menu that fits your theme, audience, and dietary needs.",
+      },
+      {
+        step: "02",
+        title: "Prepare",
+        description:
+          "Our catering partners source ingredients and prepare every dish to the highest standard.",
+      },
+      {
+        step: "03",
+        title: "Serve",
+        description:
+          "We manage food flow, service timing, and guest satisfaction throughout the event.",
+      },
+    ],
+  },
+  {
+    id: "entertainment-talent-management",
+    title: "Entertainment and Talent Management",
+    tagline: "Performances that captivate.",
+    description:
+      "The right entertainment elevates any event from ordinary to extraordinary. We book, manage, and produce live performances — from top musical acts, hosts, and emcees to cultural performers, keynote speakers, and specialty acts. Our roster of talent is curated to match your audience and event theme perfectly.",
+    image: "/images/services/entertainment.jpg",
+    offerings: [
+      "Live band, DJ, and musical act booking",
+      "Hosts, emcees, and keynote speakers",
+      "Cultural and specialty performers",
+      "Sound check and rehearsal coordination",
+      "Performance schedule and run-of-show",
+      "Talent hospitality and rider management",
+    ],
+    process: [
+      {
+        step: "01",
+        title: "Curate",
+        description: "We recommend talent based on your event theme, audience, and budget.",
+      },
+      {
+        step: "02",
+        title: "Book",
+        description: "We handle contracts, scheduling, and all logistical arrangements for talent.",
+      },
+      {
+        step: "03",
+        title: "Produce",
+        description: "We manage rehearsals, sound checks, and live production on event day.",
+      },
+    ],
+  },
+  {
+    id: "logistics-coordination",
+    title: "Logistics and Coordination",
+    tagline: "Seamless operations behind the scenes.",
+    description:
+      "Flawless execution requires meticulous logistics. Our operations team manages transportation, accommodation, equipment rentals, on-ground staffing, and real-time coordination so that every moving part works in perfect harmony. We plan for every scenario so your event runs without a hitch.",
+    image: "/images/services/logistics.jpg",
+    offerings: [
+      "Transportation and shuttle management",
+      "Guest and VIP accommodation booking",
+      "Equipment and furniture rentals",
+      "On-ground staffing and crew management",
+      "Real-time timeline and run-of-show management",
+      "Contingency and crisis response planning",
+    ],
+    process: [
+      {
+        step: "01",
+        title: "Plan",
+        description:
+          "We build a detailed logistics roadmap covering every operational requirement.",
+      },
+      {
+        step: "02",
+        title: "Coordinate",
+        description: "Our team manages vendors, staff, and schedules across all event touchpoints.",
+      },
+      {
+        step: "03",
+        title: "Execute",
+        description: "We oversee load-in, on-ground operations, and load-out with precision.",
+      },
+    ],
+  },
+  {
+    id: "marketing-promotion",
+    title: "Marketing and Promotion",
+    tagline: "Amplify your event's reach.",
+    description:
+      "An event is only as successful as its reach. We develop and execute targeted marketing campaigns that generate buzz, drive attendance, and extend your event's impact across digital and traditional channels. From social media and email marketing to PR and on-ground promotions, we make sure your audience shows up.",
+    image: "/images/services/marketing.jpg",
+    offerings: [
+      "Social media campaign management",
+      "Email marketing and guest invitations",
+      "Press releases and media relations",
+      "On-ground signage and promotional materials",
+      "Event photography and videography",
+      "Post-event reporting and analytics",
+    ],
+    process: [
+      {
+        step: "01",
+        title: "Strategize",
+        description:
+          "We develop a marketing plan tailored to your target audience and event goals.",
+      },
+      {
+        step: "02",
+        title: "Create",
+        description: "We produce compelling content, visuals, and collateral across all channels.",
+      },
+      {
+        step: "03",
+        title: "Amplify",
+        description: "We launch, monitor, and optimize campaigns to maximize reach and attendance.",
       },
     ],
   },

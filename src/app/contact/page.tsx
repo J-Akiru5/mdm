@@ -56,7 +56,11 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className={styles.infoTitle}>Phone</p>
-                    <p className={styles.infoText}>+63 (912) 345 6789</p>
+                    <p className={styles.infoText}>
+                      +63 908 895 4818
+                      <br />
+                      (033) 323-4864
+                    </p>
                   </div>
                 </div>
 
@@ -76,7 +80,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className={styles.infoTitle}>Email</p>
-                    <p className={styles.infoText}>info@mdmevents.com</p>
+                    <p className={styles.infoText}>mdmeventsmgt@gmail.com</p>
                   </div>
                 </div>
 
@@ -96,7 +100,9 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className={styles.infoTitle}>Address</p>
-                    <p className={styles.infoText}>Iloilo City, Philippines</p>
+                    <p className={styles.infoText}>
+                      Villa Darroca, 56 Quezon St. Arevalo, Iloilo City, Philippines
+                    </p>
                   </div>
                 </div>
 
@@ -209,7 +215,7 @@ export default function ContactPage() {
                       <input
                         id="phone"
                         type="tel"
-                        placeholder="+63 912 345 6789"
+                        placeholder="+63 908 895 4818"
                         className={styles.input}
                       />
                     </div>
@@ -256,7 +262,7 @@ export default function ContactPage() {
       {/* Map */}
       <section className={styles.mapSection}>
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62782.39867741693!2d122.50780849999999!3d10.7201794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33aee56d7f20cfc5%3A0x1db37a10e3a7aa24!2sIloilo%20City%2C%20Iloilo!5e0!3m2!1sen!2sph!4v1700000000000!5m2!1sen!2sph"
+          src="https://maps.google.com/maps?q=Villa%20Darroca,%2056%20Quezon%20St.,%20Arevalo,%20Iloilo%20City,%20Philippines&t=&z=16&ie=UTF8&iwloc=&output=embed"
           width="100%"
           height="400"
           style={{ border: 0, display: "block" }}

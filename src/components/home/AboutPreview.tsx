@@ -17,13 +17,12 @@ export default function AboutPreview() {
                 <span className={styles.accent}>Professionally Handled.</span>
               </h2>
               <p className={styles.description}>
-                MDM Events Management is a full-service events and activation partner that turns
-                ideas into well-executed experiences.
+                MDM Events Management specializes in delivering high-impact corporate events that
+                drive business results.
               </p>
               <p className={styles.description}>
-                From corporate conferences and government programs to product launches, exhibits,
-                and community celebrations, we manage every moving part — so you can focus on your
-                guests, message, and goals.
+                Our team of experts has 8 years of experience in crafting and executing events that
+                exceed our clients&apos; expectations.
               </p>
               <Link href="/about" className={styles.textLink}>
                 Learn More About Us →

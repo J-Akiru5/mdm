@@ -67,15 +67,19 @@ export default function ContactSection() {
             <ul className={styles.details}>
               <li>
                 <strong>Email</strong>
-                <span>info@mdmevents.com</span>
+                <span>mdmeventsmgt@gmail.com</span>
               </li>
               <li>
                 <strong>Mobile</strong>
-                <span>+63 912 345 6789</span>
+                <span>+63 908 895 4818</span>
               </li>
               <li>
-                <strong>Service Area</strong>
-                <span>Iloilo City, Philippines</span>
+                <strong>Phone</strong>
+                <span>(033) 323 4864</span>
+              </li>
+              <li>
+                <strong>Address</strong>
+                <span>56 Quezon St. Arevalo, Iloilo City</span>
               </li>
             </ul>
           </div>

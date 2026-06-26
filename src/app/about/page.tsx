@@ -9,6 +9,7 @@ import Button from "@/components/ui/Button";
 import Image from "next/image";
 import { stats } from "@/data/stats";
 import HeroGlobe from "@/components/ui/HeroGlobe";
+import WhyChooseUs from "@/components/home/WhyChooseUs";
 import styles from "./page.module.css";
 
 export default function AboutPage() {
@@ -46,12 +47,12 @@ export default function AboutPage() {
               <span className={styles.sectionLabel}>WHO WE ARE</span>
               <h2 className={styles.sectionHeading}>Your Event. Professionally Handled.</h2>
               <p className={styles.text}>
-                MDM Events Management is a team of passionate planners, creatives, and
-                problem-solvers committed to delivering events that inspire and connect.
+                MDM Events Management specializes in delivering high-impact corporate events that
+                drive business results.
               </p>
               <p className={styles.text}>
-                We believe every event has a purpose. And when it is planned with strategy,
-                creativity, and passion, it becomes an experience that people will remember.
+                Our team of experts has 8 years of experience in crafting and executing events that
+                exceed our clients&apos; expectations.
               </p>
               <div className={styles.statsRow}>
                 {stats.map((stat) => (
@@ -82,6 +83,45 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Leadership */}
+      <section className={styles.leadershipSection}>
+        <div className="container">
+          <SectionHeading subtitle="Meet Our Founder" title="Our Leadership" align="center" />
+          <div className={styles.leaderCard}>
+            <ScrollReveal animation="fadeInLeft" className={styles.leaderImageWrap}>
+              <Image
+                src="/images/team/mary_ann.jpg"
+                alt="Mary Ann Matiling"
+                width={260}
+                height={260}
+                className={styles.leaderImage}
+                unoptimized
+              />
+            </ScrollReveal>
+            <ScrollReveal animation="fadeInRight" className={styles.leaderBio}>
+              <h3 className={styles.leaderName}>Mary Ann Matiling</h3>
+              <span className={styles.leaderRole}>Managing Director, MDM Events Management</span>
+              <p className={styles.leaderText}>
+                Mary Ann Matiling is a seasoned entrepreneur with a proven track record spanning
+                over 20 years in various fields, including events management, business development,
+                sales, marketing, and office administration. With her extensive experience, she has
+                developed strong organizational skills, attention to detail, and the ability to
+                multitask, making her a versatile professional.
+              </p>
+              <p className={styles.leaderText}>
+                Ann has been managing events for over a decade; she oversees logistics, timelines,
+                and client expectations with ease. In business development, she has a keen sense of
+                market trends and opportunities, allowing her to drive growth and innovation.
+                Ann&apos;s sales and marketing experience has given her an adept ability to build
+                relationships. Additionally, her experience in office administration indicates she
+                is well-versed in managing day-to-day operations, supervising teams, and ensuring a
+                seamless workflow.
+              </p>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
       {/* Mission & Vision */}
       <section className="section">
         <div className="container">
@@ -105,9 +145,11 @@ export default function AboutPage() {
                 </div>
                 <h3 className={styles.missionTitle}>Our Mission</h3>
                 <p className={styles.missionText}>
-                  To create meaningful events that inspire, connect, and leave a lasting impact
-                  through strategic planning, creative execution, and unwavering commitment to
-                  excellence.
+                  Our mission is to deliver innovative, professionally executed corporate events and
+                  vibrant, culturally rich festivals that leave a lasting impact. We aim to bridge
+                  brands with their audiences through strategic planning, creative storytelling, and
+                  flawless execution—bringing every vision to life with Filipino heart and global
+                  standards.
                 </p>
               </div>
             </ScrollReveal>
@@ -128,11 +170,48 @@ export default function AboutPage() {
                 </div>
                 <h3 className={styles.missionTitle}>Our Vision</h3>
                 <p className={styles.missionText}>
-                  To be a trusted events partner known for creativity, reliability, and excellence —
-                  transforming every vision into a reality that exceeds expectations.
+                  To be the leading events management company in the Philippines, known for
+                  delivering world-class corporate events and culturally vibrant festivals that
+                  inspire, connect, and create lasting impact for brands, businesses, and
+                  communities.
                 </p>
               </div>
             </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      <WhyChooseUs />
+
+      {/* Services Overview */}
+      <section className="section section-off-white">
+        <div className="container">
+          <SectionHeading subtitle="What We Offer" title="Our Services" align="center" />
+          <div className={styles.servicesList}>
+            <div className={styles.serviceItem}>
+              <div className={styles.serviceBullet} />
+              <span>Event Conceptualization and Design</span>
+            </div>
+            <div className={styles.serviceItem}>
+              <div className={styles.serviceBullet} />
+              <span>Venue Selection and Management</span>
+            </div>
+            <div className={styles.serviceItem}>
+              <div className={styles.serviceBullet} />
+              <span>Catering and Beverage Services</span>
+            </div>
+            <div className={styles.serviceItem}>
+              <div className={styles.serviceBullet} />
+              <span>Entertainment and Talent Management</span>
+            </div>
+            <div className={styles.serviceItem}>
+              <div className={styles.serviceBullet} />
+              <span>Logistics and Coordination</span>
+            </div>
+            <div className={styles.serviceItem}>
+              <div className={styles.serviceBullet} />
+              <span>Marketing and Promotion</span>
+            </div>
           </div>
         </div>
       </section>
