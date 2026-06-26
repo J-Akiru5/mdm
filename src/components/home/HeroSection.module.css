@@ -17,7 +17,7 @@
   z-index: 1;
   color: var(--color-white);
   max-width: 700px;
-  padding: 125px 8%;
+  padding: 125px 8% 90px;
 }
 
 .eyebrow {
