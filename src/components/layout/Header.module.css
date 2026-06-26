@@ -102,6 +102,18 @@
 
 /* Mobile responsive styling matching mdm.html header type */
 @media (max-width: 850px) {
+  .header {
+    height: 60px;
+  }
+
+  .inner {
+    height: 60px;
+  }
+
+  .logoImg {
+    height: 40px;
+  }
+
   .menuToggle {
     display: block;
   }
@@ -109,7 +121,7 @@
   .nav {
     display: none;
     position: absolute;
-    top: 82px;
+    top: 60px;
     left: 0;
     right: 0;
     background-color: var(--color-white);
