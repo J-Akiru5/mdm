@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 import styles from "./page.module.css";
 
 interface Inquiry {
@@ -22,13 +21,10 @@ export default function AdminInquiries() {
   const [selected, setSelected] = useState<Inquiry | null>(null);
 
   useEffect(() => {
-    const supabase = createClient();
-    supabase
-      .from("contact_submissions")
-      .select("*")
-      .order("created_at", { ascending: false })
-      .then(({ data }) => {
-        if (data) setInquiries(data);
+    fetch("/api/contact")
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data)) setInquiries(data);
         setLoading(false);
       });
   }, []);

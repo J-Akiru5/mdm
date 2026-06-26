@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { createClient } from "@/lib/supabase/client";
 import SectionHeading from "../ui/SectionHeading";
 import styles from "./PortfolioPreview.module.css";
 
@@ -27,22 +26,12 @@ export default function PortfolioPreview() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchPortfolio() {
-      try {
-        const supabase = createClient();
-        const { data } = await supabase
-          .from("portfolio")
-          .select("id, title, category, image_url")
-          .order("created_at", { ascending: false })
-          .limit(6);
-
-        if (data) setItems(data);
-      } finally {
+    fetch("/api/portfolio")
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data)) setItems(data.slice(0, 6));
         setLoading(false);
-      }
-    }
-
-    fetchPortfolio();
+      });
   }, []);
 
   const filtered =

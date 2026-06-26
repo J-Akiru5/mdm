@@ -1,5 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { prisma } from "@/lib/prisma";
+
+export async function GET() {
+  try {
+    const submissions = await prisma.contactSubmission.findMany({
+      orderBy: { createdAt: "desc" },
+    });
+    return NextResponse.json(submissions);
+  } catch {
+    return NextResponse.json({ error: "Failed to fetch inquiries" }, { status: 500 });
+  }
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -10,20 +21,17 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Name and email are required" }, { status: 400 });
     }
 
-    const supabase = await createClient();
-    const { error } = await supabase.from("contact_submissions").insert({
-      full_name: fullName,
-      email,
-      phone: phone || "",
-      company: company || "",
-      event_type: eventType || "",
-      event_date: eventDate || "",
-      message: message || "",
+    await prisma.contactSubmission.create({
+      data: {
+        fullName,
+        email,
+        phone: phone || null,
+        company: company || null,
+        eventType: eventType || null,
+        eventDate: eventDate || null,
+        message: message || "",
+      },
     });
-
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
-    }
 
     return NextResponse.json({ success: true }, { status: 201 });
   } catch {

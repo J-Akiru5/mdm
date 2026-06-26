@@ -21,16 +21,17 @@ export default function AdminPortfolio() {
   const [form, setForm] = useState({ title: "", category: "", image_url: "" });
   const [uploading, setUploading] = useState(false);
 
-  useEffect(() => {
-    const supabase = createClient();
-    supabase
-      .from("portfolio")
-      .select("*")
-      .order("created_at", { ascending: false })
-      .then(({ data }) => {
-        if (data) setItems(data);
+  const fetchItems = () => {
+    fetch("/api/portfolio")
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data)) setItems(data);
         setLoading(false);
       });
+  };
+
+  useEffect(() => {
+    fetchItems();
   }, []);
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,19 +54,14 @@ export default function AdminPortfolio() {
 
   const handleSave = async () => {
     if (!form.title || !form.category) return alert("Title and category required");
-    const supabase = createClient();
-    if (editing) {
-      await supabase.from("portfolio").update(form).eq("id", editing.id);
-    } else {
-      await supabase.from("portfolio").insert({ ...form, id: crypto.randomUUID() });
-    }
+    await fetch("/api/portfolio", {
+      method: editing ? "PUT" : "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(editing ? { ...form, id: editing.id } : form),
+    });
     setEditing(null);
     setForm({ title: "", category: "", image_url: "" });
-    const { data } = await supabase
-      .from("portfolio")
-      .select("*")
-      .order("created_at", { ascending: false });
-    if (data) setItems(data);
+    fetchItems();
   };
 
   const handleEdit = (item: PortfolioItem) => {
@@ -75,13 +71,8 @@ export default function AdminPortfolio() {
 
   const handleDelete = async (id: string) => {
     if (!confirm("Delete this item?")) return;
-    const supabase = createClient();
-    await supabase.from("portfolio").delete().eq("id", id);
-    const { data } = await supabase
-      .from("portfolio")
-      .select("*")
-      .order("created_at", { ascending: false });
-    if (data) setItems(data);
+    await fetch(`/api/portfolio?id=${id}`, { method: "DELETE" });
+    fetchItems();
   };
 
   const handleCancel = () => {

@@ -5,7 +5,6 @@ import QuoteModal from "@/components/ui/QuoteModal";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import Button from "@/components/ui/Button";
 import Image from "next/image";
-import { createClient } from "@/lib/supabase/client";
 import styles from "./page.module.css";
 
 interface PortfolioItem {
@@ -30,16 +29,12 @@ export default function PortfolioPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchPortfolio() {
-      const supabase = createClient();
-      const { data } = await supabase
-        .from("portfolio")
-        .select("id, title, category, image_url")
-        .order("created_at", { ascending: false });
-      if (data) setItems(data);
-      setLoading(false);
-    }
-    fetchPortfolio();
+    fetch("/api/portfolio")
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data)) setItems(data);
+        setLoading(false);
+      });
   }, []);
 
   const filteredItems =
