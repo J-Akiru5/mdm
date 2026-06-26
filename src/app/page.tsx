@@ -4,7 +4,7 @@ import { useState } from "react";
 import QuoteModal from "@/components/ui/QuoteModal";
 import HeroSection from "@/components/home/HeroSection";
 import ClientMarquee from "@/components/home/ClientMarquee";
-import WhyChooseUs from "@/components/home/WhyChooseUs";
+import CoreValues from "@/components/home/CoreValues";
 import AboutPreview from "@/components/home/AboutPreview";
 import WhatWeDo from "@/components/home/WhatWeDo";
 import PortfolioPreview from "@/components/home/PortfolioPreview";
@@ -18,7 +18,7 @@ export default function HomePage() {
     <>
       <HeroSection onQuoteOpen={() => setQuoteOpen(true)} />
       <ClientMarquee />
-      <WhyChooseUs />
+      <CoreValues />
       <AboutPreview />
       <WhatWeDo onQuoteOpen={() => setQuoteOpen(true)} />
       <PortfolioPreview />
