@@ -1,0 +1,172 @@
+.heading {
+  font-size: 28px;
+  font-weight: 700;
+  color: #171717;
+  margin: 0 0 24px;
+}
+
+.loading {
+  text-align: center;
+  padding: 48px;
+  color: #666;
+  font-size: 14px;
+}
+
+.form {
+  background: #fff;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.form h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #171717;
+  margin: 0 0 16px;
+}
+
+.formFields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.input {
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+}
+
+.input:focus {
+  border-color: #9e1115;
+}
+
+.uploadRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.uploading {
+  font-size: 13px;
+  color: #666;
+}
+
+.preview {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.formActions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  padding: 10px 20px;
+  background: #9e1115;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s;
+}
+
+.btn:hover {
+  background: #8a0f13;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btnSecondary {
+  background: #666;
+}
+
+.btnSecondary:hover {
+  background: #555;
+}
+
+.btnSmall {
+  padding: 6px 14px;
+  font-size: 12px;
+}
+
+.btnDanger {
+  background: transparent;
+  color: #c00;
+  border: 1px solid #c00;
+}
+
+.btnDanger:hover {
+  background: #c00;
+  color: #fff;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.empty {
+  text-align: center;
+  padding: 48px;
+  color: #999;
+  font-size: 14px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.thumb {
+  width: 60px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.itemInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.itemInfo strong {
+  font-size: 14px;
+  color: #171717;
+}
+
+.category {
+  font-size: 12px;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.itemActions {
+  display: flex;
+  gap: 6px;
+}

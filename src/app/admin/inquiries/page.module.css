@@ -1,0 +1,151 @@
+.heading {
+  font-size: 28px;
+  font-weight: 700;
+  color: #171717;
+  margin: 0 0 24px;
+}
+
+.loading {
+  text-align: center;
+  padding: 48px;
+  color: #666;
+  font-size: 14px;
+}
+
+.empty {
+  text-align: center;
+  padding: 48px;
+  color: #999;
+  font-size: 14px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+
+.item:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.itemInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.itemInfo strong {
+  font-size: 14px;
+  color: #171717;
+}
+
+.itemEmail {
+  font-size: 13px;
+  color: #999;
+}
+
+.itemDate {
+  font-size: 12px;
+  color: #bbb;
+}
+
+.detail {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+}
+
+.detailCard {
+  background: #fff;
+  border-radius: 8px;
+  padding: 32px;
+  max-width: 560px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.closeDetail {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #999;
+}
+
+.detailCard h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #171717;
+  margin: 0 0 20px;
+}
+
+.detailGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.detailGrid strong {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #999;
+  margin-bottom: 2px;
+}
+
+.detailGrid p {
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+}
+
+.detailMessage {
+  margin-bottom: 16px;
+}
+
+.detailMessage strong {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #999;
+  margin-bottom: 6px;
+}
+
+.detailMessage p {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.detailDate {
+  font-size: 12px;
+  color: #bbb;
+}
