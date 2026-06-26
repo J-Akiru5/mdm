@@ -7,19 +7,18 @@
 }
 
 :root {
-  /* Colors */
-  --color-primary: #9B1B30;
-  --color-primary-dark: #7A1526;
-  --color-primary-light: #C42B42;
-  --color-secondary: #1A1A2E;
-  --color-dark: #0D0D1A;
+  /* Colors — matching mdm.html */
+  --color-primary: #9e1115;
+  --color-primary-dark: #8a0f13;
+  --color-primary-light: #d51c24;
+  --color-dark: #070707;
   --color-white: #FFFFFF;
-  --color-off-white: #F7F7F8;
+  --color-off-white: #f8f8f8;
   --color-gray-100: #E8E8EC;
   --color-gray-300: #B0B0BC;
-  --color-gray-600: #5A5A6E;
-  --color-gray-900: #1C1C28;
-  --color-accent-gold: #D4A853;
+  --color-gray-600: #555;
+  --color-gray-900: #171717;
+  --color-text: #222;
 
   /* Spacing */
   --space-xs: 4px;
@@ -31,18 +30,17 @@
   --space-3xl: 120px;
 
   /* Layout */
-  --container-max: 1200px;
+  --container-max: 1180px;
   --container-wide: 1400px;
 
   /* Border radius */
   --border-radius-sm: 4px;
   --border-radius-md: 8px;
   --border-radius-lg: 16px;
-  --border-radius-pill: 50px;
 
-  /* Fonts */
-  --font-heading: var(--font-playfair), 'Playfair Display', Georgia, serif;
-  --font-body: var(--font-inter), 'Inter', system-ui, sans-serif;
+  /* Fonts — DM Sans only */
+  --font-heading: var(--font-dm-sans), 'DM Sans', sans-serif;
+  --font-body: var(--font-dm-sans), 'DM Sans', sans-serif;
 }
 
 html {
@@ -52,8 +50,8 @@ html {
 body {
   font-family: var(--font-body);
   font-size: 16px;
-  line-height: 1.6;
-  color: var(--color-gray-600);
+  line-height: 1.65;
+  color: var(--color-gray-900);
   background-color: var(--color-white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -62,7 +60,12 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   color: var(--color-gray-900);
-  line-height: 1.2;
+  line-height: 1.05;
+  margin: 0;
+}
+
+p {
+  line-height: 1.65;
 }
 
 a {
@@ -160,17 +163,6 @@ ul, ol {
 @keyframes scaleUp {
   from { opacity: 0; transform: scale(0.9); }
   to   { opacity: 1; transform: scale(1); }
-}
-
-@keyframes pulse {
-  0%   { box-shadow: 0 0 0 0 rgba(155, 27, 48, 0.4); }
-  70%  { box-shadow: 0 0 0 10px rgba(155, 27, 48, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(155, 27, 48, 0); }
-}
-
-@keyframes countUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes shimmer {

@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import Button from "./Button";
 import styles from "./QuoteModal.module.css";

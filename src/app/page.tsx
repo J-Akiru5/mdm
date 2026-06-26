@@ -6,7 +6,9 @@ import HeroSection from '@/components/home/HeroSection';
 import CoreValues from '@/components/home/CoreValues';
 import AboutPreview from '@/components/home/AboutPreview';
 import WhatWeDo from '@/components/home/WhatWeDo';
+import PortfolioPreview from '@/components/home/PortfolioPreview';
 import CTABanner from '@/components/home/CTABanner';
+import ContactSection from '@/components/home/ContactSection';
 
 export default function HomePage() {
   const [quoteOpen, setQuoteOpen] = useState(false);
@@ -17,7 +19,9 @@ export default function HomePage() {
       <CoreValues />
       <AboutPreview />
       <WhatWeDo onQuoteOpen={() => setQuoteOpen(true)} />
+      <PortfolioPreview />
       <CTABanner onQuoteOpen={() => setQuoteOpen(true)} />
+      <ContactSection />
       <QuoteModal isOpen={quoteOpen} onClose={() => setQuoteOpen(false)} />
     </>
   );

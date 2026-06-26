@@ -1,27 +1,27 @@
 /* Hero */
 .hero {
   padding: var(--space-2xl) 0;
-  background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-secondary) 100%);
+  background-color: var(--color-dark);
   text-align: center;
 }
 
 .heroLabel {
   display: inline-block;
-  font-family: var(--font-inter), sans-serif;
-  font-size: 13px;
-  font-weight: 600;
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 4px;
+  letter-spacing: 2px;
   color: var(--color-primary-light);
   margin-bottom: var(--space-md);
 }
 
 .heroTitle {
-  font-family: var(--font-playfair), serif;
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
   font-size: clamp(32px, 5vw, 52px);
-  font-weight: 800;
+  font-weight: 700;
   color: var(--color-white);
-  line-height: 1.15;
+  line-height: 1.1;
 }
 
 /* Content Grid */
@@ -41,25 +41,26 @@
 
 .infoLabel {
   display: inline-block;
-  font-family: var(--font-inter), sans-serif;
-  font-size: 13px;
-  font-weight: 600;
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   color: var(--color-primary);
 }
 
 .infoHeading {
-  font-family: var(--font-playfair), serif;
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
   font-size: clamp(24px, 3vw, 32px);
   font-weight: 700;
   color: var(--color-gray-900);
+  line-height: 1.1;
 }
 
 .infoDesc {
   font-size: 15px;
   color: var(--color-gray-600);
-  line-height: 1.7;
+  line-height: 1.65;
 }
 
 .infoItems {
@@ -79,7 +80,7 @@
   height: 44px;
   min-width: 44px;
   border-radius: 50%;
-  background-color: rgba(155, 27, 48, 0.1);
+  background-color: rgba(158, 17, 21, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -134,7 +135,7 @@
 .form {
   background-color: var(--color-white);
   border: 1px solid var(--color-gray-100);
-  border-radius: var(--border-radius-lg);
+  border-radius: var(--border-radius-md);
   padding: var(--space-xl);
   box-shadow: 0 4px 24px rgba(0,0,0,0.08);
   display: flex;
@@ -167,16 +168,20 @@
   padding: 12px var(--space-md);
   border: 1px solid var(--color-gray-100);
   border-radius: var(--border-radius-sm);
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
   font-size: 15px;
   color: var(--color-gray-900);
-  background-color: var(--color-off-white);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--color-white);
+  transition: border-color 0.3s ease;
   outline: none;
+}
+
+.input::placeholder {
+  color: var(--color-gray-300);
 }
 
 .input:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(155, 27, 48, 0.1);
   background-color: var(--color-white);
 }
 
@@ -185,18 +190,22 @@
   padding: 12px var(--space-md);
   border: 1px solid var(--color-gray-100);
   border-radius: var(--border-radius-sm);
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
   font-size: 15px;
   color: var(--color-gray-900);
-  background-color: var(--color-off-white);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--color-white);
+  transition: border-color 0.3s ease;
   outline: none;
   resize: vertical;
   min-height: 120px;
 }
 
+.textarea::placeholder {
+  color: var(--color-gray-300);
+}
+
 .textarea:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(155, 27, 48, 0.1);
   background-color: var(--color-white);
 }
 
@@ -225,8 +234,9 @@
 }
 
 .successMsg h3 {
-  font-family: var(--font-playfair), serif;
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
   font-size: 24px;
+  font-weight: 700;
   color: var(--color-gray-900);
   margin-bottom: var(--space-sm);
 }

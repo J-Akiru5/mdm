@@ -1,12 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import Button from '../ui/Button';
 import ScrollReveal from '../ui/ScrollReveal';
 import styles from './AboutPreview.module.css';
 
 export default function AboutPreview() {
   return (
-    <section className="section section-off-white">
+    <section id="about" className="section section-off-white">
       <div className="container">
         <div className={styles.grid}>
           <ScrollReveal animation="fadeInLeft">
@@ -18,22 +17,22 @@ export default function AboutPreview() {
               </h2>
               <p className={styles.description}>
                 MDM Events Management is a full-service events and activation partner that turns
-                ideas into well-executed experiences. From corporate conferences and government
-                programs to product launches, festivals, exhibits, and community celebrations,
-                we manage every moving part.
+                ideas into well-executed experiences.
               </p>
               <p className={styles.description}>
-                Our clients can focus on their guests, message, and goals — while we handle everything else.
+                From corporate conferences and government programs to product launches, exhibits,
+                and community celebrations, we manage every moving part — so you can focus on
+                your guests, message, and goals.
               </p>
-              <Button variant="outlineDark" as="a" href="/about">
-                Learn More About Us
-              </Button>
+              <Link href="/about" className={styles.textLink}>
+                Learn More About Us →
+              </Link>
             </div>
           </ScrollReveal>
 
           <ScrollReveal animation="fadeInRight">
-            <div className={styles.imageGrid}>
-              <div className={styles.imageMain}>
+            <div className={styles.photoGrid}>
+              <div className={`${styles.photo} ${styles.photoMain}`}>
                 <Image
                   src="/images/portfolio/corporate.jpg"
                   alt="MDM Events - Corporate Event"
@@ -43,7 +42,7 @@ export default function AboutPreview() {
                   unoptimized
                 />
               </div>
-              <div className={styles.imageSub1}>
+              <div className={`${styles.photo} ${styles.photoSub1}`}>
                 <Image
                   src="/images/portfolio/festival.jpg"
                   alt="MDM Events - Festival"
@@ -53,7 +52,7 @@ export default function AboutPreview() {
                   unoptimized
                 />
               </div>
-              <div className={styles.imageSub2}>
+              <div className={`${styles.photo} ${styles.photoSub2}`}>
                 <Image
                   src="/images/portfolio/launch.jpg"
                   alt="MDM Events - Product Launch"

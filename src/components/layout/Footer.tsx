@@ -10,17 +10,9 @@ const quickLinks = [
 ];
 
 const serviceLinks = [
-  { href: "/services", label: "Event Planning" },
-  { href: "/services", label: "Event Production" },
-  { href: "/services", label: "Event Management" },
-  { href: "/services", label: "Branding & Design" },
-];
-
-const socialLinks = [
-  { href: "#", label: "Facebook", icon: "FB" },
-  { href: "#", label: "Instagram", icon: "IG" },
-  { href: "#", label: "YouTube", icon: "YT" },
-  { href: "#", label: "TikTok", icon: "TT" },
+  { href: "/services", label: "Corporate Events" },
+  { href: "/services", label: "Brand Activations" },
+  { href: "/services", label: "Production & Technical" },
 ];
 
 export default function Footer() {
@@ -39,21 +31,8 @@ export default function Footer() {
               />
             </Link>
             <p className={styles.tagline}>
-              Professional event planning, production, and management services.
-              We bring your vision to life.
+              Events That Move People, Brands, and Communities.
             </p>
-            <div className={styles.social}>
-              {socialLinks.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  className={styles.socialLink}
-                  aria-label={s.label}
-                >
-                  {s.icon}
-                </a>
-              ))}
-            </div>
           </div>
 
           <div className={styles.column}>
@@ -79,22 +58,17 @@ export default function Footer() {
           </div>
 
           <div className={styles.column}>
-            <h4 className={styles.columnTitle}>Contact Info</h4>
+            <h4 className={styles.columnTitle}>Contact</h4>
             <ul className={styles.columnLinks}>
+              <li>info@mdmevents.com</li>
+              <li>+63 912 345 6789</li>
               <li>Iloilo City, Philippines</li>
-              <li>
-                <a href="tel:+639123456789">+63 (912) 345 6789</a>
-              </li>
-              <li>
-                <a href="mailto:info@mdmevents.com">info@mdmevents.com</a>
-              </li>
-              <li>Mon–Fri: 9:00 AM – 6:00 PM</li>
             </ul>
           </div>
         </div>
 
         <div className={styles.copyright}>
-          <p>&copy; {new Date().getFullYear()} MDM Events Management. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} MDM Events Management. All Rights Reserved.</p>
         </div>
       </div>
     </footer>

@@ -12,7 +12,7 @@
 
 .modal {
   background-color: var(--color-white);
-  border-radius: var(--border-radius-lg);
+  border-radius: var(--border-radius-md);
   padding: var(--space-xl);
   max-width: 600px;
   width: 100%;
@@ -42,8 +42,9 @@
 }
 
 .title {
-  font-family: var(--font-playfair), serif;
-  font-size: 32px;
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
   color: var(--color-gray-900);
   margin-bottom: var(--space-sm);
 }
@@ -72,10 +73,16 @@
   padding: 12px 16px;
   border: 1px solid var(--color-gray-100);
   border-radius: var(--border-radius-sm);
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
   font-size: 15px;
   color: var(--color-gray-900);
   background-color: var(--color-white);
   transition: border-color 0.2s;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--color-gray-300);
 }
 
 .input:focus,
@@ -112,8 +119,9 @@
 }
 
 .thankYouTitle {
-  font-family: var(--font-playfair), serif;
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
   font-size: 28px;
+  font-weight: 700;
   color: var(--color-gray-900);
   margin-bottom: var(--space-sm);
 }

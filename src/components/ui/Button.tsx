@@ -8,6 +8,7 @@ interface ButtonProps {
   onClick?: () => void;
   type?: "button" | "submit";
   className?: string;
+  disabled?: boolean;
 }
 
 export default function Button({
@@ -18,6 +19,7 @@ export default function Button({
   onClick,
   type = "button",
   className = "",
+  disabled = false,
 }: ButtonProps) {
   const classNames = [styles.button, styles[variant], className]
     .filter(Boolean)
@@ -32,7 +34,7 @@ export default function Button({
   }
 
   return (
-    <button type={type} className={classNames} onClick={onClick}>
+    <button type={type} className={classNames} onClick={onClick} disabled={disabled}>
       {children}
     </button>
   );

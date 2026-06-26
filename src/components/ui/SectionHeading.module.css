@@ -12,25 +12,25 @@
 
 .subtitle {
   display: inline-block;
-  font-family: var(--font-inter), sans-serif;
-  font-size: 14px;
-  font-weight: 600;
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   color: var(--color-primary);
   margin-bottom: var(--space-sm);
 }
 
 .dark .subtitle {
-  color: var(--color-accent-gold);
+  color: var(--color-white);
 }
 
 .title {
-  font-family: var(--font-playfair), serif;
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
   font-size: clamp(28px, 5vw, 48px);
   font-weight: 700;
   color: var(--color-gray-900);
-  line-height: 1.2;
+  line-height: 1.1;
   margin-bottom: var(--space-md);
 }
 
@@ -39,11 +39,11 @@
 }
 
 .description {
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
   font-size: 16px;
   color: var(--color-gray-600);
   max-width: 640px;
-  line-height: 1.7;
+  line-height: 1.65;
 }
 
 .center .description {
