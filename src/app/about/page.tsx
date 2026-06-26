@@ -8,6 +8,7 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import Button from "@/components/ui/Button";
 import Image from "next/image";
 import { stats } from "@/data/stats";
+import HeroGlobe from "@/components/ui/HeroGlobe";
 import styles from "./page.module.css";
 
 export default function AboutPage() {
@@ -16,8 +17,9 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className={styles.hero}>
-        <div className="container" style={{ textAlign: "center" }}>
+      <section className={`${styles.hero} brandedHero`}>
+        <HeroGlobe />
+        <div className="container heroContent" style={{ textAlign: "center" }}>
           <span className={styles.heroLabel}>ABOUT US</span>
           <h1 className={styles.heroTitle}>We Bring Your Vision to Life.</h1>
           <p className={styles.heroSub}>

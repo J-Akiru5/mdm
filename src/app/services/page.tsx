@@ -1,29 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import QuoteModal from "@/components/ui/QuoteModal";
-import SectionHeading from "@/components/ui/SectionHeading";
-import ScrollReveal from "@/components/ui/ScrollReveal";
-import Button from "@/components/ui/Button";
 import Image from "next/image";
 import Link from "next/link";
+import QuoteModal from "@/components/ui/QuoteModal";
+import ScrollReveal from "@/components/ui/ScrollReveal";
+import Button from "@/components/ui/Button";
 import { services } from "@/data/services";
 import styles from "./page.module.css";
-
-const serviceImages: Record<string, string> = {
-  "event-planning": "/images/services/planning.jpg",
-  "event-production": "/images/services/production.jpg",
-  "event-management": "/images/services/management.jpg",
-  "branding-design": "/images/services/branding.jpg",
-  "technology-support": "/images/services/technology.png",
-};
 
 export default function ServicesPage() {
   const [quoteOpen, setQuoteOpen] = useState(false);
 
   return (
     <>
-      {/* Hero */}
       <section className={styles.hero}>
         <div className="container" style={{ textAlign: "center" }}>
           <span className={styles.heroLabel}>OUR SERVICES</span>
@@ -35,48 +25,44 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Services Grid */}
-      <section className="section">
-        <div className="container">
-          <div className={styles.grid}>
-            {services.map((service, i) => {
-              const isTech = service.id === "technology-support";
-              const cardContent = (
-                <div className={`${styles.card} ${isTech ? styles.cardLinked : ""}`}>
-                  <div className={styles.cardImageWrap}>
-                    <Image
-                      src={serviceImages[service.id] || "/images/hero_event.jpg"}
-                      alt={service.title}
-                      fill
-                      style={{ objectFit: "cover" }}
-                      sizes="(max-width:768px) 100vw, 33vw"
-                      unoptimized
-                    />
-                  </div>
-                  <div className={styles.cardContent}>
-                    <h3 className={styles.cardTitle}>{service.title}</h3>
-                    <p className={styles.cardDesc}>{service.description}</p>
-                  </div>
+      {services.map((svc, i) => {
+        const isEven = i % 2 === 0;
+        return (
+          <ScrollReveal key={svc.id}>
+            <section className={`${styles.section} ${isEven ? "" : styles.sectionAlt}`}>
+              <div className={`container ${styles.sectionInner}`}>
+                <div
+                  className={`${styles.sectionImage} ${isEven ? styles.imageLeft : styles.imageRight}`}
+                >
+                  <Image
+                    src={svc.image}
+                    alt={svc.title}
+                    fill
+                    style={{ objectFit: "cover" }}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    unoptimized
+                  />
                 </div>
-              );
-              if (isTech) {
-                return (
-                  <Link href="/services/technology" key={service.id} className={styles.cardLink}>
-                    {cardContent}
+                <div
+                  className={`${styles.sectionText} ${isEven ? styles.textRight : styles.textLeft}`}
+                >
+                  <span className={styles.sectionIndex}>0{i + 1}</span>
+                  <h2 className={styles.sectionTitle}>{svc.title}</h2>
+                  <p className={styles.sectionTagline}>{svc.tagline}</p>
+                  <p className={styles.sectionDesc}>{svc.description}</p>
+                  <Link
+                    href={`/services/${svc.id === "technology-support" ? "technology" : svc.id}`}
+                    className={styles.sectionLink}
+                  >
+                    Learn More →
                   </Link>
-                );
-              }
-              return (
-                <ScrollReveal key={service.id} delay={(i % 3) * 0.1}>
-                  {cardContent}
-                </ScrollReveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+                </div>
+              </div>
+            </section>
+          </ScrollReveal>
+        );
+      })}
 
-      {/* CTA */}
       <section className={styles.cta}>
         <div className="container">
           <div className={styles.ctaInner}>

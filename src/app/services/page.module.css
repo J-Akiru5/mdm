@@ -7,7 +7,6 @@
 
 .heroLabel {
   display: inline-block;
-  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
@@ -17,7 +16,6 @@
 }
 
 .heroTitle {
-  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
   font-size: clamp(36px, 5vw, 56px);
   font-weight: 700;
   color: var(--color-white);
@@ -33,75 +31,98 @@
   line-height: 1.65;
 }
 
-/* Services Grid */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-lg);
+/* Alternating Sections */
+.section {
+  padding: var(--space-2xl) 0;
 }
 
-.card {
-  background-color: var(--color-white);
-  border: 1px solid var(--color-gray-100);
+.sectionAlt {
+  background-color: var(--color-off-white);
+}
+
+.sectionInner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2xl);
+  align-items: center;
+}
+
+.sectionImage {
+  position: relative;
+  aspect-ratio: 4 / 3;
   border-radius: var(--border-radius-md);
   overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  transition:
-    box-shadow 0.4s ease,
-    transform 0.4s ease;
 }
 
-.card:hover {
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-  transform: translateY(-4px);
+.imageLeft {
+  order: 0;
 }
 
-.cardImageWrap {
-  position: relative;
-  height: 200px;
-  overflow: hidden;
+.imageRight {
+  order: 1;
 }
 
-.cardContent {
-  padding: var(--space-lg);
+.textLeft {
+  order: 0;
 }
 
-.cardTitle {
-  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
-  font-size: 20px;
+.textRight {
+  order: 1;
+}
+
+.sectionIndex {
+  font-size: 11px;
   font-weight: 700;
-  color: var(--color-gray-900);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-primary-light);
+  display: block;
   margin-bottom: var(--space-sm);
-  padding-bottom: var(--space-sm);
-  border-bottom: 2px solid var(--color-primary);
 }
 
-.cardDesc {
-  font-size: 14px;
+.sectionTitle {
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
+  font-size: clamp(28px, 3.5vw, 38px);
+  font-weight: 700;
+  color: var(--color-dark);
+  margin-bottom: var(--space-sm);
+  line-height: 1.1;
+}
+
+.sectionTagline {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--color-gray-700);
+  margin-bottom: var(--space-md);
+  line-height: 1.5;
+}
+
+.sectionDesc {
+  font-size: 15px;
   color: var(--color-gray-600);
-  line-height: 1.65;
+  line-height: 1.7;
+  margin-bottom: var(--space-lg);
+}
+
+.sectionLink {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.sectionLink:hover {
+  color: var(--color-primary-light);
+  transform: translateX(4px);
 }
 
 /* CTA Banner */
-.cardLink {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
-
-.cardLinked {
-  position: relative;
-}
-
-.cardLinked::after {
-  content: "Learn More →";
-  display: block;
-  margin-top: var(--space-sm);
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--color-primary);
-}
-
 .cta {
   background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
   padding: var(--space-xl) 0;
@@ -128,17 +149,27 @@
 }
 
 @media (max-width: 768px) {
-  .grid {
+  .sectionInner {
     grid-template-columns: 1fr;
+    gap: var(--space-lg);
   }
+
+  .sectionImage {
+    aspect-ratio: 16 / 9;
+  }
+
+  .imageLeft,
+  .imageRight {
+    order: 0;
+  }
+
+  .textLeft,
+  .textRight {
+    order: 1;
+  }
+
   .ctaInner {
     flex-direction: column;
     text-align: center;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
   }
 }

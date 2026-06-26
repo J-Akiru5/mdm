@@ -31,11 +31,11 @@
 }
 
 .overview {
+  max-width: 800px;
+  margin: 0 auto;
   font-size: 17px;
   color: var(--color-gray-600);
   line-height: 1.8;
-  max-width: 800px;
-  margin: 0 auto;
   text-align: center;
 }
 
@@ -75,48 +75,6 @@
   line-height: 1.55;
 }
 
-.subGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-lg);
-}
-
-.subCard {
-  background-color: var(--color-white);
-  border: 1px solid var(--color-gray-100);
-  border-radius: var(--border-radius-md);
-  padding: var(--space-lg);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  transition:
-    box-shadow 0.4s ease,
-    transform 0.4s ease;
-}
-
-.subCard:hover {
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-  transform: translateY(-4px);
-}
-
-.subIcon {
-  font-size: 32px;
-  display: block;
-  margin-bottom: var(--space-sm);
-}
-
-.subTitle {
-  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--color-gray-900);
-  margin-bottom: var(--space-sm);
-}
-
-.subDesc {
-  font-size: 14px;
-  color: var(--color-gray-600);
-  line-height: 1.65;
-}
-
 .processSection {
   background-color: var(--color-off-white);
 }
@@ -125,6 +83,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-lg);
+  counter-reset: step;
 }
 
 .processStep {
@@ -165,6 +124,7 @@
 .cta {
   background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
   padding: var(--space-xl) 0;
+  text-align: center;
 }
 
 .ctaTitle {
@@ -180,20 +140,18 @@
   margin-bottom: var(--space-lg);
 }
 
-@media (max-width: 1024px) {
-  .grid,
-  .subGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 @media (max-width: 768px) {
-  .grid,
-  .subGrid {
+  .grid {
     grid-template-columns: 1fr;
   }
 
   .processGrid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

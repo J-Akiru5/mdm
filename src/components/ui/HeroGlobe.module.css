@@ -1,0 +1,12 @@
+.globeOverlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 420px;
+  height: 420px;
+  max-width: 90vw;
+  max-height: 90vw;
+  pointer-events: none;
+  z-index: 1;
+}
