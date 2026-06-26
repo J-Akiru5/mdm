@@ -1,0 +1,9 @@
+node_modules/
+.next/
+out/
+prisma/
+*.lock
+.env
+.env.local
+coverage/
+public/

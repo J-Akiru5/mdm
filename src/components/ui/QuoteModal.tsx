@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useCallback, useState } from "react";
 import Button from "./Button";
 import styles from "./QuoteModal.module.css";
 
@@ -11,12 +11,16 @@ interface QuoteModalProps {
 export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
   const [showThankYou, setShowThankYou] = useState(false);
 
+  const handleClose = useCallback(() => {
+    setShowThankYou(false);
+    onClose();
+  }, [onClose]);
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
-      setShowThankYou(false);
     }
     return () => {
       document.body.style.overflow = "";
@@ -25,11 +29,11 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") handleClose();
     };
     if (isOpen) window.addEventListener("keydown", handleEsc);
     return () => window.removeEventListener("keydown", handleEsc);
-  }, [isOpen, onClose]);
+  }, [isOpen, handleClose]);
 
   if (!isOpen) return null;
 
@@ -37,17 +41,14 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
     e.preventDefault();
     setShowThankYou(true);
     setTimeout(() => {
-      onClose();
+      handleClose();
     }, 2000);
   };
 
   return (
-    <div className={styles.overlay} onClick={onClose}>
-      <div
-        className={styles.modal}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button className={styles.close} onClick={onClose} aria-label="Close">
+    <div className={styles.overlay} onClick={handleClose}>
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+        <button className={styles.close} onClick={handleClose} aria-label="Close">
           ✕
         </button>
 
@@ -65,30 +66,12 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
             </p>
             <form className={styles.form} onSubmit={handleSubmit}>
               <div className={styles.row}>
-                <input
-                  type="text"
-                  placeholder="Full Name"
-                  className={styles.input}
-                  required
-                />
-                <input
-                  type="email"
-                  placeholder="Email Address"
-                  className={styles.input}
-                  required
-                />
+                <input type="text" placeholder="Full Name" className={styles.input} required />
+                <input type="email" placeholder="Email Address" className={styles.input} required />
               </div>
               <div className={styles.row}>
-                <input
-                  type="tel"
-                  placeholder="Phone Number"
-                  className={styles.input}
-                />
-                <input
-                  type="text"
-                  placeholder="Company / Organization"
-                  className={styles.input}
-                />
+                <input type="tel" placeholder="Phone Number" className={styles.input} />
+                <input type="text" placeholder="Company / Organization" className={styles.input} />
               </div>
               <div className={styles.row}>
                 <select className={styles.input} defaultValue="">
