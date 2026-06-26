@@ -4,6 +4,7 @@ import { useState } from "react";
 import QuoteModal from "@/components/ui/QuoteModal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
+import HeroGlobe from "@/components/ui/HeroGlobe";
 import styles from "./page.module.css";
 
 export default function ContactPage() {
@@ -19,8 +20,9 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className={styles.hero}>
-        <div className="container" style={{ textAlign: "center" }}>
+      <section className={`${styles.hero} brandedHero`}>
+        <HeroGlobe />
+        <div className="container heroContent" style={{ textAlign: "center" }}>
           <span className={styles.heroLabel}>CONTACT US</span>
           <h1 className={styles.heroTitle}>Let&apos;s Create Something Amazing Together.</h1>
         </div>

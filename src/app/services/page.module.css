@@ -6,13 +6,21 @@
 }
 
 .heroLabel {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: var(--color-primary-light);
+  color: #ff4a50;
+  background-color: rgba(213, 28, 36, 0.08);
+  border: 1px solid rgba(213, 28, 36, 0.35);
+  padding: 6px 16px;
   margin-bottom: var(--space-md);
+  border-radius: 0;
+  box-shadow: 0 0 15px rgba(213, 28, 36, 0.1);
+  text-shadow: 0 0 5px rgba(213, 28, 36, 0.2);
 }
 
 .heroTitle {

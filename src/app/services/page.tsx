@@ -7,6 +7,7 @@ import QuoteModal from "@/components/ui/QuoteModal";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import Button from "@/components/ui/Button";
 import { services } from "@/data/services";
+import HeroGlobe from "@/components/ui/HeroGlobe";
 import styles from "./page.module.css";
 
 export default function ServicesPage() {
@@ -14,8 +15,9 @@ export default function ServicesPage() {
 
   return (
     <>
-      <section className={styles.hero}>
-        <div className="container" style={{ textAlign: "center" }}>
+      <section className={`${styles.hero} brandedHero`}>
+        <HeroGlobe />
+        <div className="container heroContent" style={{ textAlign: "center" }}>
           <span className={styles.heroLabel}>OUR SERVICES</span>
           <h1 className={styles.heroTitle}>Solutions for Every Type of Event.</h1>
           <p className={styles.heroSub}>

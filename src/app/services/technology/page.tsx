@@ -5,6 +5,7 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import Button from "@/components/ui/Button";
 import QuoteModal from "@/components/ui/QuoteModal";
 import { getTechServiceData, getTechSubServices, styles } from "./data";
+import HeroGlobe from "@/components/ui/HeroGlobe";
 
 export default function TechnologyPage() {
   const [quoteOpen, setQuoteOpen] = useState(false);
@@ -13,8 +14,9 @@ export default function TechnologyPage() {
 
   return (
     <>
-      <section className={styles.hero}>
-        <div className="container" style={{ textAlign: "center" }}>
+      <section className={`${styles.hero} brandedHero`}>
+        <HeroGlobe />
+        <div className="container heroContent" style={{ textAlign: "center" }}>
           <span className={styles.heroLabel}>TECHNOLOGY & DIGITAL SOLUTIONS</span>
           <h1 className={styles.heroTitle}>{svc.title}</h1>
           <p className={styles.heroSub}>{svc.tagline}</p>

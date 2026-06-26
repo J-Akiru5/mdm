@@ -6,6 +6,7 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import Button from "@/components/ui/Button";
 import Skeleton from "@/components/ui/Skeleton";
 import Image from "next/image";
+import HeroGlobe from "@/components/ui/HeroGlobe";
 import styles from "./page.module.css";
 
 interface PortfolioItem {
@@ -43,8 +44,9 @@ export default function PortfolioPage() {
 
   return (
     <>
-      <section className={styles.hero}>
-        <div className="container" style={{ textAlign: "center" }}>
+      <section className={`${styles.hero} brandedHero`}>
+        <HeroGlobe />
+        <div className="container heroContent" style={{ textAlign: "center" }}>
           <span className={styles.heroLabel}>OUR PORTFOLIO</span>
           <h1 className={styles.heroTitle}>
             {loading
