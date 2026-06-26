@@ -1,0 +1,21 @@
+.reveal {
+  opacity: 0;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fadeInUp {
+  transform: translateY(30px);
+}
+
+.fadeInLeft {
+  transform: translateX(-30px);
+}
+
+.fadeInRight {
+  transform: translateX(30px);
+}
+
+.visible {
+  opacity: 1;
+  transform: translate(0);
+}

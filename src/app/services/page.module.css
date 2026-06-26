@@ -1,0 +1,116 @@
+/* Hero */
+.hero {
+  padding: var(--space-2xl) 0;
+  background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-secondary) 100%);
+  text-align: center;
+}
+
+.heroLabel {
+  display: inline-block;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: var(--color-primary-light);
+  margin-bottom: var(--space-md);
+}
+
+.heroTitle {
+  font-family: var(--font-playfair), serif;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 800;
+  color: var(--color-white);
+  margin-bottom: var(--space-md);
+  line-height: 1.15;
+}
+
+.heroSub {
+  font-size: 18px;
+  color: var(--color-gray-300);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* Services Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray-100);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.card:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  transform: translateY(-4px);
+}
+
+.cardImageWrap {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.cardContent {
+  padding: var(--space-lg);
+}
+
+.cardTitle {
+  font-family: var(--font-playfair), serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-gray-900);
+  margin-bottom: var(--space-sm);
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.cardDesc {
+  font-size: 14px;
+  color: var(--color-gray-600);
+  line-height: 1.7;
+}
+
+/* CTA Banner */
+.cta {
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+  padding: var(--space-xl) 0;
+}
+
+.ctaInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xl);
+}
+
+.ctaTitle {
+  font-family: var(--font-playfair), serif;
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: var(--space-xs);
+}
+
+.ctaText {
+  font-size: 15px;
+  color: rgba(255,255,255,0.8);
+}
+
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; }
+  .ctaInner { flex-direction: column; text-align: center; }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
