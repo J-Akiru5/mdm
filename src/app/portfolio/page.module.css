@@ -127,6 +127,49 @@
   color: var(--color-primary-light);
 }
 
+.heroSub {
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
+  font-size: 16px;
+  color: var(--color-gray-400);
+  max-width: 500px;
+  margin: var(--space-md) auto 0;
+  line-height: 1.6;
+}
+
+.filterSkeleton {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.emptyState {
+  text-align: center;
+  padding: var(--space-2xl) var(--space-lg);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.emptyIcon {
+  font-size: 56px;
+  display: block;
+  margin-bottom: var(--space-md);
+}
+
+.emptyTitle {
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-dark);
+  margin-bottom: var(--space-sm);
+}
+
+.emptyDesc {
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
+  font-size: 16px;
+  color: var(--color-gray-600);
+  line-height: 1.6;
+  margin-bottom: var(--space-lg);
+}
+
 /* CTA */
 .ctaTitle {
   font-family: var(--font-dm-sans), "DM Sans", sans-serif;

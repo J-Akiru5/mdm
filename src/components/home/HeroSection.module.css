@@ -1,6 +1,8 @@
 .hero {
   position: relative;
-  height: 610px;
+  min-height: 610px;
+  display: flex;
+  align-items: center;
   background:
     linear-gradient(90deg, #070707d9, #07070755),
     url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1800&q=85")
@@ -17,7 +19,8 @@
   z-index: 1;
   color: var(--color-white);
   max-width: 700px;
-  padding: 125px 8%;
+  padding: 125px 8% 90px;
+  width: 100%;
 }
 
 .eyebrow {
@@ -58,10 +61,10 @@
   margin-top: 30px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 850px) {
   .hero {
+    min-height: auto;
     height: auto;
-    min-height: 500px;
   }
 
   .content {
@@ -69,7 +72,7 @@
   }
 
   .title {
-    font-size: 36px;
+    font-size: 42px;
   }
 
   .subtitle {
@@ -77,7 +80,19 @@
   }
 
   .actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 500px) {
+  .title {
+    font-size: 35px;
+  }
+
+  .actions {
     flex-direction: column;
-    gap: var(--space-sm);
+    align-items: stretch;
   }
 }

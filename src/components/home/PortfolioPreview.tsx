@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import SectionHeading from "../ui/SectionHeading";
+import Skeleton from "../ui/Skeleton";
 import styles from "./PortfolioPreview.module.css";
 
 interface PortfolioItem {
@@ -59,7 +60,21 @@ export default function PortfolioPreview() {
         </div>
 
         {loading ? (
-          <div className={styles.loading}>Loading portfolio...</div>
+          <div className={styles.gallery}>
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className={styles.galleryItem}>
+                <Skeleton height="100%" borderRadius="var(--border-radius-md)" />
+              </div>
+            ))}
+          </div>
+        ) : items.length === 0 ? (
+          <div className={styles.emptyState}>
+            <span className={styles.emptyIcon}>🚀</span>
+            <h3 className={styles.emptyTitle}>Projects Coming Soon</h3>
+            <p className={styles.emptyDesc}>
+              We&apos;re crafting extraordinary experiences. Stay tuned for our latest work.
+            </p>
+          </div>
         ) : (
           <div className={styles.gallery}>
             {filtered.map((item) => (

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import QuoteModal from "@/components/ui/QuoteModal";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import Button from "@/components/ui/Button";
+import Skeleton from "@/components/ui/Skeleton";
 import Image from "next/image";
 import styles from "./page.module.css";
 
@@ -45,27 +46,36 @@ export default function PortfolioPage() {
       <section className={styles.hero}>
         <div className="container" style={{ textAlign: "center" }}>
           <span className={styles.heroLabel}>OUR PORTFOLIO</span>
-          <h1 className={styles.heroTitle}>A Glimpse of the Events We&apos;ve Made Possible.</h1>
+          <h1 className={styles.heroTitle}>
+            {loading
+              ? "Loading..."
+              : items.length === 0
+                ? "Coming Soon"
+                : "A Glimpse of the Events We\u2019ve Made Possible."}
+          </h1>
+          {!loading && items.length === 0 && (
+            <p className={styles.heroSub}>
+              We&apos;re putting the final touches on something amazing. Stay tuned.
+            </p>
+          )}
         </div>
       </section>
 
-      <section className="section">
-        <div className="container">
-          <div className={styles.filters}>
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                className={`${styles.filter} ${activeCategory === cat.id ? styles.filterActive : ""}`}
-                onClick={() => setActiveCategory(cat.id)}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
+      {!loading && items.length > 0 && (
+        <section className="section">
+          <div className="container">
+            <div className={styles.filters}>
+              {categories.map((cat) => (
+                <button
+                  key={cat.id}
+                  className={`${styles.filter} ${activeCategory === cat.id ? styles.filterActive : ""}`}
+                  onClick={() => setActiveCategory(cat.id)}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
 
-          {loading ? (
-            <p style={{ textAlign: "center", color: "#999" }}>Loading...</p>
-          ) : (
             <div className={styles.grid}>
               {filteredItems.map((item, i) => (
                 <ScrollReveal key={item.id} delay={(i % 4) * 0.1}>
@@ -86,9 +96,51 @@ export default function PortfolioPage() {
                 </ScrollReveal>
               ))}
             </div>
-          )}
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
+
+      {loading && (
+        <section className="section">
+          <div className="container">
+            <div className={styles.filters}>
+              {categories.map((cat) => (
+                <button
+                  key={cat.id}
+                  className={`${styles.filter} ${styles.filterSkeleton}`}
+                  disabled
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+            <div className={styles.grid}>
+              {Array.from({ length: 8 }).map((_, i) => (
+                <div key={i} className={styles.item}>
+                  <Skeleton height="100%" borderRadius="var(--border-radius-md)" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {!loading && items.length === 0 && (
+        <section className="section">
+          <div className="container">
+            <div className={styles.emptyState}>
+              <span className={styles.emptyIcon}>🚀</span>
+              <h2 className={styles.emptyTitle}>Projects Coming Soon</h2>
+              <p className={styles.emptyDesc}>
+                We&apos;re crafting extraordinary experiences that will be showcased here.
+                <br />
+                Stay tuned for our portfolio launch.
+              </p>
+              <Button onClick={() => setQuoteOpen(true)}>Get Notified</Button>
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="section section-dark" style={{ textAlign: "center" }}>
         <div className="container">

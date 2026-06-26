@@ -75,6 +75,34 @@
   font-size: 14px;
 }
 
+.emptyState {
+  text-align: center;
+  padding: var(--space-2xl) var(--space-lg);
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.emptyIcon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: var(--space-md);
+}
+
+.emptyTitle {
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--color-dark);
+  margin-bottom: var(--space-sm);
+}
+
+.emptyDesc {
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
+  font-size: 16px;
+  color: var(--color-gray-600);
+  line-height: 1.6;
+}
+
 @media (max-width: 1024px) {
   .gallery {
     grid-template-columns: repeat(2, 1fr);
