@@ -101,6 +101,34 @@
   border-color: #d51c24;
 }
 
+/* Category Management */
+.categoryNote {
+  font-size: 13px;
+  color: #666;
+  margin: 0 0 16px;
+  line-height: 1.5;
+}
+
+.categoryAdd {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.categoryAdd .input {
+  flex: 1;
+}
+
+.categoryEditRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.categoryEditRow .input {
+  flex: 1;
+}
+
 /* Form */
 .form {
   background: #fff;

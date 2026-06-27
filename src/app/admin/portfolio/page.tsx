@@ -22,13 +22,18 @@ interface PortfolioItem {
   created_at: string;
 }
 
-const categories = ["corporate", "government", "launches", "festivals", "production", "exhibits"];
+interface Category {
+  id: string;
+  name: string;
+  sort_order: number;
+}
 
 export default function AdminPortfolio() {
   const { toast } = useToast();
   const [items, setItems] = useState<PortfolioItem[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<"items" | "form">("items");
+  const [activeTab, setActiveTab] = useState<"items" | "form" | "categories">("items");
   const [editing, setEditing] = useState<PortfolioItem | null>(null);
   const [form, setForm] = useState({
     title: "",
@@ -48,6 +53,13 @@ export default function AdminPortfolio() {
   const [filterCategory, setFilterCategory] = useState("all");
   const [filterHighlight, setFilterHighlight] = useState("all");
 
+  // Category CRUD
+  const [newCategoryName, setNewCategoryName] = useState("");
+  const [editingCategory, setEditingCategory] = useState<Category | null>(null);
+  const [editCategoryName, setEditCategoryName] = useState("");
+
+  const categoryNames = categories.map((c) => c.name);
+
   const fetchItems = useCallback(() => {
     fetch("/api/portfolio")
       .then((r) => r.json())
@@ -57,9 +69,18 @@ export default function AdminPortfolio() {
       });
   }, []);
 
+  const fetchCategories = useCallback(() => {
+    fetch("/api/portfolio/categories")
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data)) setCategories(data);
+      });
+  }, []);
+
   useEffect(() => {
     fetchItems();
-  }, [fetchItems]);
+    fetchCategories();
+  }, [fetchItems, fetchCategories]);
 
   const filteredItems = items.filter((item) => {
     const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase());
@@ -273,6 +294,58 @@ export default function AdminPortfolio() {
     setUploading(false);
   };
 
+  // Category CRUD handlers
+  const handleAddCategory = async () => {
+    if (!newCategoryName.trim()) return toast("error", "Category name is required");
+
+    const res = await fetch("/api/portfolio/categories", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: newCategoryName }),
+    });
+
+    if (res.ok) {
+      toast("success", "Category added");
+      setNewCategoryName("");
+      fetchCategories();
+    } else {
+      const err = await res.json();
+      toast("error", err.error || "Failed to add category");
+    }
+  };
+
+  const handleUpdateCategory = async () => {
+    if (!editingCategory || !editCategoryName.trim()) return;
+
+    const res = await fetch("/api/portfolio/categories", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: editingCategory.id, name: editCategoryName }),
+    });
+
+    if (res.ok) {
+      toast("success", "Category updated");
+      setEditingCategory(null);
+      setEditCategoryName("");
+      fetchCategories();
+    } else {
+      const err = await res.json();
+      toast("error", err.error || "Failed to update category");
+    }
+  };
+
+  const handleDeleteCategory = async (id: string) => {
+    if (!confirm("Delete this category? Items using it will keep their value.")) return;
+
+    const res = await fetch(`/api/portfolio/categories?id=${id}`, { method: "DELETE" });
+    if (res.ok) {
+      toast("success", "Category deleted");
+      fetchCategories();
+    } else {
+      toast("error", "Failed to delete category");
+    }
+  };
+
   if (loading) return <div className={styles.loading}>Loading...</div>;
 
   return (
@@ -296,6 +369,12 @@ export default function AdminPortfolio() {
         >
           {editing ? "Edit Item" : "Add New Item"}
         </button>
+        <button
+          className={`${styles.tab} ${activeTab === "categories" ? styles.tabActive : ""}`}
+          onClick={() => setActiveTab("categories")}
+        >
+          Categories ({categories.length})
+        </button>
       </div>
 
       {activeTab === "items" ? (
@@ -315,7 +394,7 @@ export default function AdminPortfolio() {
               className={styles.filterSelect}
             >
               <option value="all">All Categories</option>
-              {categories.map((c) => (
+              {categoryNames.map((c) => (
                 <option key={c} value={c}>
                   {c.charAt(0).toUpperCase() + c.slice(1)}
                 </option>
@@ -389,7 +468,7 @@ export default function AdminPortfolio() {
             ))}
           </div>
         </>
-      ) : (
+      ) : activeTab === "form" ? (
         /* Form Tab */
         <div className={styles.form}>
           <h2>{editing ? "Edit Item" : "Add New Item"}</h2>
@@ -406,7 +485,7 @@ export default function AdminPortfolio() {
               className={styles.input}
             >
               <option value="">Select category *</option>
-              {categories.map((c) => (
+              {categoryNames.map((c) => (
                 <option key={c} value={c}>
                   {c.charAt(0).toUpperCase() + c.slice(1)}
                 </option>
@@ -552,6 +631,92 @@ export default function AdminPortfolio() {
                 Cancel
               </button>
             </div>
+          </div>
+        </div>
+      ) : (
+        /* Categories Tab */
+        <div className={styles.form}>
+          <h2>Manage Categories</h2>
+          <p className={styles.categoryNote}>
+            Categories appear as filters on the portfolio page and as options when creating items.
+          </p>
+
+          {/* Add Category */}
+          <div className={styles.categoryAdd}>
+            <input
+              placeholder="New category name..."
+              value={newCategoryName}
+              onChange={(e) => setNewCategoryName(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleAddCategory()}
+              className={styles.input}
+            />
+            <button
+              onClick={handleAddCategory}
+              className={styles.btn}
+              disabled={!newCategoryName.trim()}
+            >
+              Add
+            </button>
+          </div>
+
+          {/* Categories List */}
+          <div className={styles.list}>
+            {categories.length === 0 && (
+              <p className={styles.empty}>No categories yet. Add one above.</p>
+            )}
+            {categories.map((cat) => (
+              <div key={cat.id} className={styles.item}>
+                <div className={styles.itemInfo}>
+                  {editingCategory?.id === cat.id ? (
+                    <div className={styles.categoryEditRow}>
+                      <input
+                        value={editCategoryName}
+                        onChange={(e) => setEditCategoryName(e.target.value)}
+                        onKeyDown={(e) => e.key === "Enter" && handleUpdateCategory()}
+                        className={styles.input}
+                        autoFocus
+                      />
+                      <button
+                        onClick={handleUpdateCategory}
+                        className={`${styles.btn} ${styles.btnSmall}`}
+                      >
+                        Save
+                      </button>
+                      <button
+                        onClick={() => {
+                          setEditingCategory(null);
+                          setEditCategoryName("");
+                        }}
+                        className={`${styles.btn} ${styles.btnSmall} ${styles.btnSecondary}`}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  ) : (
+                    <strong>{cat.name}</strong>
+                  )}
+                </div>
+                {editingCategory?.id !== cat.id && (
+                  <div className={styles.itemActions}>
+                    <button
+                      onClick={() => {
+                        setEditingCategory(cat);
+                        setEditCategoryName(cat.name);
+                      }}
+                      className={`${styles.btn} ${styles.btnSmall}`}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDeleteCategory(cat.id)}
+                      className={`${styles.btn} ${styles.btnSmall} ${styles.btnDanger}`}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       )}

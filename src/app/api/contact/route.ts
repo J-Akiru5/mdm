@@ -6,7 +6,18 @@ export async function GET() {
     const submissions = await prisma.contactSubmission.findMany({
       orderBy: { createdAt: "desc" },
     });
-    return NextResponse.json(submissions);
+    const mapped = submissions.map((s) => ({
+      id: s.id,
+      full_name: s.fullName,
+      email: s.email,
+      phone: s.phone,
+      company: s.company,
+      event_type: s.eventType,
+      event_date: s.eventDate,
+      message: s.message,
+      created_at: s.createdAt.toISOString(),
+    }));
+    return NextResponse.json(mapped);
   } catch {
     return NextResponse.json({ error: "Failed to fetch inquiries" }, { status: 500 });
   }

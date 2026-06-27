@@ -17,20 +17,16 @@ interface PortfolioItem {
   client_logo: string | null;
 }
 
-const categories = [
-  { id: "all", label: "All" },
-  { id: "corporate", label: "Corporate" },
-  { id: "government", label: "Government" },
-  { id: "launches", label: "Launches" },
-  { id: "festivals", label: "Festivals" },
-  { id: "production", label: "Production" },
-  { id: "exhibits", label: "Exhibits" },
-];
+interface Category {
+  id: string;
+  name: string;
+}
 
 export default function PortfolioPage() {
   const [quoteOpen, setQuoteOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState("all");
   const [items, setItems] = useState<PortfolioItem[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -44,12 +40,14 @@ export default function PortfolioPage() {
   }, []);
 
   useEffect(() => {
-    fetch("/api/portfolio")
-      .then((r) => r.json())
-      .then((data) => {
-        if (Array.isArray(data)) setItems(data);
-        setLoading(false);
-      });
+    Promise.all([
+      fetch("/api/portfolio").then((r) => r.json()),
+      fetch("/api/portfolio/categories").then((r) => r.json()),
+    ]).then(([itemsData, catsData]) => {
+      if (Array.isArray(itemsData)) setItems(itemsData);
+      if (Array.isArray(catsData)) setCategories(catsData);
+      setLoading(false);
+    });
   }, []);
 
   const filteredItems =
@@ -80,13 +78,19 @@ export default function PortfolioPage() {
         <section className="section">
           <div className="container">
             <div className={styles.filters}>
+              <button
+                className={`${styles.filter} ${activeCategory === "all" ? styles.filterActive : ""}`}
+                onClick={() => setActiveCategory("all")}
+              >
+                All
+              </button>
               {categories.map((cat) => (
                 <button
                   key={cat.id}
-                  className={`${styles.filter} ${activeCategory === cat.id ? styles.filterActive : ""}`}
-                  onClick={() => setActiveCategory(cat.id)}
+                  className={`${styles.filter} ${activeCategory === cat.name ? styles.filterActive : ""}`}
+                  onClick={() => setActiveCategory(cat.name)}
                 >
-                  {cat.label}
+                  {cat.name.charAt(0).toUpperCase() + cat.name.slice(1)}
                 </button>
               ))}
             </div>
@@ -120,13 +124,9 @@ export default function PortfolioPage() {
         <section className="section">
           <div className="container">
             <div className={styles.filters}>
-              {categories.map((cat) => (
-                <button
-                  key={cat.id}
-                  className={`${styles.filter} ${styles.filterSkeleton}`}
-                  disabled
-                >
-                  {cat.label}
+              {["All", "Loading...", "Loading...", "Loading...", "Loading..."].map((label, i) => (
+                <button key={i} className={`${styles.filter} ${styles.filterSkeleton}`} disabled>
+                  {label}
                 </button>
               ))}
             </div>
