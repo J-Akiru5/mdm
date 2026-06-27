@@ -21,6 +21,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Link href="/admin/inquiries" className={styles.navLink}>
               Inquiries
             </Link>
+            <Link href="/admin/feedback" className={styles.navLink}>
+              Feedback
+            </Link>
           </nav>
           <form action={logout} className={styles.logoutForm}>
             <button type="submit" className={styles.logoutBtn}>

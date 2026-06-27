@@ -1,9 +1,15 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
+    const { searchParams } = new URL(req.url);
+    const highlightOnly = searchParams.get("highlight") === "true";
+
+    const where = highlightOnly ? { highlight: true } : {};
+
     const items = await prisma.portfolio.findMany({
+      where,
       orderBy: { createdAt: "desc" },
       include: { images: { orderBy: { sortOrder: "asc" } } },
     });
@@ -13,6 +19,7 @@ export async function GET() {
       category: item.category,
       image_url: item.imageUrl,
       client_logo: item.clientLogo,
+      highlight: item.highlight,
       images: item.images.map((img) => ({
         id: img.id,
         url: img.url,
@@ -42,6 +49,7 @@ export async function POST(req: Request) {
         category: body.category,
         imageUrl: body.image_url,
         clientLogo: body.client_logo || null,
+        highlight: body.highlight || false,
         images: { create: imagesData },
       },
       include: { images: true },
@@ -57,7 +65,6 @@ export async function PUT(req: Request) {
     const body = await req.json();
     const { id, images, ...data } = body;
 
-    // Update main fields
     await prisma.portfolio.update({
       where: { id },
       data: {
@@ -65,14 +72,12 @@ export async function PUT(req: Request) {
         category: data.category,
         imageUrl: data.image_url,
         clientLogo: data.client_logo || null,
+        highlight: data.highlight || false,
       },
     });
 
-    // Sync images if provided
     if (Array.isArray(images)) {
-      // Delete existing images
       await prisma.portfolioImage.deleteMany({ where: { portfolioId: id } });
-      // Create new images
       if (images.length > 0) {
         await prisma.portfolioImage.createMany({
           data: images.map((img: { url: string; sort_order?: number }, i: number) => ({
@@ -94,12 +99,30 @@ export async function PUT(req: Request) {
   }
 }
 
+export async function PATCH(req: Request) {
+  try {
+    const body = await req.json();
+    const { id, highlight } = body;
+
+    if (!id || typeof highlight !== "boolean") {
+      return NextResponse.json({ error: "Missing id or highlight" }, { status: 400 });
+    }
+
+    const item = await prisma.portfolio.update({
+      where: { id },
+      data: { highlight },
+    });
+    return NextResponse.json(item);
+  } catch {
+    return NextResponse.json({ error: "Failed to update highlight" }, { status: 500 });
+  }
+}
+
 export async function DELETE(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const id = searchParams.get("id");
     if (!id) return NextResponse.json({ error: "Missing id" }, { status: 400 });
-    // Images cascade delete via schema
     await prisma.portfolio.delete({ where: { id } });
     return NextResponse.json({ success: true });
   } catch {

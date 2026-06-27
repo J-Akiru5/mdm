@@ -17,6 +17,7 @@ interface PortfolioItem {
   category: string;
   image_url: string;
   client_logo: string | null;
+  highlight: boolean;
   images: PortfolioImage[];
   created_at: string;
 }
@@ -202,6 +203,20 @@ export default function AdminPortfolio() {
       fetchItems();
     } else {
       toast("error", "Failed to delete item");
+    }
+  };
+
+  const handleToggleHighlight = async (id: string, current: boolean) => {
+    const res = await fetch("/api/portfolio", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, highlight: !current }),
+    });
+    if (res.ok) {
+      toast("success", current ? "Removed from highlights" : "Added to highlights");
+      fetchItems();
+    } else {
+      toast("error", "Failed to update highlight");
     }
   };
 
@@ -394,12 +409,20 @@ export default function AdminPortfolio() {
             <div className={styles.itemInfo}>
               <strong>{item.title}</strong>
               <span className={styles.category}>{item.category}</span>
+              {item.highlight && <span className={styles.highlightBadge}>★ Highlight</span>}
               {item.client_logo && <span className={styles.badge}>Has logo</span>}
               {item.images && item.images.length > 0 && (
                 <span className={styles.badge}>{item.images.length} photos</span>
               )}
             </div>
             <div className={styles.itemActions}>
+              <button
+                onClick={() => handleToggleHighlight(item.id, item.highlight)}
+                className={`${styles.btn} ${styles.btnSmall} ${item.highlight ? styles.btnHighlightActive : styles.btnHighlight}`}
+                title={item.highlight ? "Remove from highlights" : "Add to highlights"}
+              >
+                {item.highlight ? "★" : "☆"}
+              </button>
               <button
                 onClick={() => handleEdit(item)}
                 className={`${styles.btn} ${styles.btnSmall}`}

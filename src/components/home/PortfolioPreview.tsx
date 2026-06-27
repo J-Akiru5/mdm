@@ -20,10 +20,10 @@ export default function PortfolioPreview() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/portfolio")
+    fetch("/api/portfolio?highlight=true")
       .then((r) => r.json())
       .then((data) => {
-        if (Array.isArray(data)) setItems(data.slice(0, 3));
+        if (Array.isArray(data)) setItems(data);
         setLoading(false);
       });
   }, []);

@@ -7,6 +7,7 @@ import styles from "./page.module.css";
 export default function AdminDashboard() {
   const [portfolioCount, setPortfolioCount] = useState(0);
   const [inquiryCount, setInquiryCount] = useState(0);
+  const [feedbackCount, setFeedbackCount] = useState(0);
 
   useEffect(() => {
     fetch("/api/admin/stats")
@@ -14,6 +15,7 @@ export default function AdminDashboard() {
       .then((data) => {
         if (data.portfolioCount !== undefined) setPortfolioCount(data.portfolioCount);
         if (data.inquiryCount !== undefined) setInquiryCount(data.inquiryCount);
+        if (data.feedbackCount !== undefined) setFeedbackCount(data.feedbackCount);
       });
   }, []);
 
@@ -28,6 +30,10 @@ export default function AdminDashboard() {
         <Link href="/admin/inquiries" className={styles.card}>
           <span className={styles.cardValue}>{inquiryCount}</span>
           <span className={styles.cardLabel}>Inquiries</span>
+        </Link>
+        <Link href="/admin/feedback" className={styles.card}>
+          <span className={styles.cardValue}>{feedbackCount}</span>
+          <span className={styles.cardLabel}>Feedback</span>
         </Link>
       </div>
     </div>
