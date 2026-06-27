@@ -67,9 +67,16 @@ export default function Footer() {
         </div>
 
         <div className={styles.bottomBar}>
-          <p className={styles.copyright}>
-            &copy; {new Date().getFullYear()} MDM Events Management. All Rights Reserved.
-          </p>
+          <div className={styles.copyrightGroup}>
+            <p className={styles.copyright}>
+              &copy; {new Date().getFullYear()} MDM Events Management. All Rights Reserved.
+            </p>
+            <div className={styles.legalLinks}>
+              <Link href="/privacy">Privacy Policy</Link>
+              <span className={styles.legalDivider}>&bull;</span>
+              <Link href="/terms">Terms of Service</Link>
+            </div>
+          </div>
           <div className={styles.creditPill}>
             <span>Powered by</span>{" "}
             <a href="https://zenlabs.me/" target="_blank" rel="noopener noreferrer">
