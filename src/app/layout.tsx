@@ -26,6 +26,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://mdmeventsmanagement.com"),
   title: "MDM Events Management — Events That Move People, Brands, and Communities",
   description:
     "MDM Events Management is a full-service events and activation partner that turns ideas into well-executed experiences. We plan, produce, and manage events that leave a lasting impact.",
