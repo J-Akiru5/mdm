@@ -256,6 +256,44 @@ export const services: Service[] = [
       },
     ],
   },
+  {
+    id: "personal-events",
+    title: "Personal Events",
+    tagline: "Every milestone, beautifully celebrated.",
+    description:
+      "From the grandeur of a wedding to the joy of a child's birthday, we bring heart and expertise to life's most meaningful moments. Our personal events team handles every detail — coordination, styling, catering, and entertainment — so you can be fully present for the people who matter most.",
+    image: "/images/services/planning.jpg",
+    offerings: [
+      "Wedding & Debut Planning (On-the-Day, Semi, Full Coordination)",
+      "Baptism Receptions & Christening Celebrations",
+      "Kiddie Parties & Themed Birthday Parties",
+      "Private Gathering & Intimate Event Management",
+      "Food & Beverage Coordination and Staffing Management",
+      "Venue Styling, Floral Design & Decor",
+      "Staging, Lights & Sounds, Iwata Fans",
+      "Aisle Carpets, LED / LCD TV & Projectors",
+    ],
+    process: [
+      {
+        step: "01",
+        title: "Consult",
+        description:
+          "We sit down with you to understand your story, vision, and the experience you want to create for your guests.",
+      },
+      {
+        step: "02",
+        title: "Design",
+        description:
+          "We craft a personalized event plan — from styling and florals to catering and program flow.",
+      },
+      {
+        step: "03",
+        title: "Celebrate",
+        description:
+          "On the day, our team handles everything so you can relax, enjoy, and make memories.",
+      },
+    ],
+  },
 ];
 
 export const serviceCategories = [
