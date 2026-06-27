@@ -9,7 +9,6 @@ import AboutPreview from "@/components/home/AboutPreview";
 import WhatWeDo from "@/components/home/WhatWeDo";
 import PortfolioPreview from "@/components/home/PortfolioPreview";
 import CTABanner from "@/components/home/CTABanner";
-import ContactSection from "@/components/home/ContactSection";
 
 export default function HomePage() {
   const [quoteOpen, setQuoteOpen] = useState(false);
@@ -23,7 +22,6 @@ export default function HomePage() {
       <WhatWeDo onQuoteOpen={() => setQuoteOpen(true)} />
       <PortfolioPreview />
       <CTABanner onQuoteOpen={() => setQuoteOpen(true)} />
-      <ContactSection />
       <QuoteModal isOpen={quoteOpen} onClose={() => setQuoteOpen(false)} />
     </>
   );

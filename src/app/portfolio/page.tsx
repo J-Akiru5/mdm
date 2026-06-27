@@ -23,6 +23,8 @@ const categories = [
   { id: "government", label: "Government" },
   { id: "launches", label: "Launches" },
   { id: "festivals", label: "Festivals" },
+  { id: "production", label: "Production" },
+  { id: "exhibits", label: "Exhibits" },
 ];
 
 export default function PortfolioPage() {
@@ -30,6 +32,10 @@ export default function PortfolioPage() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [items, setItems] = useState<PortfolioItem[]>([]);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     fetch("/api/portfolio")
@@ -90,12 +96,12 @@ export default function PortfolioPage() {
                     sizes="(max-width:768px) 100vw, 25vw"
                     unoptimized
                   />
+                  <span className={styles.itemCategoryBadge}>{item.category}</span>
                   <div className={styles.itemOverlay}>
                     {item.client_logo && (
                       <img src={item.client_logo} alt="Client logo" className={styles.clientLogo} />
                     )}
                     <h3 className={styles.itemTitle}>{item.title}</h3>
-                    <span className={styles.itemCategory}>{item.category}</span>
                   </div>
                 </Link>
               ))}
