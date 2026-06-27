@@ -25,20 +25,57 @@ const inter = Inter({
   weight: ["400", "500", "600"],
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://mdmevents.org";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://mdmeventsmanagement.com"),
-  title: "MDM Events Management — Events That Move People, Brands, and Communities",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "MDM Events Management — Events That Move People, Brands, and Communities",
+    template: "%s — MDM Events Management",
+  },
   description:
     "MDM Events Management is a full-service events and activation partner that turns ideas into well-executed experiences. We plan, produce, and manage events that leave a lasting impact.",
-  keywords: "events management, corporate events, event production, Iloilo, Philippines",
+  keywords: [
+    "events management Iloilo",
+    "event planner Iloilo City",
+    "corporate events Iloilo",
+    "event management company Philippines",
+    "event production services Iloilo",
+    "event organizer Western Visayas",
+    "MDM Events Management",
+    "corporate event planner",
+    "event management services",
+    "Iloilo event coordinator",
+  ],
+  authors: [{ name: "MDM Events Management", url: siteUrl }],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
+    type: "website",
+    locale: "en_PH",
+    siteName: "MDM Events Management",
+    url: siteUrl,
     title: "MDM Events Management — Events That Move People, Brands, and Communities",
     description:
-      "MDM Events Management is a full-service events and activation partner that turns ideas into well-executed experiences.",
-    images: ["/images/OG/image.png"],
+      "MDM Events Management is a full-service events and activation partner that turns ideas into well-executed experiences. We plan, produce, and manage events that leave a lasting impact.",
+    images: [
+      {
+        url: "/images/OG/image.png",
+        width: 1200,
+        height: 630,
+        alt: "MDM Events Management",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
+    site: "@mdmevents",
     images: ["/images/OG/image.png"],
   },
 };
