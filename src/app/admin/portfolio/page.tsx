@@ -295,23 +295,32 @@ export default function AdminPortfolio() {
             className={`${styles.dropZone} ${dragOver ? styles.dropZoneActive : ""}`}
             onDragOver={(e) => {
               e.preventDefault();
+              e.stopPropagation();
               setDragOver(true);
             }}
-            onDragLeave={() => setDragOver(false)}
+            onDragLeave={(e) => {
+              e.stopPropagation();
+              setDragOver(false);
+            }}
             onDrop={handleDropZoneDrop}
           >
             {uploading ? (
               <span>Uploading...</span>
             ) : (
-              <span>Drop images here or click to browse</span>
+              <>
+                <span>Drop images here</span>
+                <label className={styles.browseBtn}>
+                  or click to browse
+                  <input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={handleMultiUpload}
+                    className={styles.browseInput}
+                  />
+                </label>
+              </>
             )}
-            <input
-              type="file"
-              accept="image/*"
-              multiple
-              onChange={handleMultiUpload}
-              className={styles.dropZoneInput}
-            />
           </div>
 
           {images.length > 0 && (

@@ -88,10 +88,27 @@
 }
 
 .dropZoneInput {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
+  display: none;
+}
+
+.browseBtn {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 6px 14px;
+  background: #9e1115;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
+  transition: background 0.2s;
+}
+
+.browseBtn:hover {
+  background: #8a0f13;
+}
+
+.browseInput {
+  display: none;
 }
 
 /* Buttons */
