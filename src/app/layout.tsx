@@ -30,6 +30,16 @@ export const metadata: Metadata = {
   description:
     "MDM Events Management is a full-service events and activation partner that turns ideas into well-executed experiences. We plan, produce, and manage events that leave a lasting impact.",
   keywords: "events management, corporate events, event production, Iloilo, Philippines",
+  openGraph: {
+    title: "MDM Events Management — Events That Move People, Brands, and Communities",
+    description:
+      "MDM Events Management is a full-service events and activation partner that turns ideas into well-executed experiences.",
+    images: ["/images/OG/image.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/images/OG/image.png"],
+  },
 };
 
 export default function RootLayout({
