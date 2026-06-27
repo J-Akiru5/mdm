@@ -12,6 +12,7 @@ interface PortfolioItem {
   title: string;
   category: string;
   image_url: string;
+  client_logo: string | null;
 }
 
 const categories = [
@@ -88,6 +89,9 @@ export default function PortfolioPreview() {
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   unoptimized
                 />
+                {item.client_logo && (
+                  <img src={item.client_logo} alt="Client logo" className={styles.clientLogo} />
+                )}
                 <div className={styles.label}>
                   <span>{item.title}</span>
                 </div>

@@ -15,6 +15,7 @@ interface PortfolioItem {
   title: string;
   category: string;
   image_url: string;
+  client_logo: string | null;
 }
 
 const categories = [
@@ -92,6 +93,13 @@ export default function PortfolioPage() {
                       unoptimized
                     />
                     <div className={styles.itemOverlay}>
+                      {item.client_logo && (
+                        <img
+                          src={item.client_logo}
+                          alt="Client logo"
+                          className={styles.clientLogo}
+                        />
+                      )}
                       <h3 className={styles.itemTitle}>{item.title}</h3>
                       <span className={styles.itemCategory}>{item.category}</span>
                     </div>
