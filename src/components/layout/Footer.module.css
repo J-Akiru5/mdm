@@ -4,7 +4,7 @@
   padding: var(--space-2xl) 0 var(--space-md);
   position: relative;
   overflow: hidden;
-  border-radius: 0 !important; /* Ensure sharp edges */
+  border-radius: 0;
 }
 
 .inner {
@@ -33,7 +33,6 @@
   display: flex;
   align-items: center;
   text-decoration: none;
-  border-radius: 0 !important;
 }
 
 .logoImg {
@@ -41,7 +40,6 @@
   max-height: 60px;
   width: auto;
   height: auto;
-  border-radius: 0 !important;
 }
 
 .logoText {
@@ -90,7 +88,6 @@
   color: var(--color-gray-300);
   transition: color 0.3s;
   text-decoration: none;
-  border-radius: 0 !important;
 }
 
 .columnLinks a:hover {
@@ -122,7 +119,7 @@
   padding: 8px 20px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 100px;
+  border-radius: 0;
   font-size: 12px;
   color: var(--color-gray-400);
   flex-shrink: 0;

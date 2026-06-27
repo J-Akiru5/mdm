@@ -34,7 +34,7 @@
   color: #b0b0bc;
   text-decoration: none;
   padding: 10px 12px;
-  border-radius: 4px;
+  border-radius: 0;
   font-size: 14px;
   font-weight: 500;
   transition: all 0.2s;
@@ -55,7 +55,7 @@
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.15);
   color: #b0b0bc;
-  border-radius: 4px;
+  border-radius: 0;
   cursor: pointer;
   font-size: 13px;
   font-weight: 600;

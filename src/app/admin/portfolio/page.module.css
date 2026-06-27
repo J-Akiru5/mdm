@@ -14,7 +14,7 @@
 
 .form {
   background: #fff;
-  border-radius: 8px;
+  border-radius: 0;
   padding: 24px;
   margin-bottom: 24px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
@@ -36,7 +36,7 @@
 .input {
   padding: 10px 14px;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 0;
   font-size: 14px;
   font-family: inherit;
   outline: none;
@@ -62,7 +62,7 @@
   width: 80px;
   height: 60px;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 0;
 }
 
 .formActions {
@@ -75,7 +75,7 @@
   background: #9e1115;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 0;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -135,7 +135,7 @@
   gap: 16px;
   background: #fff;
   padding: 16px;
-  border-radius: 8px;
+  border-radius: 0;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
@@ -143,7 +143,7 @@
   width: 60px;
   height: 45px;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 0;
   flex-shrink: 0;
 }
 

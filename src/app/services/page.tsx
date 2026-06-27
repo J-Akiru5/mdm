@@ -31,6 +31,44 @@ export default function ServicesPage() {
 
       <ServiceCatalog />
 
+      {services.map((svc, i) => {
+        const isEven = i % 2 === 0;
+        return (
+          <ScrollReveal key={svc.id}>
+            <section
+              id={`service-${svc.id}`}
+              className={`${styles.section} ${isEven ? "" : styles.sectionAlt}`}
+            >
+              <div className={`container ${styles.sectionInner}`}>
+                <div
+                  className={`${styles.sectionImage} ${isEven ? styles.imageLeft : styles.imageRight}`}
+                >
+                  <Image
+                    src={svc.image}
+                    alt={svc.title}
+                    fill
+                    style={{ objectFit: "cover" }}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    unoptimized
+                  />
+                </div>
+                <div
+                  className={`${styles.sectionText} ${isEven ? styles.textRight : styles.textLeft}`}
+                >
+                  <span className={styles.sectionIndex}>{String(i + 1).padStart(2, "0")}</span>
+                  <h2 className={styles.sectionTitle}>{svc.title}</h2>
+                  <p className={styles.sectionTagline}>{svc.tagline}</p>
+                  <p className={styles.sectionDesc}>{svc.description}</p>
+                  <Link href={`/services/${svc.id}`} className={styles.sectionLink}>
+                    Learn More →
+                  </Link>
+                </div>
+              </div>
+            </section>
+          </ScrollReveal>
+        );
+      })}
+
       {/* Our Workflow */}
       <section className={styles.workflowSection}>
         <div className="container">
@@ -100,44 +138,6 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
-
-      {services.map((svc, i) => {
-        const isEven = i % 2 === 0;
-        return (
-          <ScrollReveal key={svc.id}>
-            <section
-              id={`service-${svc.id}`}
-              className={`${styles.section} ${isEven ? "" : styles.sectionAlt}`}
-            >
-              <div className={`container ${styles.sectionInner}`}>
-                <div
-                  className={`${styles.sectionImage} ${isEven ? styles.imageLeft : styles.imageRight}`}
-                >
-                  <Image
-                    src={svc.image}
-                    alt={svc.title}
-                    fill
-                    style={{ objectFit: "cover" }}
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    unoptimized
-                  />
-                </div>
-                <div
-                  className={`${styles.sectionText} ${isEven ? styles.textRight : styles.textLeft}`}
-                >
-                  <span className={styles.sectionIndex}>{String(i + 1).padStart(2, "0")}</span>
-                  <h2 className={styles.sectionTitle}>{svc.title}</h2>
-                  <p className={styles.sectionTagline}>{svc.tagline}</p>
-                  <p className={styles.sectionDesc}>{svc.description}</p>
-                  <Link href={`/services/${svc.id}`} className={styles.sectionLink}>
-                    Learn More →
-                  </Link>
-                </div>
-              </div>
-            </section>
-          </ScrollReveal>
-        );
-      })}
 
       <section className={styles.cta}>
         <div className="container">

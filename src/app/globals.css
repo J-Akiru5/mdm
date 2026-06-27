@@ -36,9 +36,9 @@
   --container-wide: 1400px;
 
   /* Border radius */
-  --border-radius-sm: 4px;
-  --border-radius-md: 8px;
-  --border-radius-lg: 16px;
+  --border-radius-sm: 0;
+  --border-radius-md: 0;
+  --border-radius-lg: 0;
 
   /* Fonts — DM Sans only */
   --font-heading: var(--font-dm-sans), "DM Sans", sans-serif;

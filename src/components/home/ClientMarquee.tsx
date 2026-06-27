@@ -18,22 +18,20 @@ export default function ClientMarquee() {
 
   return (
     <section className={styles.section}>
-      <div className={styles.container}>
-        <h3 className={styles.title}>Trusted By Industry Leaders</h3>
-        <div className={styles.marquee}>
-          <div className={styles.marqueeInner}>
-            {marqueeItems.map((client, index) => (
-              <div key={`${client.name}-${index}`} className={styles.logoWrap}>
-                <Image
-                  src={client.logo}
-                  alt={`${client.name} Logo`}
-                  width={140}
-                  height={50}
-                  className={styles.logo}
-                />
-              </div>
-            ))}
-          </div>
+      <h3 className={styles.title}>Trusted By Industry Leaders</h3>
+      <div className={styles.marquee}>
+        <div className={styles.marqueeInner}>
+          {marqueeItems.map((client, index) => (
+            <div key={`${client.name}-${index}`} className={styles.logoWrap}>
+              <Image
+                src={client.logo}
+                alt={`${client.name} Logo`}
+                width={140}
+                height={50}
+                className={styles.logo}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </section>

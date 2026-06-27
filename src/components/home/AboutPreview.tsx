@@ -6,7 +6,7 @@ import styles from "./AboutPreview.module.css";
 export default function AboutPreview() {
   return (
     <section id="about" className="section section-off-white">
-      <div className="container">
+      <div className="container-wide">
         <div className={styles.grid}>
           <ScrollReveal animation="fadeInLeft">
             <div className={styles.textContent}>

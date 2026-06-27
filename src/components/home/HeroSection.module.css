@@ -1,23 +1,45 @@
+/* ================================================================
+   HERO SECTION — Two-column layout with logo panel
+   ================================================================ */
+
 .hero {
   position: relative;
-  height: 610px;
+  height: 750px;
   background:
-    linear-gradient(90deg, #070707d9, #07070755),
-    url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1800&q=85")
-      center / cover;
+    linear-gradient(
+      90deg,
+      rgba(7, 7, 7, 0.97) 0%,
+      rgba(7, 7, 7, 0.82) 40%,
+      rgba(7, 7, 7, 0.3) 70%,
+      rgba(7, 7, 7, 0.1) 100%
+    ),
+    url("/images/hero_event.jpg") center / cover;
   overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 
 .overlay {
   display: none;
 }
 
+/* ---------- Two-column inner wrapper ---------- */
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 8% 60px;
+  gap: 40px;
+}
+
+/* ---------- Left: Text content ---------- */
 .content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   color: var(--color-white);
-  max-width: 700px;
-  padding: 125px 8% 90px;
+  flex: 0 0 52%;
+  max-width: 52%;
 }
 
 .eyebrow {
@@ -31,11 +53,11 @@
 
 .title {
   font-family: var(--font-dm-sans), "DM Sans", sans-serif;
-  font-size: 60px;
+  font-size: 64px;
   font-weight: 700;
   color: var(--color-white);
   line-height: 1.05;
-  margin: 0 0 15px;
+  margin: 0 0 24px;
 }
 
 .highlight {
@@ -46,9 +68,9 @@
 .subtitle {
   font-family: var(--font-dm-sans), "DM Sans", sans-serif;
   font-size: 18px;
-  color: var(--color-white);
+  color: rgba(255, 255, 255, 0.75);
   line-height: 1.65;
-  max-width: 500px;
+  max-width: 480px;
   margin-bottom: 0;
 }
 
@@ -58,18 +80,166 @@
   margin-top: 30px;
 }
 
+/* ---------- Right: Logo panel ---------- */
+.logoPanel {
+  flex: 0 0 44%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 420px;
+  z-index: 1;
+}
+
+/* Outer decorative ring — pulsing red border */
+.logoRingOuter {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  border: 1px solid rgba(158, 17, 21, 0.15);
+  pointer-events: none;
+  animation: ringBreath 5s ease-in-out infinite 0.8s;
+}
+
+/* Inner ring — subtle white */
+.logoRing {
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  pointer-events: none;
+  animation: ringBreath 5s ease-in-out infinite;
+}
+
+/* Red radial ambient glow behind logo */
+.logoGlow {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(158, 17, 21, 0.28) 0%,
+    rgba(158, 17, 21, 0.08) 45%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* White faded radial background — sits between the glow and the logo */
+.logoWhiteBg {
+  position: absolute;
+  width: 820px;
+  height: 820px;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.94) 0%,
+    rgba(255, 255, 255, 0.78) 18%,
+    rgba(255, 255, 255, 0.52) 36%,
+    rgba(255, 255, 255, 0.24) 54%,
+    rgba(255, 255, 255, 0.07) 68%,
+    transparent 78%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Logo image container */
+.logoWrap {
+  position: relative;
+  width: 540px;
+  height: 310px;
+  z-index: 2;
+}
+
+/* Logo image — transparent PNG, original brand colours
+   drop-shadow adds subtle white halo so dark 'EVENTS MANAGEMENT'
+   text reads clearly on the dark hero bg */
+.logoImg {
+  filter: drop-shadow(0 2px 16px rgba(255, 255, 255, 0.25))
+    drop-shadow(0 0 8px rgba(158, 17, 21, 0.4));
+  animation: logoFloat 7s ease-in-out infinite;
+}
+
+/* ---------- Animations ---------- */
+@keyframes logoFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes ringBreath {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.025);
+  }
+}
+
+/* ================================================================
+   Responsive
+   ================================================================ */
+
+/* Tablet — shrink logo and title */
+@media (min-width: 769px) and (max-width: 1100px) {
+  .title {
+    font-size: 48px;
+  }
+
+  .logoWrap {
+    width: 320px;
+    height: 168px;
+  }
+
+  .logoRingOuter {
+    width: 380px;
+    height: 380px;
+  }
+
+  .logoRing {
+    width: 280px;
+    height: 280px;
+  }
+}
+
+/* Mobile — hide logo entirely, full-width text */
 @media (max-width: 768px) {
   .hero {
     height: auto;
-    min-height: 500px;
+    min-height: 520px;
+    background:
+      linear-gradient(rgba(7, 7, 7, 0.88), rgba(7, 7, 7, 0.88)),
+      url("/images/hero_event.jpg") center / cover;
+  }
+
+  .inner {
+    padding: 110px 6% 60px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
   }
 
   .content {
-    padding: 100px 6% 60px;
+    flex: none;
+    max-width: 100%;
+  }
+
+  .logoPanel {
+    display: none;
   }
 
   .title {
-    font-size: 36px;
+    font-size: 38px;
   }
 
   .subtitle {

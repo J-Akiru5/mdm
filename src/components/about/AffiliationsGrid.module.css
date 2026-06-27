@@ -1,0 +1,248 @@
+/* ================================================================
+   AFFILIATIONS — Dark Showcase Design
+   ================================================================ */
+
+/* ---------- Section ---------- */
+.section {
+  position: relative;
+  padding: var(--space-2xl) 0;
+  background-color: #0a0a0a;
+  overflow: hidden;
+}
+
+/* Radial red bloom — sits behind the heading */
+.ambientGlow {
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 600px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(158, 17, 21, 0.18) 0%,
+    rgba(158, 17, 21, 0.06) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Keep all content above glow */
+.section > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Override the generic .container spacing */
+.section :global(.container) {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Heading ---------- */
+.heading {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.subtitle {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--color-primary);
+  margin-bottom: 14px;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 16px;
+  line-height: 1.1;
+}
+
+.description {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.45);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ---------- Grid — 6-column trick ----------
+   5 cards: 3 in row 1, 2 centred in row 2.
+   Each card spans 2 of 6 equal columns.
+   Cards 4 & 5 are offset by 1 col to centre them.
+   ------------------------------------------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+}
+
+/* Every ScrollReveal wrapper spans 2 cols */
+.grid > div {
+  grid-column: span 2;
+}
+
+/* Centre the 4th card (starts at col 2) */
+.grid > div:nth-child(4) {
+  grid-column: 2 / 4;
+}
+
+/* Centre the 5th card (starts at col 4) */
+.grid > div:nth-child(5) {
+  grid-column: 4 / 6;
+}
+
+/* Make the ScrollReveal wrapper fill height so card stretches */
+.grid > div {
+  height: 100%;
+}
+
+/* ---------- Card ---------- */
+.card {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 40px 28px 32px;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+  cursor: default;
+  transition:
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(158, 17, 21, 0.55);
+  box-shadow:
+    0 0 0 1px rgba(158, 17, 21, 0.25),
+    0 20px 60px rgba(158, 17, 21, 0.2),
+    0 40px 80px rgba(0, 0, 0, 0.6);
+}
+
+/* ---------- Card inner glow ---------- */
+.cardGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 110%, rgba(158, 17, 21, 0.18) 0%, transparent 65%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.card:hover .cardGlow {
+  opacity: 1;
+}
+
+/* Top accent line that slides in on hover */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-primary) 30%,
+    var(--color-primary-light) 70%,
+    transparent 100%
+  );
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover::before {
+  transform: scaleX(1);
+}
+
+/* ---------- Logo ---------- */
+.logoWrap {
+  position: relative;
+  width: 160px;
+  height: 120px;
+  margin-bottom: 20px;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.card:hover .logoWrap {
+  transform: scale(1.08);
+}
+
+/* ---------- Divider ---------- */
+.divider {
+  width: 32px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+  margin-bottom: 16px;
+  transition:
+    width 0.35s ease,
+    background 0.35s ease;
+}
+
+.card:hover .divider {
+  width: 56px;
+  background: rgba(158, 17, 21, 0.7);
+}
+
+/* ---------- Partner name ---------- */
+.name {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.3);
+  text-align: center;
+  line-height: 1.5;
+  transition: color 0.3s ease;
+}
+
+.card:hover .name {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ================================================================
+   Responsive
+   ================================================================ */
+
+/* Tablet — 2-column, remove centering trick */
+@media (max-width: 960px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid > div {
+    grid-column: span 1 !important;
+  }
+}
+
+/* Mobile — single column */
+@media (max-width: 500px) {
+  .grid {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .logoWrap {
+    width: 130px;
+    height: 96px;
+  }
+}

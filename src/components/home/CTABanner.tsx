@@ -10,7 +10,7 @@ interface CTABannerProps {
 export default function CTABanner({ onQuoteOpen }: CTABannerProps) {
   return (
     <section className={styles.banner}>
-      <div className="container">
+      <div className="container-wide">
         <div className={styles.inner}>
           <div className={styles.text}>
             <h2 className={styles.title}>READY TO PLAN YOUR NEXT EVENT?</h2>

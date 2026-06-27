@@ -40,7 +40,7 @@ export default function PortfolioPreview() {
 
   return (
     <section id="portfolio" className="section">
-      <div className="container">
+      <div className="container-wide">
         <SectionHeading
           subtitle="Our Portfolio"
           title="Experiences We Have Brought to Life."

@@ -129,7 +129,7 @@ interface WhatWeDoProps {
 export default function WhatWeDo({ onQuoteOpen }: WhatWeDoProps) {
   return (
     <section className="section section-dark">
-      <div className="container">
+      <div className="container-wide">
         <SectionHeading
           subtitle="What We Do"
           title="We Create. We Plan. We Deliver."

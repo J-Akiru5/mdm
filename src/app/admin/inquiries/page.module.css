@@ -31,7 +31,7 @@
   justify-content: space-between;
   background: #fff;
   padding: 16px;
-  border-radius: 8px;
+  border-radius: 0;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   cursor: pointer;
   transition: box-shadow 0.2s;
@@ -75,7 +75,7 @@
 
 .detailCard {
   background: #fff;
-  border-radius: 8px;
+  border-radius: 0;
   padding: 32px;
   max-width: 560px;
   width: 100%;

@@ -54,7 +54,7 @@ export default function ContactSection() {
 
   return (
     <section id="contact" className="section">
-      <div className="container">
+      <div className="container-wide">
         <div className={styles.grid}>
           <div className={styles.info}>
             <span className={styles.subtitle}>GET IN TOUCH</span>

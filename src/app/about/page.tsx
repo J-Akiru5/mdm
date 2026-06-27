@@ -10,6 +10,7 @@ import Image from "next/image";
 import { stats } from "@/data/stats";
 import HeroGlobe from "@/components/ui/HeroGlobe";
 import WhyChooseUs from "@/components/home/WhyChooseUs";
+import AffiliationsGrid from "@/components/about/AffiliationsGrid";
 import styles from "./page.module.css";
 
 export default function AboutPage() {
@@ -38,7 +39,7 @@ export default function AboutPage() {
                 src="/images/about_team.jpg"
                 alt="MDM Events Management Team"
                 fill
-                style={{ objectFit: "cover", borderRadius: "12px" }}
+                style={{ objectFit: "cover" }}
                 sizes="(max-width:768px) 100vw, 50vw"
                 unoptimized
               />
@@ -180,6 +181,8 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <AffiliationsGrid />
 
       <WhyChooseUs />
 

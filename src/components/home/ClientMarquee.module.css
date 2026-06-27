@@ -5,12 +5,6 @@
   overflow: hidden;
 }
 
-.container {
-  max-width: var(--container-wide);
-  margin: 0 auto;
-  padding: 0 6%;
-}
-
 .title {
   text-align: center;
   font-size: 14px;

@@ -1,7 +1,40 @@
 .hero {
   padding: var(--space-2xl) 0;
   background-color: var(--color-dark);
-  text-align: center;
+}
+
+.backContainer {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: var(--space-md);
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--color-gray-300);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.backButton:hover {
+  color: var(--color-primary-light);
+  transform: translateX(-4px);
+}
+
+.backIcon {
+  transition: transform 0.2s ease;
+}
+
+.backButton:hover .backIcon {
+  transform: translateX(-2px);
 }
 
 .heroLabel {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
+import Link from "next/link";
 import QuoteModal from "@/components/ui/QuoteModal";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import Button from "@/components/ui/Button";
@@ -30,10 +31,32 @@ export default function ServicePageLayout({
   return (
     <>
       <section className={styles.hero}>
-        <div className="container" style={{ textAlign: "center" }}>
-          <span className={styles.heroLabel}>{label}</span>
-          <h1 className={styles.heroTitle}>{title}</h1>
-          <p className={styles.heroSub}>{tagline}</p>
+        <div className="container">
+          <div className={styles.backContainer}>
+            <Link href="/services" className={styles.backButton}>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className={styles.backIcon}
+              >
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+              </svg>
+              <span>Back to Services</span>
+            </Link>
+          </div>
+
+          <div style={{ textAlign: "center" }}>
+            <span className={styles.heroLabel}>{label}</span>
+            <h1 className={styles.heroTitle}>{title}</h1>
+            <p className={styles.heroSub}>{tagline}</p>
+          </div>
         </div>
       </section>
 
