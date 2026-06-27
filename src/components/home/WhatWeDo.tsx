@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { services } from "@/data/services";
 import SectionHeading from "../ui/SectionHeading";
 import ScrollReveal from "../ui/ScrollReveal";
@@ -140,11 +141,18 @@ export default function WhatWeDo({ onQuoteOpen }: WhatWeDoProps) {
         <div className={styles.grid}>
           {services.map((svc, i) => (
             <ScrollReveal key={svc.id} delay={i * 0.1}>
-              <div className={styles.card}>
-                <div className={styles.iconWrap}>{serviceIcons[svc.id]}</div>
-                <h3 className={styles.cardTitle}>{svc.title}</h3>
-                <p className={styles.cardDesc}>{svc.tagline}</p>
-              </div>
+              <Link href={`/services/${svc.id}`} className={styles.card}>
+                <div className={styles.cardContent}>
+                  <div className={styles.iconWrap}>{serviceIcons[svc.id]}</div>
+                  <h3 className={styles.cardTitle}>{svc.title}</h3>
+                  <p className={styles.cardDesc}>{svc.tagline}</p>
+                </div>
+                <div className={styles.cardFooter}>
+                  <span className={styles.learnMore}>
+                    Learn More <span className={styles.arrow}>&rarr;</span>
+                  </span>
+                </div>
+              </Link>
             </ScrollReveal>
           ))}
         </div>
