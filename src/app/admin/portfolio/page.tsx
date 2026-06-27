@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef, useCallback } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { useToast } from "@/components/ui/Toast";
 import styles from "./page.module.css";
 
 interface PortfolioImage {
@@ -23,6 +24,7 @@ interface PortfolioItem {
 const categories = ["corporate", "government", "launches", "festivals", "production", "exhibits"];
 
 export default function AdminPortfolio() {
+  const { toast } = useToast();
   const [items, setItems] = useState<PortfolioItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<PortfolioItem | null>(null);
@@ -52,7 +54,7 @@ export default function AdminPortfolio() {
     const fileName = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
     const { error } = await supabase.storage.from("portfolio").upload(fileName, file);
     if (error) {
-      alert("Upload failed: " + error.message);
+      toast("error", "Upload failed: " + error.message);
       return null;
     }
     const { data: urlData } = supabase.storage.from("portfolio").getPublicUrl(fileName);
@@ -148,8 +150,8 @@ export default function AdminPortfolio() {
   };
 
   const handleSave = async () => {
-    if (!form.title || !form.category) return alert("Title and category are required");
-    if (!form.image_url) return alert("Cover image is required");
+    if (!form.title || !form.category) return toast("error", "Title and category are required");
+    if (!form.image_url) return toast("error", "Cover image is required");
 
     const payload = {
       title: form.title,
@@ -168,14 +170,15 @@ export default function AdminPortfolio() {
 
       if (!res.ok) {
         const err = await res.json();
-        alert("Error: " + (err.error || "Unknown error"));
+        toast("error", err.error || "Failed to save item");
         return;
       }
 
+      toast("success", editing ? "Item updated successfully" : "Item created successfully");
       resetForm();
       fetchItems();
-    } catch (err) {
-      alert("Network error: " + String(err));
+    } catch {
+      toast("error", "Network error. Please try again.");
     }
   };
 
@@ -195,9 +198,10 @@ export default function AdminPortfolio() {
     if (!confirm("Are you sure you want to delete this portfolio item?")) return;
     const res = await fetch(`/api/portfolio?id=${id}`, { method: "DELETE" });
     if (res.ok) {
+      toast("success", "Item deleted successfully");
       fetchItems();
     } else {
-      alert("Failed to delete item");
+      toast("error", "Failed to delete item");
     }
   };
 

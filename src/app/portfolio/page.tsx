@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import QuoteModal from "@/components/ui/QuoteModal";
-import ScrollReveal from "@/components/ui/ScrollReveal";
 import Button from "@/components/ui/Button";
 import Skeleton from "@/components/ui/Skeleton";
 import Image from "next/image";
@@ -81,30 +80,24 @@ export default function PortfolioPage() {
             </div>
 
             <div className={styles.grid}>
-              {filteredItems.map((item, i) => (
-                <ScrollReveal key={item.id} delay={(i % 4) * 0.1}>
-                  <Link href={`/portfolio/${item.id}`} className={styles.item}>
-                    <Image
-                      src={item.image_url}
-                      alt={item.title}
-                      fill
-                      style={{ objectFit: "cover" }}
-                      sizes="(max-width:768px) 100vw, 25vw"
-                      unoptimized
-                    />
-                    <div className={styles.itemOverlay}>
-                      {item.client_logo && (
-                        <img
-                          src={item.client_logo}
-                          alt="Client logo"
-                          className={styles.clientLogo}
-                        />
-                      )}
-                      <h3 className={styles.itemTitle}>{item.title}</h3>
-                      <span className={styles.itemCategory}>{item.category}</span>
-                    </div>
-                  </Link>
-                </ScrollReveal>
+              {filteredItems.map((item) => (
+                <Link key={item.id} href={`/portfolio/${item.id}`} className={styles.item}>
+                  <Image
+                    src={item.image_url}
+                    alt={item.title}
+                    fill
+                    style={{ objectFit: "cover" }}
+                    sizes="(max-width:768px) 100vw, 25vw"
+                    unoptimized
+                  />
+                  <div className={styles.itemOverlay}>
+                    {item.client_logo && (
+                      <img src={item.client_logo} alt="Client logo" className={styles.clientLogo} />
+                    )}
+                    <h3 className={styles.itemTitle}>{item.title}</h3>
+                    <span className={styles.itemCategory}>{item.category}</span>
+                  </div>
+                </Link>
               ))}
             </div>
           </div>
