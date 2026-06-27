@@ -28,13 +28,25 @@ export default function AdminPortfolio() {
   const { toast } = useToast();
   const [items, setItems] = useState<PortfolioItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<"items" | "form">("items");
   const [editing, setEditing] = useState<PortfolioItem | null>(null);
-  const [form, setForm] = useState({ title: "", category: "", image_url: "", client_logo: "" });
+  const [form, setForm] = useState({
+    title: "",
+    category: "",
+    image_url: "",
+    client_logo: "",
+    highlight: false,
+  });
   const [images, setImages] = useState<PortfolioImage[]>([]);
   const [uploading, setUploading] = useState(false);
   const [dragOver, setDragOver] = useState(false);
   const [dragActiveIndex, setDragActiveIndex] = useState<number | null>(null);
   const dragOverItem = useRef<number | null>(null);
+
+  // Filters
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filterCategory, setFilterCategory] = useState("all");
+  const [filterHighlight, setFilterHighlight] = useState("all");
 
   const fetchItems = useCallback(() => {
     fetch("/api/portfolio")
@@ -48,6 +60,16 @@ export default function AdminPortfolio() {
   useEffect(() => {
     fetchItems();
   }, [fetchItems]);
+
+  const filteredItems = items.filter((item) => {
+    const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = filterCategory === "all" || item.category === filterCategory;
+    const matchesHighlight =
+      filterHighlight === "all" ||
+      (filterHighlight === "highlighted" && item.highlight) ||
+      (filterHighlight === "not-highlighted" && !item.highlight);
+    return matchesSearch && matchesCategory && matchesHighlight;
+  });
 
   const uploadFile = async (file: File): Promise<string | null> => {
     const supabase = createClient();
@@ -94,7 +116,6 @@ export default function AdminPortfolio() {
     e.target.value = "";
   };
 
-  // Drag-and-drop handlers for gallery images
   const handleDragStart = (index: number) => {
     setDragActiveIndex(index);
   };
@@ -124,7 +145,6 @@ export default function AdminPortfolio() {
     setImages((prev) => prev.filter((_, i) => i !== index));
   };
 
-  // Drag-and-drop for portfolio items (reorder)
   const handleItemDragStart = (index: number, e: React.DragEvent) => {
     e.dataTransfer.effectAllowed = "move";
     e.dataTransfer.setData("text/plain", String(index));
@@ -159,6 +179,7 @@ export default function AdminPortfolio() {
       category: form.category,
       image_url: form.image_url,
       client_logo: form.client_logo || null,
+      highlight: form.highlight,
       images: images.map((img, i) => ({ url: img.url, sort_order: i })),
     };
 
@@ -177,6 +198,7 @@ export default function AdminPortfolio() {
 
       toast("success", editing ? "Item updated successfully" : "Item created successfully");
       resetForm();
+      setActiveTab("items");
       fetchItems();
     } catch {
       toast("error", "Network error. Please try again.");
@@ -190,8 +212,10 @@ export default function AdminPortfolio() {
       category: item.category,
       image_url: item.image_url,
       client_logo: item.client_logo || "",
+      highlight: item.highlight,
     });
     setImages(item.images ? [...item.images] : []);
+    setActiveTab("form");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -222,11 +246,18 @@ export default function AdminPortfolio() {
 
   const resetForm = () => {
     setEditing(null);
-    setForm({ title: "", category: "", image_url: "", client_logo: "" });
+    setForm({ title: "", category: "", image_url: "", client_logo: "", highlight: false });
     setImages([]);
   };
 
-  // Handle drop zone for gallery images
+  const clearFilters = () => {
+    setSearchQuery("");
+    setFilterCategory("all");
+    setFilterHighlight("all");
+  };
+
+  const hasActiveFilters = searchQuery || filterCategory !== "all" || filterHighlight !== "all";
+
   const handleDropZoneDrop = async (e: React.DragEvent) => {
     e.preventDefault();
     setDragOver(false);
@@ -248,197 +279,282 @@ export default function AdminPortfolio() {
     <div>
       <h1 className={styles.heading}>Portfolio</h1>
 
-      {/* CRUD Form */}
-      <div className={styles.form}>
-        <h2>{editing ? "Edit Item" : "Add New Item"}</h2>
-        <div className={styles.formFields}>
-          <input
-            placeholder="Title *"
-            value={form.title}
-            onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
-            className={styles.input}
-          />
-          <select
-            value={form.category}
-            onChange={(e) => setForm((f) => ({ ...f, category: e.target.value }))}
-            className={styles.input}
-          >
-            <option value="">Select category *</option>
-            {categories.map((c) => (
-              <option key={c} value={c}>
-                {c.charAt(0).toUpperCase() + c.slice(1)}
-              </option>
-            ))}
-          </select>
+      {/* Tab Bar */}
+      <div className={styles.tabs}>
+        <button
+          className={`${styles.tab} ${activeTab === "items" ? styles.tabActive : ""}`}
+          onClick={() => setActiveTab("items")}
+        >
+          Items ({items.length})
+        </button>
+        <button
+          className={`${styles.tab} ${activeTab === "form" ? styles.tabActive : ""}`}
+          onClick={() => {
+            setActiveTab("form");
+            if (!editing) resetForm();
+          }}
+        >
+          {editing ? "Edit Item" : "Add New Item"}
+        </button>
+      </div>
 
-          {/* Cover Image */}
-          <label className={styles.fieldLabel}>Cover Image *</label>
-          <div className={styles.uploadRow}>
-            <input type="file" accept="image/*" onChange={handleCoverUpload} disabled={uploading} />
-            {uploading && <span className={styles.uploading}>Uploading...</span>}
-            {form.image_url && (
-              <img src={form.image_url} alt="cover preview" className={styles.preview} />
-            )}
-            {form.image_url && (
-              <button
-                type="button"
-                onClick={() => setForm((f) => ({ ...f, image_url: "" }))}
-                className={`${styles.btn} ${styles.btnSmall} ${styles.btnDanger}`}
-              >
-                Remove
-              </button>
-            )}
-          </div>
-
-          {/* Client Logo */}
-          <label className={styles.fieldLabel}>Client Logo (optional)</label>
-          <div className={styles.uploadRow}>
-            <input type="file" accept="image/*" onChange={handleLogoUpload} disabled={uploading} />
-            {form.client_logo && (
-              <img src={form.client_logo} alt="logo preview" className={styles.preview} />
-            )}
-            {form.client_logo && (
-              <button
-                type="button"
-                onClick={() => setForm((f) => ({ ...f, client_logo: "" }))}
-                className={`${styles.btn} ${styles.btnSmall} ${styles.btnDanger}`}
-              >
-                Remove
-              </button>
-            )}
-          </div>
-
-          {/* Gallery Images */}
-          <label className={styles.fieldLabel}>Gallery Images (drag to reorder)</label>
-          <div
-            className={`${styles.dropZone} ${dragOver ? styles.dropZoneActive : ""}`}
-            onDragOver={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              setDragOver(true);
-            }}
-            onDragLeave={(e) => {
-              e.stopPropagation();
-              setDragOver(false);
-            }}
-            onDrop={handleDropZoneDrop}
-          >
-            {uploading ? (
-              <span>Uploading...</span>
-            ) : (
-              <>
-                <span>Drop images here</span>
-                <label className={styles.browseBtn}>
-                  or click to browse
-                  <input
-                    type="file"
-                    accept="image/*"
-                    multiple
-                    onChange={handleMultiUpload}
-                    className={styles.browseInput}
-                  />
-                </label>
-              </>
-            )}
-          </div>
-
-          {images.length > 0 && (
-            <div className={styles.imageGrid}>
-              {images.map((img, i) => (
-                <div
-                  key={`${img.url}-${i}`}
-                  className={styles.imageItem}
-                  draggable
-                  onDragStart={() => handleDragStart(i)}
-                  onDragEnter={() => handleDragEnter(i)}
-                  onDragEnd={handleDragEnd}
-                  onDragOver={(e) => e.preventDefault()}
-                  style={{ opacity: dragActiveIndex === i ? 0.5 : 1 }}
-                >
-                  <div className={styles.dragHandle}>&#9776;</div>
-                  <img src={img.url} alt={`Gallery ${i + 1}`} className={styles.imageThumb} />
-                  <div className={styles.imageMeta}>
-                    <span className={styles.imageIndex}>#{i + 1}</span>
-                    <button
-                      type="button"
-                      onClick={() => removeImage(i)}
-                      className={`${styles.btn} ${styles.btnSmall} ${styles.btnDanger}`}
-                    >
-                      &times;
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          <div className={styles.formActions}>
-            <button
-              onClick={handleSave}
-              className={styles.btn}
-              disabled={uploading || !form.title || !form.category}
+      {activeTab === "items" ? (
+        <>
+          {/* Filters */}
+          <div className={styles.filters}>
+            <input
+              type="text"
+              placeholder="Search by title..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className={styles.searchInput}
+            />
+            <select
+              value={filterCategory}
+              onChange={(e) => setFilterCategory(e.target.value)}
+              className={styles.filterSelect}
             >
-              {editing ? "Update" : "Add Item"}
-            </button>
-            {editing && (
-              <button onClick={resetForm} className={`${styles.btn} ${styles.btnSecondary}`}>
-                Cancel
+              <option value="all">All Categories</option>
+              {categories.map((c) => (
+                <option key={c} value={c}>
+                  {c.charAt(0).toUpperCase() + c.slice(1)}
+                </option>
+              ))}
+            </select>
+            <select
+              value={filterHighlight}
+              onChange={(e) => setFilterHighlight(e.target.value)}
+              className={styles.filterSelect}
+            >
+              <option value="all">All</option>
+              <option value="highlighted">Highlighted</option>
+              <option value="not-highlighted">Not Highlighted</option>
+            </select>
+            {hasActiveFilters && (
+              <button className={styles.clearFilters} onClick={clearFilters}>
+                Clear filters
               </button>
             )}
           </div>
-        </div>
-      </div>
 
-      {/* Items List */}
-      <div className={styles.listHeader}>
-        <h2>Items ({items.length})</h2>
-      </div>
-      <div className={styles.list}>
-        {items.length === 0 && <p className={styles.empty}>No portfolio items yet.</p>}
-        {items.map((item, index) => (
-          <div
-            key={item.id}
-            className={styles.item}
-            draggable
-            onDragStart={(e) => handleItemDragStart(index, e)}
-            onDragOver={handleItemDragOver}
-            onDrop={() => handleItemDrop(index)}
-          >
-            <div className={styles.dragHandle}>&#9776;</div>
-            <img src={item.image_url} alt={item.title} className={styles.thumb} />
-            <div className={styles.itemInfo}>
-              <strong>{item.title}</strong>
-              <span className={styles.category}>{item.category}</span>
-              {item.highlight && <span className={styles.highlightBadge}>★ Highlight</span>}
-              {item.client_logo && <span className={styles.badge}>Has logo</span>}
-              {item.images && item.images.length > 0 && (
-                <span className={styles.badge}>{item.images.length} photos</span>
+          {/* Items List */}
+          <div className={styles.list}>
+            {filteredItems.length === 0 && (
+              <p className={styles.empty}>
+                {hasActiveFilters ? "No items match your filters." : "No portfolio items yet."}
+              </p>
+            )}
+            {filteredItems.map((item, index) => (
+              <div
+                key={item.id}
+                className={styles.item}
+                draggable
+                onDragStart={(e) => handleItemDragStart(index, e)}
+                onDragOver={handleItemDragOver}
+                onDrop={() => handleItemDrop(index)}
+              >
+                <div className={styles.dragHandle}>&#9776;</div>
+                <img src={item.image_url} alt={item.title} className={styles.thumb} />
+                <div className={styles.itemInfo}>
+                  <strong>{item.title}</strong>
+                  <span className={styles.category}>{item.category}</span>
+                  {item.highlight && <span className={styles.highlightBadge}>★ Highlight</span>}
+                  {item.client_logo && <span className={styles.badge}>Has logo</span>}
+                  {item.images && item.images.length > 0 && (
+                    <span className={styles.badge}>{item.images.length} photos</span>
+                  )}
+                </div>
+                <div className={styles.itemActions}>
+                  <button
+                    onClick={() => handleToggleHighlight(item.id, item.highlight)}
+                    className={`${styles.btn} ${styles.btnSmall} ${item.highlight ? styles.btnHighlightActive : styles.btnHighlight}`}
+                    title={item.highlight ? "Remove from highlights" : "Add to highlights"}
+                  >
+                    {item.highlight ? "★" : "☆"}
+                  </button>
+                  <button
+                    onClick={() => handleEdit(item)}
+                    className={`${styles.btn} ${styles.btnSmall}`}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(item.id)}
+                    className={`${styles.btn} ${styles.btnSmall} ${styles.btnDanger}`}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      ) : (
+        /* Form Tab */
+        <div className={styles.form}>
+          <h2>{editing ? "Edit Item" : "Add New Item"}</h2>
+          <div className={styles.formFields}>
+            <input
+              placeholder="Title *"
+              value={form.title}
+              onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
+              className={styles.input}
+            />
+            <select
+              value={form.category}
+              onChange={(e) => setForm((f) => ({ ...f, category: e.target.value }))}
+              className={styles.input}
+            >
+              <option value="">Select category *</option>
+              {categories.map((c) => (
+                <option key={c} value={c}>
+                  {c.charAt(0).toUpperCase() + c.slice(1)}
+                </option>
+              ))}
+            </select>
+
+            <label className={styles.fieldLabel}>
+              <input
+                type="checkbox"
+                checked={form.highlight}
+                onChange={(e) => setForm((f) => ({ ...f, highlight: e.target.checked }))}
+                className={styles.checkbox}
+              />
+              Show on homepage highlights
+            </label>
+
+            {/* Cover Image */}
+            <label className={styles.fieldLabel}>Cover Image *</label>
+            <div className={styles.uploadRow}>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleCoverUpload}
+                disabled={uploading}
+              />
+              {uploading && <span className={styles.uploading}>Uploading...</span>}
+              {form.image_url && (
+                <img src={form.image_url} alt="cover preview" className={styles.preview} />
+              )}
+              {form.image_url && (
+                <button
+                  type="button"
+                  onClick={() => setForm((f) => ({ ...f, image_url: "" }))}
+                  className={`${styles.btn} ${styles.btnSmall} ${styles.btnDanger}`}
+                >
+                  Remove
+                </button>
               )}
             </div>
-            <div className={styles.itemActions}>
+
+            {/* Client Logo */}
+            <label className={styles.fieldLabel}>Client Logo (optional)</label>
+            <div className={styles.uploadRow}>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleLogoUpload}
+                disabled={uploading}
+              />
+              {form.client_logo && (
+                <img src={form.client_logo} alt="logo preview" className={styles.preview} />
+              )}
+              {form.client_logo && (
+                <button
+                  type="button"
+                  onClick={() => setForm((f) => ({ ...f, client_logo: "" }))}
+                  className={`${styles.btn} ${styles.btnSmall} ${styles.btnDanger}`}
+                >
+                  Remove
+                </button>
+              )}
+            </div>
+
+            {/* Gallery Images */}
+            <label className={styles.fieldLabel}>Gallery Images (drag to reorder)</label>
+            <div
+              className={`${styles.dropZone} ${dragOver ? styles.dropZoneActive : ""}`}
+              onDragOver={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setDragOver(true);
+              }}
+              onDragLeave={(e) => {
+                e.stopPropagation();
+                setDragOver(false);
+              }}
+              onDrop={handleDropZoneDrop}
+            >
+              {uploading ? (
+                <span>Uploading...</span>
+              ) : (
+                <>
+                  <span>Drop images here</span>
+                  <label className={styles.browseBtn}>
+                    or click to browse
+                    <input
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      onChange={handleMultiUpload}
+                      className={styles.browseInput}
+                    />
+                  </label>
+                </>
+              )}
+            </div>
+
+            {images.length > 0 && (
+              <div className={styles.imageGrid}>
+                {images.map((img, i) => (
+                  <div
+                    key={`${img.url}-${i}`}
+                    className={styles.imageItem}
+                    draggable
+                    onDragStart={() => handleDragStart(i)}
+                    onDragEnter={() => handleDragEnter(i)}
+                    onDragEnd={handleDragEnd}
+                    onDragOver={(e) => e.preventDefault()}
+                    style={{ opacity: dragActiveIndex === i ? 0.5 : 1 }}
+                  >
+                    <div className={styles.dragHandle}>&#9776;</div>
+                    <img src={img.url} alt={`Gallery ${i + 1}`} className={styles.imageThumb} />
+                    <div className={styles.imageMeta}>
+                      <span className={styles.imageIndex}>#{i + 1}</span>
+                      <button
+                        type="button"
+                        onClick={() => removeImage(i)}
+                        className={`${styles.btn} ${styles.btnSmall} ${styles.btnDanger}`}
+                      >
+                        &times;
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className={styles.formActions}>
               <button
-                onClick={() => handleToggleHighlight(item.id, item.highlight)}
-                className={`${styles.btn} ${styles.btnSmall} ${item.highlight ? styles.btnHighlightActive : styles.btnHighlight}`}
-                title={item.highlight ? "Remove from highlights" : "Add to highlights"}
+                onClick={handleSave}
+                className={styles.btn}
+                disabled={uploading || !form.title || !form.category}
               >
-                {item.highlight ? "★" : "☆"}
+                {editing ? "Update" : "Add Item"}
               </button>
               <button
-                onClick={() => handleEdit(item)}
-                className={`${styles.btn} ${styles.btnSmall}`}
+                onClick={() => {
+                  resetForm();
+                  setActiveTab("items");
+                }}
+                className={`${styles.btn} ${styles.btnSecondary}`}
               >
-                Edit
-              </button>
-              <button
-                onClick={() => handleDelete(item.id)}
-                className={`${styles.btn} ${styles.btnSmall} ${styles.btnDanger}`}
-              >
-                Delete
+                Cancel
               </button>
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
