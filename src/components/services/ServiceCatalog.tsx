@@ -7,6 +7,7 @@ import styles from "./ServiceCatalog.module.css";
 export default function ServiceCatalog() {
   const [activeId, setActiveId] = useState<string>(services[0].id);
   const [visible, setVisible] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   const scrollTo = useCallback((id: string) => {
@@ -56,9 +57,16 @@ export default function ServiceCatalog() {
 
   return (
     <nav
-      className={`${styles.catalog} ${visible ? styles.catalogVisible : ""}`}
+      className={`${styles.catalog} ${visible ? styles.catalogVisible : ""} ${collapsed ? styles.collapsed : ""}`}
       aria-label="Services"
     >
+      <button
+        className={styles.toggle}
+        onClick={() => setCollapsed((c) => !c)}
+        aria-label={collapsed ? "Expand services menu" : "Collapse services menu"}
+      >
+        {collapsed ? "\u203A" : "\u2039"}
+      </button>
       <span className={styles.label}>Services</span>
       <ul className={styles.list}>
         {services.map((svc, i) => (
