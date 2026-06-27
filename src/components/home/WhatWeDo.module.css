@@ -3,12 +3,12 @@
   background:
     linear-gradient(
       180deg,
-      rgba(7, 7, 7, 0.96) 0%,
-      rgba(7, 7, 7, 0.88) 40%,
-      rgba(7, 7, 7, 0.88) 60%,
-      rgba(7, 7, 7, 0.96) 100%
+      rgba(7, 7, 7, 0.92) 0%,
+      rgba(7, 7, 7, 0.55) 45%,
+      rgba(7, 7, 7, 0.55) 60%,
+      rgba(7, 7, 7, 0.92) 100%
     ),
-    url("/images/hero_event.jpg") center / cover;
+    url("/images/red_abstract_bg.png") center / cover;
   color: var(--color-white);
   overflow: hidden;
   padding: 100px 0;
