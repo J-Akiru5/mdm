@@ -6,7 +6,14 @@ export async function GET() {
     const items = await prisma.portfolio.findMany({
       orderBy: { createdAt: "desc" },
     });
-    return NextResponse.json(items);
+    const mapped = items.map((item) => ({
+      id: item.id,
+      title: item.title,
+      category: item.category,
+      image_url: item.imageUrl,
+      created_at: item.createdAt.toISOString(),
+    }));
+    return NextResponse.json(mapped);
   } catch {
     return NextResponse.json({ error: "Failed to fetch portfolio" }, { status: 500 });
   }
