@@ -129,8 +129,9 @@ interface WhatWeDoProps {
 
 export default function WhatWeDo({ onQuoteOpen }: WhatWeDoProps) {
   return (
-    <section className="section section-dark">
-      <div className="container-wide">
+    <section className={`${styles.section} section`}>
+      <div className={styles.redGlow} aria-hidden="true" />
+      <div className={`${styles.inner} container-wide`}>
         <SectionHeading
           subtitle="What We Do"
           title="We Create. We Plan. We Deliver."
