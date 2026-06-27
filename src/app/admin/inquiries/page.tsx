@@ -15,10 +15,16 @@ interface Inquiry {
   created_at: string;
 }
 
+const eventTypes = ["corporate", "government", "launch", "festival", "exhibit", "other"];
+
 export default function AdminInquiries() {
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<Inquiry | null>(null);
+
+  // Filters
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filterEventType, setFilterEventType] = useState("all");
 
   useEffect(() => {
     fetch("/api/contact")
@@ -28,6 +34,23 @@ export default function AdminInquiries() {
         setLoading(false);
       });
   }, []);
+
+  const filteredInquiries = inquiries.filter((inq) => {
+    const matchesSearch =
+      inq.full_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      inq.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (inq.company && inq.company.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (inq.message && inq.message.toLowerCase().includes(searchQuery.toLowerCase()));
+    const matchesEventType = filterEventType === "all" || inq.event_type === filterEventType;
+    return matchesSearch && matchesEventType;
+  });
+
+  const clearFilters = () => {
+    setSearchQuery("");
+    setFilterEventType("all");
+  };
+
+  const hasActiveFilters = searchQuery || filterEventType !== "all";
 
   if (loading) return <div className={styles.loading}>Loading...</div>;
 
@@ -76,12 +99,48 @@ export default function AdminInquiries() {
       )}
 
       {inquiries.length === 0 && <p className={styles.empty}>No inquiries yet.</p>}
+
+      {/* Filters */}
+      <div className={styles.filters}>
+        <input
+          type="text"
+          placeholder="Search by name, email, company, or message..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className={styles.searchInput}
+        />
+        <select
+          value={filterEventType}
+          onChange={(e) => setFilterEventType(e.target.value)}
+          className={styles.filterSelect}
+        >
+          <option value="all">All Event Types</option>
+          {eventTypes.map((t) => (
+            <option key={t} value={t}>
+              {t.charAt(0).toUpperCase() + t.slice(1)}
+            </option>
+          ))}
+        </select>
+        {hasActiveFilters && (
+          <button className={styles.clearFilters} onClick={clearFilters}>
+            Clear filters
+          </button>
+        )}
+      </div>
+
+      {filteredInquiries.length === 0 && (
+        <p className={styles.empty}>
+          {hasActiveFilters ? "No inquiries match your filters." : "No inquiries yet."}
+        </p>
+      )}
+
       <div className={styles.list}>
-        {inquiries.map((inq) => (
+        {filteredInquiries.map((inq) => (
           <div key={inq.id} className={styles.item} onClick={() => setSelected(inq)}>
             <div className={styles.itemInfo}>
               <strong>{inq.full_name}</strong>
               <span className={styles.itemEmail}>{inq.email}</span>
+              {inq.event_type && <span className={styles.itemBadge}>{inq.event_type}</span>}
             </div>
             <span className={styles.itemDate}>{new Date(inq.created_at).toLocaleDateString()}</span>
           </div>

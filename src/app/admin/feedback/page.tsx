@@ -17,6 +17,10 @@ export default function AdminFeedback() {
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<Feedback | null>(null);
 
+  // Filters
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filterRating, setFilterRating] = useState("all");
+
   useEffect(() => {
     fetch("/api/feedback")
       .then((r) => r.json())
@@ -25,6 +29,22 @@ export default function AdminFeedback() {
         setLoading(false);
       });
   }, []);
+
+  const filteredFeedbacks = feedbacks.filter((fb) => {
+    const matchesSearch =
+      fb.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      fb.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      fb.comment.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesRating = filterRating === "all" || fb.rating === Number(filterRating);
+    return matchesSearch && matchesRating;
+  });
+
+  const clearFilters = () => {
+    setSearchQuery("");
+    setFilterRating("all");
+  };
+
+  const hasActiveFilters = searchQuery || filterRating !== "all";
 
   if (loading) return <div className={styles.loading}>Loading...</div>;
 
@@ -80,8 +100,42 @@ export default function AdminFeedback() {
         </div>
       </div>
 
+      {/* Filters */}
+      <div className={styles.filters}>
+        <input
+          type="text"
+          placeholder="Search by name, email, or comment..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className={styles.searchInput}
+        />
+        <select
+          value={filterRating}
+          onChange={(e) => setFilterRating(e.target.value)}
+          className={styles.filterSelect}
+        >
+          <option value="all">All Ratings</option>
+          <option value="5">5 Stars</option>
+          <option value="4">4 Stars</option>
+          <option value="3">3 Stars</option>
+          <option value="2">2 Stars</option>
+          <option value="1">1 Star</option>
+        </select>
+        {hasActiveFilters && (
+          <button className={styles.clearFilters} onClick={clearFilters}>
+            Clear filters
+          </button>
+        )}
+      </div>
+
+      {filteredFeedbacks.length === 0 && (
+        <p className={styles.empty}>
+          {hasActiveFilters ? "No feedback matches your filters." : "No feedback yet."}
+        </p>
+      )}
+
       <div className={styles.list}>
-        {feedbacks.map((fb) => (
+        {filteredFeedbacks.map((fb) => (
           <div key={fb.id} className={styles.item} onClick={() => setSelected(fb)}>
             <div className={styles.itemInfo}>
               <strong>{fb.name}</strong>

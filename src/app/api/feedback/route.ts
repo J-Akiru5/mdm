@@ -6,7 +6,15 @@ export async function GET() {
     const feedbacks = await prisma.feedback.findMany({
       orderBy: { createdAt: "desc" },
     });
-    return NextResponse.json(feedbacks);
+    const mapped = feedbacks.map((f) => ({
+      id: f.id,
+      name: f.name,
+      email: f.email,
+      rating: f.rating,
+      comment: f.comment,
+      created_at: f.createdAt.toISOString(),
+    }));
+    return NextResponse.json(mapped);
   } catch (error) {
     console.error("Failed to fetch feedbacks:", error);
     return NextResponse.json({ error: "Failed to fetch feedbacks" }, { status: 500 });
