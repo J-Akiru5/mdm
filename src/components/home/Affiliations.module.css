@@ -1,0 +1,112 @@
+.section {
+  padding: var(--space-2xl) 0;
+  background-color: var(--color-gray-50, #f8f8f8);
+  border-top: 1px solid var(--color-gray-100, #efefef);
+}
+
+.inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--color-gray-900);
+  margin: 0 0 14px;
+  line-height: 1.1;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: var(--color-gray-500);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* 5-card grid — 5 cols on desktop, wraps on smaller screens */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 28px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 180px;
+  transition: transform 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.logoWrap {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+  background-color: var(--color-white);
+  flex-shrink: 0;
+}
+
+.name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-gray-700);
+  text-align: center;
+  line-height: 1.35;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: var(--space-xl) 0;
+  }
+
+  .inner {
+    padding: 0 var(--space-md);
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .grid {
+    gap: 20px;
+  }
+
+  .card {
+    width: 140px;
+  }
+
+  .logoWrap {
+    width: 130px;
+    height: 130px;
+  }
+}
