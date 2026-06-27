@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import QuoteModal from "@/components/ui/QuoteModal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
@@ -10,11 +10,106 @@ import styles from "./page.module.css";
 export default function ContactPage() {
   const [quoteOpen, setQuoteOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [form, setForm] = useState({
+    fullName: "",
+    company: "",
+    email: "",
+    phone: "",
+    eventType: "",
+    eventDate: "",
+    message: "",
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [activeTab, setActiveTab] = useState<"inquiry" | "feedback">("inquiry");
+  const [feedbackForm, setFeedbackForm] = useState({
+    name: "",
+    email: "",
+    rating: 5,
+    comment: "",
+  });
+  const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
+  const [submittingFeedback, setSubmittingFeedback] = useState(false);
+  const [hoveredRating, setHoveredRating] = useState<number | null>(null);
+
+  useEffect(() => {
+    const handler = () => setQuoteOpen(true);
+    window.addEventListener("openQuoteModal", handler);
+    return () => window.removeEventListener("openQuoteModal", handler);
+  }, []);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+  ) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
+    setSubmitting(true);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        alert(err.error || "Failed to send. Please try again.");
+        setSubmitting(false);
+        return;
+      }
+
+      setSubmitted(true);
+      setForm({
+        fullName: "",
+        company: "",
+        email: "",
+        phone: "",
+        eventType: "",
+        eventDate: "",
+        message: "",
+      });
+      setTimeout(() => setSubmitted(false), 4000);
+    } catch {
+      alert("Network error. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleFeedbackChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFeedbackForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleFeedbackSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmittingFeedback(true);
+
+    try {
+      const res = await fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(feedbackForm),
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        alert(err.error || "Failed to submit feedback. Please try again.");
+        setSubmittingFeedback(false);
+        return;
+      }
+
+      setFeedbackSubmitted(true);
+      setFeedbackForm({ name: "", email: "", rating: 5, comment: "" });
+      setTimeout(() => setFeedbackSubmitted(false), 4000);
+    } catch {
+      alert("Network error. Please try again.");
+    } finally {
+      setSubmittingFeedback(false);
+    }
   };
 
   return (
@@ -168,93 +263,240 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Contact Form */}
-            <form className={styles.form} onSubmit={handleSubmit}>
-              {submitted ? (
-                <div className={styles.successMsg}>
-                  <span className={styles.successIcon}>✓</span>
-                  <h3>Message Sent!</h3>
-                  <p>We&apos;ll get back to you shortly.</p>
-                </div>
+            {/* Form Section */}
+            <div className={styles.formContainer}>
+              <div className={styles.tabs}>
+                <button
+                  type="button"
+                  className={`${styles.tabBtn} ${activeTab === "inquiry" ? styles.activeTab : ""}`}
+                  onClick={() => setActiveTab("inquiry")}
+                >
+                  Send Inquiry
+                </button>
+                <button
+                  type="button"
+                  className={`${styles.tabBtn} ${activeTab === "feedback" ? styles.activeTab : ""}`}
+                  onClick={() => setActiveTab("feedback")}
+                >
+                  Leave Feedback
+                </button>
+              </div>
+
+              {activeTab === "inquiry" ? (
+                <form className={styles.form} onSubmit={handleSubmit}>
+                  {submitted ? (
+                    <div className={styles.successMsg}>
+                      <span className={styles.successIcon}>✓</span>
+                      <h3>Message Sent!</h3>
+                      <p>We&apos;ll get back to you shortly.</p>
+                    </div>
+                  ) : (
+                    <>
+                      <div className={styles.formRow}>
+                        <div className={styles.formGroup}>
+                          <label htmlFor="fullName">Full Name</label>
+                          <input
+                            id="fullName"
+                            name="fullName"
+                            type="text"
+                            placeholder="Juan dela Cruz"
+                            className={styles.input}
+                            value={form.fullName}
+                            onChange={handleChange}
+                            required
+                          />
+                        </div>
+                        <div className={styles.formGroup}>
+                          <label htmlFor="company">Company / Organization</label>
+                          <input
+                            id="company"
+                            name="company"
+                            type="text"
+                            placeholder="Company Name"
+                            className={styles.input}
+                            value={form.company}
+                            onChange={handleChange}
+                          />
+                        </div>
+                      </div>
+                      <div className={styles.formRow}>
+                        <div className={styles.formGroup}>
+                          <label htmlFor="email">Email Address</label>
+                          <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            placeholder="you@example.com"
+                            className={styles.input}
+                            value={form.email}
+                            onChange={handleChange}
+                            required
+                          />
+                        </div>
+                        <div className={styles.formGroup}>
+                          <label htmlFor="phone">Phone Number</label>
+                          <input
+                            id="phone"
+                            name="phone"
+                            type="tel"
+                            placeholder="+63 908 895 4818"
+                            className={styles.input}
+                            value={form.phone}
+                            onChange={handleChange}
+                          />
+                        </div>
+                      </div>
+                      <div className={styles.formRow}>
+                        <div className={styles.formGroup}>
+                          <label htmlFor="eventType">Event Type</label>
+                          <select
+                            id="eventType"
+                            name="eventType"
+                            className={styles.input}
+                            value={form.eventType}
+                            onChange={handleChange}
+                          >
+                            <option value="" disabled>
+                              Select event type
+                            </option>
+                            <option value="corporate">Corporate Event</option>
+                            <option value="government">Government Event</option>
+                            <option value="launch">Brand Launch</option>
+                            <option value="festival">Festival / Community</option>
+                            <option value="exhibit">Exhibit / Trade Fair</option>
+                            <option value="other">Other</option>
+                          </select>
+                        </div>
+                        <div className={styles.formGroup}>
+                          <label htmlFor="eventDate">Event Date</label>
+                          <input
+                            id="eventDate"
+                            name="eventDate"
+                            type="date"
+                            className={styles.input}
+                            value={form.eventDate}
+                            onChange={handleChange}
+                          />
+                        </div>
+                      </div>
+                      <div className={styles.formGroup}>
+                        <label htmlFor="message">Your Message</label>
+                        <textarea
+                          id="message"
+                          name="message"
+                          placeholder="Tell us about your event..."
+                          className={styles.textarea}
+                          rows={5}
+                          value={form.message}
+                          onChange={handleChange}
+                        />
+                      </div>
+                      <Button type="submit" className={styles.submitBtn} disabled={submitting}>
+                        {submitting ? "Sending..." : "Send Message"}
+                      </Button>
+                    </>
+                  )}
+                </form>
               ) : (
-                <>
-                  <div className={styles.formRow}>
-                    <div className={styles.formGroup}>
-                      <label htmlFor="fullName">Full Name</label>
-                      <input
-                        id="fullName"
-                        type="text"
-                        placeholder="Juan dela Cruz"
-                        className={styles.input}
-                        required
-                      />
+                <form className={styles.form} onSubmit={handleFeedbackSubmit}>
+                  {feedbackSubmitted ? (
+                    <div className={styles.successMsg}>
+                      <span className={styles.successIcon}>✓</span>
+                      <h3>Feedback Submitted!</h3>
+                      <p>Thank you for your valuable feedback.</p>
                     </div>
-                    <div className={styles.formGroup}>
-                      <label htmlFor="company">Company / Organization</label>
-                      <input
-                        id="company"
-                        type="text"
-                        placeholder="Company Name"
-                        className={styles.input}
-                      />
-                    </div>
-                  </div>
-                  <div className={styles.formRow}>
-                    <div className={styles.formGroup}>
-                      <label htmlFor="email">Email Address</label>
-                      <input
-                        id="email"
-                        type="email"
-                        placeholder="you@example.com"
-                        className={styles.input}
-                        required
-                      />
-                    </div>
-                    <div className={styles.formGroup}>
-                      <label htmlFor="phone">Phone Number</label>
-                      <input
-                        id="phone"
-                        type="tel"
-                        placeholder="+63 908 895 4818"
-                        className={styles.input}
-                      />
-                    </div>
-                  </div>
-                  <div className={styles.formRow}>
-                    <div className={styles.formGroup}>
-                      <label htmlFor="eventType">Event Type</label>
-                      <select id="eventType" className={styles.input} defaultValue="">
-                        <option value="" disabled>
-                          Select event type
-                        </option>
-                        <option value="corporate">Corporate Event</option>
-                        <option value="government">Government Event</option>
-                        <option value="launch">Brand Launch</option>
-                        <option value="festival">Festival / Community</option>
-                        <option value="exhibit">Exhibit / Trade Fair</option>
-                        <option value="other">Other</option>
-                      </select>
-                    </div>
-                    <div className={styles.formGroup}>
-                      <label htmlFor="eventDate">Event Date</label>
-                      <input id="eventDate" type="date" className={styles.input} />
-                    </div>
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label htmlFor="message">Your Message</label>
-                    <textarea
-                      id="message"
-                      placeholder="Tell us about your event..."
-                      className={styles.textarea}
-                      rows={5}
-                    />
-                  </div>
-                  <Button type="submit" className={styles.submitBtn}>
-                    Send Message
-                  </Button>
-                </>
+                  ) : (
+                    <>
+                      <div className={styles.formGroup}>
+                        <label htmlFor="feedbackName">Name</label>
+                        <input
+                          id="feedbackName"
+                          name="name"
+                          type="text"
+                          placeholder="Your Name"
+                          className={styles.input}
+                          value={feedbackForm.name}
+                          onChange={handleFeedbackChange}
+                          required
+                        />
+                      </div>
+
+                      <div className={styles.formGroup}>
+                        <label htmlFor="feedbackEmail">Email Address</label>
+                        <input
+                          id="feedbackEmail"
+                          name="email"
+                          type="email"
+                          placeholder="you@example.com"
+                          className={styles.input}
+                          value={feedbackForm.email}
+                          onChange={handleFeedbackChange}
+                          required
+                        />
+                      </div>
+
+                      <div className={styles.formGroup}>
+                        <label>Rating</label>
+                        <div className={styles.starsContainer}>
+                          {[1, 2, 3, 4, 5].map((star) => {
+                            const isFilled =
+                              hoveredRating !== null
+                                ? star <= hoveredRating
+                                : star <= feedbackForm.rating;
+                            return (
+                              <button
+                                key={star}
+                                type="button"
+                                className={`${styles.starBtn} ${isFilled ? styles.filled : ""}`}
+                                onClick={() =>
+                                  setFeedbackForm((prev) => ({ ...prev, rating: star }))
+                                }
+                                onMouseEnter={() => setHoveredRating(star)}
+                                onMouseLeave={() => setHoveredRating(null)}
+                                aria-label={`${star} Stars`}
+                              >
+                                <svg
+                                  width="28"
+                                  height="28"
+                                  viewBox="0 0 24 24"
+                                  fill={isFilled ? "currentColor" : "none"}
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                >
+                                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                </svg>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+
+                      <div className={styles.formGroup}>
+                        <label htmlFor="comment">Comments / Feedback</label>
+                        <textarea
+                          id="comment"
+                          name="comment"
+                          placeholder="Share your thoughts or experience with us..."
+                          className={styles.textarea}
+                          rows={5}
+                          value={feedbackForm.comment}
+                          onChange={handleFeedbackChange}
+                          required
+                        />
+                      </div>
+
+                      <Button
+                        type="submit"
+                        className={styles.submitBtn}
+                        disabled={submittingFeedback}
+                      >
+                        {submittingFeedback ? "Submitting..." : "Submit Feedback"}
+                      </Button>
+                    </>
+                  )}
+                </form>
               )}
-            </form>
+            </div>
           </div>
         </div>
       </section>

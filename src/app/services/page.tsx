@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import QuoteModal from "@/components/ui/QuoteModal";
@@ -14,6 +14,12 @@ import styles from "./page.module.css";
 
 export default function ServicesPage() {
   const [quoteOpen, setQuoteOpen] = useState(false);
+
+  useEffect(() => {
+    const handler = () => setQuoteOpen(true);
+    window.addEventListener("openQuoteModal", handler);
+    return () => window.removeEventListener("openQuoteModal", handler);
+  }, []);
 
   return (
     <>

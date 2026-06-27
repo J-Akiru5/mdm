@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import QuoteModal from "@/components/ui/QuoteModal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import StatCounter from "@/components/ui/StatCounter";
@@ -15,6 +15,12 @@ import styles from "./page.module.css";
 
 export default function AboutPage() {
   const [quoteOpen, setQuoteOpen] = useState(false);
+
+  useEffect(() => {
+    const handler = () => setQuoteOpen(true);
+    window.addEventListener("openQuoteModal", handler);
+    return () => window.removeEventListener("openQuoteModal", handler);
+  }, []);
 
   return (
     <>

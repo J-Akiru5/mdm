@@ -10,9 +10,34 @@ interface QuoteModalProps {
 
 export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
   const [showThankYou, setShowThankYou] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [form, setForm] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    company: "",
+    eventType: "",
+    eventDate: "",
+    message: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+  ) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
   const handleClose = useCallback(() => {
     setShowThankYou(false);
+    setForm({
+      fullName: "",
+      email: "",
+      phone: "",
+      company: "",
+      eventType: "",
+      eventDate: "",
+      message: "",
+    });
     onClose();
   }, [onClose]);
 
@@ -37,12 +62,32 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setShowThankYou(true);
-    setTimeout(() => {
-      handleClose();
-    }, 2000);
+    setSubmitting(true);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        alert(err.error || "Failed to send. Please try again.");
+        setSubmitting(false);
+        return;
+      }
+
+      setShowThankYou(true);
+      setTimeout(() => {
+        handleClose();
+      }, 2500);
+    } catch {
+      alert("Network error. Please try again.");
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -66,15 +111,50 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
             </p>
             <form className={styles.form} onSubmit={handleSubmit}>
               <div className={styles.row}>
-                <input type="text" placeholder="Full Name" className={styles.input} required />
-                <input type="email" placeholder="Email Address" className={styles.input} required />
+                <input
+                  type="text"
+                  name="fullName"
+                  placeholder="Full Name"
+                  className={styles.input}
+                  value={form.fullName}
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email Address"
+                  className={styles.input}
+                  value={form.email}
+                  onChange={handleChange}
+                  required
+                />
               </div>
               <div className={styles.row}>
-                <input type="tel" placeholder="Phone Number" className={styles.input} />
-                <input type="text" placeholder="Company / Organization" className={styles.input} />
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Phone Number"
+                  className={styles.input}
+                  value={form.phone}
+                  onChange={handleChange}
+                />
+                <input
+                  type="text"
+                  name="company"
+                  placeholder="Company / Organization"
+                  className={styles.input}
+                  value={form.company}
+                  onChange={handleChange}
+                />
               </div>
               <div className={styles.row}>
-                <select className={styles.input} defaultValue="">
+                <select
+                  name="eventType"
+                  className={styles.input}
+                  value={form.eventType}
+                  onChange={handleChange}
+                >
                   <option value="" disabled>
                     Event Type
                   </option>
@@ -85,15 +165,24 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                   <option value="exhibit">Exhibit / Trade Fair</option>
                   <option value="other">Other</option>
                 </select>
-                <input type="date" className={styles.input} />
+                <input
+                  type="date"
+                  name="eventDate"
+                  className={styles.input}
+                  value={form.eventDate}
+                  onChange={handleChange}
+                />
               </div>
               <textarea
+                name="message"
                 placeholder="Tell us about your event..."
                 className={styles.textarea}
                 rows={4}
+                value={form.message}
+                onChange={handleChange}
               ></textarea>
-              <Button type="submit" className={styles.submit}>
-                Send Request
+              <Button type="submit" className={styles.submit} disabled={submitting}>
+                {submitting ? "Sending..." : "Send Request"}
               </Button>
             </form>
           </>

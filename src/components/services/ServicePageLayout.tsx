@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import Link from "next/link";
 import QuoteModal from "@/components/ui/QuoteModal";
 import ScrollReveal from "@/components/ui/ScrollReveal";
@@ -27,6 +27,12 @@ export default function ServicePageLayout({
   children,
 }: ServicePageLayoutProps) {
   const [quoteOpen, setQuoteOpen] = useState(false);
+
+  useEffect(() => {
+    const handler = () => setQuoteOpen(true);
+    window.addEventListener("openQuoteModal", handler);
+    return () => window.removeEventListener("openQuoteModal", handler);
+  }, []);
 
   return (
     <>

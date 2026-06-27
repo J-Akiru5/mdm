@@ -38,6 +38,12 @@ export default function PortfolioPage() {
   }, []);
 
   useEffect(() => {
+    const handler = () => setQuoteOpen(true);
+    window.addEventListener("openQuoteModal", handler);
+    return () => window.removeEventListener("openQuoteModal", handler);
+  }, []);
+
+  useEffect(() => {
     fetch("/api/portfolio")
       .then((r) => r.json())
       .then((data) => {
