@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import SectionHeading from "../ui/SectionHeading";
 import Skeleton from "../ui/Skeleton";
 import styles from "./PortfolioPreview.module.css";
@@ -78,7 +79,7 @@ export default function PortfolioPreview() {
         ) : (
           <div className={styles.gallery}>
             {filtered.map((item) => (
-              <div key={item.id} className={styles.galleryItem}>
+              <Link key={item.id} href={`/portfolio/${item.id}`} className={styles.galleryItem}>
                 <Image
                   src={item.image_url}
                   alt={item.title}
@@ -90,7 +91,7 @@ export default function PortfolioPreview() {
                 <div className={styles.label}>
                   <span>{item.title}</span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         )}

@@ -7,13 +7,26 @@ datasource db {
 }
 
 model Portfolio {
-  id        String   @id @default(uuid())
-  title     String
-  category  String
-  imageUrl  String   @map("image_url")
-  createdAt DateTime @default(now()) @map("created_at")
+  id         String           @id @default(uuid())
+  title      String
+  category   String
+  imageUrl   String           @map("image_url")
+  clientLogo String?          @map("client_logo")
+  createdAt  DateTime         @default(now()) @map("created_at")
+  images     PortfolioImage[]
 
   @@map("portfolio")
+}
+
+model PortfolioImage {
+  id          String    @id @default(uuid())
+  portfolioId String    @map("portfolio_id")
+  url         String
+  sortOrder   Int       @default(0) @map("sort_order")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+
+  @@map("portfolio_images")
 }
 
 model ContactSubmission {

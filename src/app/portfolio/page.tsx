@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import QuoteModal from "@/components/ui/QuoteModal";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import Button from "@/components/ui/Button";
@@ -81,7 +82,7 @@ export default function PortfolioPage() {
             <div className={styles.grid}>
               {filteredItems.map((item, i) => (
                 <ScrollReveal key={item.id} delay={(i % 4) * 0.1}>
-                  <div className={styles.item}>
+                  <Link href={`/portfolio/${item.id}`} className={styles.item}>
                     <Image
                       src={item.image_url}
                       alt={item.title}
@@ -94,7 +95,7 @@ export default function PortfolioPage() {
                       <h3 className={styles.itemTitle}>{item.title}</h3>
                       <span className={styles.itemCategory}>{item.category}</span>
                     </div>
-                  </div>
+                  </Link>
                 </ScrollReveal>
               ))}
             </div>
