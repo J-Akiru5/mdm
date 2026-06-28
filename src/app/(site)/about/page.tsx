@@ -42,7 +42,7 @@ export default function AboutPage() {
           <div className={styles.split}>
             <ScrollReveal animation="fadeInLeft" className={styles.imageWrap}>
               <Image
-                src="/images/about_team.jpg"
+                src="/images/home/team-collaboration.png"
                 alt="MDM Events Management Team"
                 fill
                 style={{ objectFit: "cover" }}

@@ -3,55 +3,67 @@ import Image from "next/image";
 import ScrollReveal from "../ui/ScrollReveal";
 import styles from "./AboutPreview.module.css";
 
-const stats = [
-  { value: "8+", label: "Years in\nBusiness" },
-  { value: "200+", label: "Events\nProduced" },
-  { value: "50+", label: "Clients\nServed" },
-  { value: "100K+", label: "Attendees\nReached" },
-  { value: "5+", label: "Cities\nCovered" },
-];
-
 export default function AboutPreview() {
   return (
     <section id="about" className="section section-off-white">
       <div className="container-wide">
         <div className={styles.grid}>
           <ScrollReveal animation="fadeInLeft">
-            <div className={styles.photoWrapper}>
-              <Image
-                src="/images/home/team-collaboration.png"
-                alt="MDM Events - Team Collaboration"
-                fill
-                style={{ objectFit: "cover" }}
-                sizes="(max-width:768px) 100vw, 50vw"
-                unoptimized
-              />
+            <div className={styles.textContent}>
+              <span className={styles.subtitle}>WHO WE ARE</span>
+              <h2 className={styles.title}>
+                Your Event.
+                <br />
+                <span className={styles.accent}>Professionally Handled.</span>
+              </h2>
+              <p className={styles.description}>
+                MDM Events Management combines strategic planning, creative execution, and
+                technology-driven solutions to produce memorable experiences for corporations,
+                government agencies, brands, and communities.
+              </p>
+              <p className={styles.description}>
+                Unlike traditional event companies, MDM integrates full-stack technology —
+                registration systems, event apps, AI assistants, livestreaming, and custom software
+                — directly into every project, giving clients a single, accountable partner from
+                concept to post-event analytics.
+              </p>
+              <Link href="/about" className={styles.textLink}>
+                Learn More About Us →
+              </Link>
             </div>
           </ScrollReveal>
 
           <ScrollReveal animation="fadeInRight">
-            <div className={styles.textContent}>
-              <span className={styles.subtitle}>WHO WE ARE</span>
-              <h2 className={styles.title}>
-                Your Event. Professionally
-                <br />
-                <span className={styles.accent}>Handled.</span>
-              </h2>
-              <p className={styles.description}>
-                MDM Events Management specializes in delivering high-impact corporate events that
-                drive business results.
-              </p>
-              <p className={styles.description}>
-                Our team of experts has 8 years of experience in crafting and executing events that
-                exceed our clients&apos; expectations.
-              </p>
-              <div className={styles.stats}>
-                {stats.map((stat) => (
-                  <div key={stat.label} className={styles.statItem}>
-                    <span className={styles.statValue}>{stat.value}</span>
-                    <span className={styles.statLabel}>{stat.label}</span>
-                  </div>
-                ))}
+            <div className={styles.photoGrid}>
+              <div className={`${styles.photo} ${styles.photoMain}`}>
+                <Image
+                  src="/images/home/workshop-group.png"
+                  alt="MDM Events - Regional Workshop Group Photo"
+                  fill
+                  style={{ objectFit: "cover" }}
+                  sizes="(max-width:768px) 100vw, 40vw"
+                  unoptimized
+                />
+              </div>
+              <div className={`${styles.photo} ${styles.photoSub1}`}>
+                <Image
+                  src="/images/home/panel-discussion.png"
+                  alt="MDM Events - Panel Discussion"
+                  fill
+                  style={{ objectFit: "cover" }}
+                  sizes="(max-width:768px) 50vw, 20vw"
+                  unoptimized
+                />
+              </div>
+              <div className={`${styles.photo} ${styles.photoSub2}`}>
+                <Image
+                  src="/images/home/community-engagement.png"
+                  alt="MDM Events - Community Engagement"
+                  fill
+                  style={{ objectFit: "cover" }}
+                  sizes="(max-width:768px) 50vw, 20vw"
+                  unoptimized
+                />
               </div>
             </div>
           </ScrollReveal>
