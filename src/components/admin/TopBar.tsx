@@ -41,7 +41,17 @@ export default function TopBar() {
   const fetchCount = useCallback(() => {
     fetch("/api/admin/notifications")
       .then((r) => r.json())
-      .then((d) => setUnreadCount((d.items ?? []).length))
+      .then((d) => {
+        const items = d.items ?? [];
+        try {
+          const raw = localStorage.getItem("mdm_notifications_read");
+          const readIds: string[] = raw ? JSON.parse(raw) : [];
+          const unread = items.filter((item: { id: string }) => !readIds.includes(item.id));
+          setUnreadCount(unread.length);
+        } catch {
+          setUnreadCount(items.length);
+        }
+      })
       .catch(() => {});
   }, []);
 
