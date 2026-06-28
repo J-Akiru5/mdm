@@ -51,6 +51,10 @@ async function main() {
           title: item.title,
           category: item.category,
           imageUrl: item.image,
+          clientName: item.clientName || null,
+          challenge: item.challenge || null,
+          solution: item.solution || null,
+          result: item.result || null,
         },
       });
     }

@@ -35,29 +35,16 @@ export default function HeroSection({ onQuoteOpen }: HeroSectionProps) {
           </div>
         </div>
 
-        {/* ── Right: Logo panel ── */}
-        <div className={styles.logoPanel} aria-hidden="true">
-          {/* Layered decorative rings */}
-          <div className={styles.logoRingOuter} />
-          <div className={styles.logoRing} />
-
-          {/* Red ambient glow */}
-          <div className={styles.logoGlow} />
-
-          {/* White faded background glow behind logo */}
-          <div className={styles.logoWhiteBg} aria-hidden="true" />
-
-          {/* Logo — transparent version */}
-          <div className={styles.logoWrap}>
-            <Image
-              src="/logo/mdm_logo_t.png"
-              alt="MDM Events Management"
-              fill
-              style={{ objectFit: "contain" }}
-              priority
-              className={styles.logoImg}
-            />
-          </div>
+        {/* ── Right: Event photography ── */}
+        <div className={styles.imagePanel} aria-hidden="true">
+          <Image
+            src="/images/portfolio/corporate-conference.jpg"
+            alt="MDM Events - Corporate Event Production"
+            fill
+            style={{ objectFit: "cover" }}
+            priority
+            className={styles.eventImage}
+          />
         </div>
       </div>
     </section>

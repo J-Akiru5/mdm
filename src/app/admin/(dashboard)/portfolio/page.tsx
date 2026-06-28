@@ -55,6 +55,10 @@ export default function AdminPortfolio() {
     category: "",
     image_url: "",
     client_logo: "",
+    client_name: "",
+    challenge: "",
+    solution: "",
+    result: "",
     highlight: false,
   });
   const [images, setImages] = useState<PortfolioImage[]>([]);
@@ -222,6 +226,10 @@ export default function AdminPortfolio() {
       category: form.category,
       image_url: form.image_url,
       client_logo: form.client_logo || null,
+      client_name: form.client_name || null,
+      challenge: form.challenge || null,
+      solution: form.solution || null,
+      result: form.result || null,
       highlight: form.highlight,
       images: images.map((img, i) => ({ url: img.url, sort_order: i })),
     };
@@ -255,6 +263,10 @@ export default function AdminPortfolio() {
       category: item.category,
       image_url: item.image_url,
       client_logo: item.client_logo || "",
+      client_name: (item as any).client_name || "",
+      challenge: (item as any).challenge || "",
+      solution: (item as any).solution || "",
+      result: (item as any).result || "",
       highlight: item.highlight,
     });
     setImages(item.images ? [...item.images] : []);
@@ -289,7 +301,17 @@ export default function AdminPortfolio() {
 
   const resetForm = () => {
     setEditing(null);
-    setForm({ title: "", category: "", image_url: "", client_logo: "", highlight: false });
+    setForm({
+      title: "",
+      category: "",
+      image_url: "",
+      client_logo: "",
+      client_name: "",
+      challenge: "",
+      solution: "",
+      result: "",
+      highlight: false,
+    });
     setImages([]);
   };
 
@@ -593,6 +615,39 @@ export default function AdminPortfolio() {
                 </button>
               )}
             </div>
+
+            {/* Case Study Fields */}
+            <h3 style={{ margin: "24px 0 12px", fontSize: 16, fontWeight: 700 }}>
+              Case Study Details
+            </h3>
+
+            <input
+              placeholder="Client Name (e.g. Megaworld Corporation)"
+              value={form.client_name}
+              onChange={(e) => setForm((f) => ({ ...f, client_name: e.target.value }))}
+              className={styles.input}
+            />
+            <textarea
+              placeholder="Challenge — what did the client need?"
+              value={form.challenge}
+              onChange={(e) => setForm((f) => ({ ...f, challenge: e.target.value }))}
+              className={styles.textarea}
+              rows={3}
+            />
+            <textarea
+              placeholder="Solution — how did MDM deliver?"
+              value={form.solution}
+              onChange={(e) => setForm((f) => ({ ...f, solution: e.target.value }))}
+              className={styles.textarea}
+              rows={3}
+            />
+            <textarea
+              placeholder="Result — measurable outcome (attendees, coverage, repeat booking)"
+              value={form.result}
+              onChange={(e) => setForm((f) => ({ ...f, result: e.target.value }))}
+              className={styles.textarea}
+              rows={3}
+            />
 
             {/* Gallery Images */}
             <label className={styles.fieldLabel}>Gallery Images (drag to reorder)</label>

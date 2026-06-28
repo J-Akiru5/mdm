@@ -49,14 +49,14 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     permissions:
-      contents: write       # push version bump commit + tag
-      issues: write         # comment on issues in release notes
-      pull-requests: write  # comment on PRs in release notes
+      contents: write # push version bump commit + tag
+      issues: write # comment on issues in release notes
+      pull-requests: write # comment on PRs in release notes
 
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # full history required for commit analysis
+          fetch-depth: 0 # full history required for commit analysis
 
       - uses: actions/setup-node@v4
         with:

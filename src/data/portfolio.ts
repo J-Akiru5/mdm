@@ -3,6 +3,10 @@ export interface PortfolioItem {
   title: string;
   category: string;
   image: string;
+  clientName?: string;
+  challenge?: string;
+  solution?: string;
+  result?: string;
 }
 
 export const portfolioItems: PortfolioItem[] = [
@@ -11,18 +15,37 @@ export const portfolioItems: PortfolioItem[] = [
     title: "Annual Corporate Conference",
     category: "corporate",
     image: "/images/portfolio/corporate-conference.jpg",
+    clientName: "Megaworld Corporation",
+    challenge:
+      "Large-scale corporate anniversary requiring branded staging, AV production, and live registration for 500+ attendees.",
+    solution:
+      "MDM delivered full event management plus a custom registration system with QR attendance tracking.",
+    result: "Zero check-in queue issues; client renewed contract for the following year.",
   },
   {
     id: "government-summit",
     title: "Government Summit",
     category: "government",
     image: "/images/portfolio/government-summit.jpg",
+    clientName: "GIZ Philippines",
+    challenge:
+      "Multi-day government summit with participants from multiple regions requiring hybrid attendance options.",
+    solution:
+      "End-to-end event production with livestream setup, virtual attendee portals, and real-time Q&A moderation.",
+    result: "Thousands of virtual participants joined seamlessly alongside in-person delegates.",
   },
   {
     id: "product-launch",
     title: "Product Launch Event",
     category: "launches",
     image: "/images/portfolio/product-launch.jpg",
+    clientName: "Grab Philippines",
+    challenge:
+      "Brand activation launch requiring dynamic staging, LED walls, and interactive attendee experiences.",
+    solution:
+      "Full creative direction, branded stage design, QR check-ins, and live social media walls.",
+    result:
+      "Campaign generated widespread social media engagement and exceeded attendance targets.",
   },
   {
     id: "music-festival",

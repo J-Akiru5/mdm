@@ -18,6 +18,10 @@ interface PortfolioItem {
   category: string;
   image_url: string;
   client_logo: string | null;
+  client_name: string | null;
+  challenge: string | null;
+  solution: string | null;
+  result: string | null;
   images: PortfolioImage[];
 }
 
@@ -74,6 +78,7 @@ export default function PortfolioDetailPage() {
     );
   }
 
+  const hasNarrative = item.challenge || item.solution || item.result;
   const displayImages =
     item.images.length > 0 ? item.images : [{ id: "cover", url: item.image_url, sort_order: 0 }];
 
@@ -98,6 +103,35 @@ export default function PortfolioDetailPage() {
               &larr; Back to Portfolio
             </Link>
           </div>
+
+          {hasNarrative && (
+            <div className={styles.caseStudy}>
+              {item.client_name && (
+                <div className={styles.caseRow}>
+                  <span className={styles.caseLabel}>Client</span>
+                  <span className={styles.caseValue}>{item.client_name}</span>
+                </div>
+              )}
+              {item.challenge && (
+                <div className={styles.caseRow}>
+                  <span className={styles.caseLabel}>Challenge</span>
+                  <span className={styles.caseValue}>{item.challenge}</span>
+                </div>
+              )}
+              {item.solution && (
+                <div className={styles.caseRow}>
+                  <span className={styles.caseLabel}>Solution</span>
+                  <span className={styles.caseValue}>{item.solution}</span>
+                </div>
+              )}
+              {item.result && (
+                <div className={styles.caseRow}>
+                  <span className={styles.caseLabel}>Result</span>
+                  <span className={styles.caseValue}>{item.result}</span>
+                </div>
+              )}
+            </div>
+          )}
 
           <div className={styles.gallery}>
             {displayImages.map((img, i) => (

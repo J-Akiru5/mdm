@@ -12,6 +12,10 @@ model Portfolio {
   category          String
   imageUrl          String           @map("image_url")
   clientLogo        String?          @map("client_logo")
+  clientName        String?          @map("client_name")
+  challenge         String?          @map("challenge")
+  solution          String?          @map("solution")
+  result            String?          @map("result")
   highlight         Boolean          @default(false)
   createdAt         DateTime         @default(now()) @map("created_at")
   updatedAt         DateTime         @default(now()) @updatedAt @map("updated_at")

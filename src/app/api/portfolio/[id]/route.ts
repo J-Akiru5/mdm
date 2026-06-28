@@ -19,6 +19,10 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
       category: item.category,
       image_url: item.imageUrl,
       client_logo: item.clientLogo,
+      client_name: item.clientName,
+      challenge: item.challenge,
+      solution: item.solution,
+      result: item.result,
       images: item.images.map((img) => ({
         id: img.id,
         url: img.url,

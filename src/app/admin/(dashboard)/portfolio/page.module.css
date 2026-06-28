@@ -163,6 +163,21 @@
   border-color: #9e1115;
 }
 
+.textarea {
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 0;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.textarea:focus {
+  border-color: #9e1115;
+}
+
 .checkbox {
   margin-right: 8px;
   accent-color: #d51c24;
