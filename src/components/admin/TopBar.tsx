@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import NotificationPanel from "@/components/admin/NotificationPanel";
 import styles from "./TopBar.module.css";
@@ -19,6 +19,7 @@ export default function TopBar() {
   const pathname = usePathname();
   const [time, setTime] = useState<string>("");
   const [showNotifications, setShowNotifications] = useState(false);
+  const [unreadCount, setUnreadCount] = useState(0);
 
   useEffect(() => {
     const update = () => {
@@ -35,6 +36,19 @@ export default function TopBar() {
     const id = setInterval(update, 1000);
     return () => clearInterval(id);
   }, []);
+
+  const fetchCount = useCallback(() => {
+    fetch("/api/admin/notifications")
+      .then((r) => r.json())
+      .then((d) => setUnreadCount((d.items ?? []).length))
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    fetchCount();
+    const id = setInterval(fetchCount, 60000);
+    return () => clearInterval(id);
+  }, [fetchCount]);
 
   const title =
     Object.entries(TITLES).find(([path]) =>
@@ -67,8 +81,13 @@ export default function TopBar() {
               <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
               <path d="M13.73 21a2 2 0 0 1-3.46 0" />
             </svg>
+            {unreadCount > 0 && (
+              <span className={styles.badge}>{unreadCount > 99 ? "99+" : unreadCount}</span>
+            )}
           </button>
-          {showNotifications && <NotificationPanel onClose={() => setShowNotifications(false)} />}
+          {showNotifications && (
+            <NotificationPanel onClose={() => setShowNotifications(false)} onRead={fetchCount} />
+          )}
         </div>
         <Link href="/admin/profile" className={styles.profileLink}>
           <span className={styles.avatar}>A</span>

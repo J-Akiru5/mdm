@@ -29,7 +29,13 @@ const TYPE_ICONS: Record<string, { bg: string; color: string }> = {
   audit: { bg: "#fef3c7", color: "#92400e" },
 };
 
-export default function NotificationPanel({ onClose }: { onClose: () => void }) {
+export default function NotificationPanel({
+  onClose,
+  onRead,
+}: {
+  onClose: () => void;
+  onRead?: () => void;
+}) {
   const [items, setItems] = useState<NotificationItem[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -39,42 +45,46 @@ export default function NotificationPanel({ onClose }: { onClose: () => void }) 
       .then((d) => {
         setItems(d.items ?? []);
         setLoading(false);
+        onRead?.();
       })
       .catch(() => setLoading(false));
-  }, []);
+  }, [onRead]);
 
   return (
-    <div className={styles.panel}>
-      <div className={styles.header}>
-        <h3 className={styles.title}>Notifications</h3>
-        <span className={styles.count}>{items.length} new</span>
-      </div>
-      <div className={styles.list}>
-        {loading ? (
-          <div className={styles.empty}>Loading...</div>
-        ) : items.length === 0 ? (
-          <div className={styles.empty}>No new notifications</div>
-        ) : (
-          items.map((item) => (
-            <div key={item.id} className={styles.item}>
-              <div
-                className={styles.icon}
-                style={{
-                  background: TYPE_ICONS[item.type]?.bg ?? "#f0f0f5",
-                  color: TYPE_ICONS[item.type]?.color ?? "#555",
-                }}
-              >
-                {item.type === "inquiry" ? "✉" : item.type === "feedback" ? "★" : "✎"}
+    <>
+      <div className={styles.backdrop} onClick={onClose} />
+      <div className={styles.panel}>
+        <div className={styles.header}>
+          <h3 className={styles.title}>Notifications</h3>
+          <span className={styles.count}>{items.length} new</span>
+        </div>
+        <div className={styles.list}>
+          {loading ? (
+            <div className={styles.empty}>Loading...</div>
+          ) : items.length === 0 ? (
+            <div className={styles.empty}>No new notifications</div>
+          ) : (
+            items.map((item) => (
+              <div key={item.id} className={styles.item}>
+                <div
+                  className={styles.icon}
+                  style={{
+                    background: TYPE_ICONS[item.type]?.bg ?? "#f0f0f5",
+                    color: TYPE_ICONS[item.type]?.color ?? "#555",
+                  }}
+                >
+                  {item.type === "inquiry" ? "✉" : item.type === "feedback" ? "★" : "✎"}
+                </div>
+                <div className={styles.itemContent}>
+                  <div className={styles.itemTitle}>{item.title}</div>
+                  <div className={styles.itemSubtitle}>{item.subtitle}</div>
+                </div>
+                <span className={styles.time}>{formatRelative(item.time)}</span>
               </div>
-              <div className={styles.itemContent}>
-                <div className={styles.itemTitle}>{item.title}</div>
-                <div className={styles.itemSubtitle}>{item.subtitle}</div>
-              </div>
-              <span className={styles.time}>{formatRelative(item.time)}</span>
-            </div>
-          ))
-        )}
+            ))
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

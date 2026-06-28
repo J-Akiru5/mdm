@@ -1,4 +1,4 @@
-.overlay {
+.backdrop {
   display: none;
 }
 
@@ -108,7 +108,7 @@
 }
 
 @media (max-width: 768px) {
-  .overlay {
+  .backdrop {
     display: block;
     position: fixed;
     inset: 0;
