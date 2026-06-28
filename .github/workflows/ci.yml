@@ -3,12 +3,17 @@ name: CI
 on:
   push:
     branches: [main]
+    tags:
+      - "v*.*.*"
   pull_request:
     branches: [main]
 
 jobs:
+  # ── Quality Gate ──────────────────────────────────────────────
   lint-and-build:
+    name: Lint, Type-check & Build
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
@@ -17,7 +22,8 @@ jobs:
           node-version: 20
           cache: npm
 
-      - run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
       - name: Lint
         run: npm run lint
@@ -30,3 +36,47 @@ jobs:
 
       - name: Build
         run: npm run build
+
+  # ── GitHub Release ────────────────────────────────────────────
+  release:
+    name: Create GitHub Release
+    needs: lint-and-build
+    runs-on: ubuntu-latest
+    # Only run when a version tag is pushed (e.g. v1.0.0)
+    if: startsWith(github.ref, 'refs/tags/v')
+
+    permissions:
+      contents: write   # Required to create a GitHub Release
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # Full history for changelog extraction
+
+      - name: Extract version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
+
+      - name: Extract CHANGELOG section for this release
+        id: changelog
+        run: |
+          VERSION="${{ steps.version.outputs.VERSION }}"
+          # Extract lines between this version header and the next
+          NOTES=$(awk "/^## \[$VERSION\]/{found=1; next} found && /^## /{exit} found{print}" CHANGELOG.md)
+          # Trim leading/trailing blank lines
+          NOTES=$(echo "$NOTES" | sed '/^[[:space:]]*$/d')
+          # Write to file to preserve multiline content
+          echo "$NOTES" > release_notes.txt
+          echo "Extracted release notes:"
+          cat release_notes.txt
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "v${{ steps.version.outputs.VERSION }}"
+          tag_name: ${{ github.ref_name }}
+          body_path: release_notes.txt
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
