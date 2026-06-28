@@ -1,8 +1,29 @@
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 12px;
+}
+
 .heading {
   font-size: 28px;
   font-weight: 700;
   color: #171717;
-  margin: 0 0 24px;
+  margin: 0;
+}
+
+.totalCount {
+  display: inline-flex;
+  align-items: center;
+  background: #f0f0f5;
+  color: #5a5a6e;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .loading {

@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
+import Pagination from "@/components/ui/Pagination";
 import styles from "./page.module.css";
 
 interface Feedback {
@@ -12,46 +13,96 @@ interface Feedback {
   created_at: string;
 }
 
+interface FeedbackResponse {
+  data: Feedback[];
+  total: number;
+  page: number;
+  totalPages: number;
+  pageSize: number;
+}
+
+const PAGE_SIZE = 20;
+
 export default function AdminFeedback() {
-  const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
+  const [res, setRes] = useState<FeedbackResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<Feedback | null>(null);
 
-  // Filters
+  // Filters & pagination
   const [searchQuery, setSearchQuery] = useState("");
   const [filterRating, setFilterRating] = useState("all");
+  const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    fetch("/api/feedback")
-      .then((r) => r.json())
-      .then((data) => {
-        if (Array.isArray(data)) setFeedbacks(data);
-        setLoading(false);
-      });
+  // Debounce search
+  const searchTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+
+  const fetchFeedbacks = useCallback(async (p: number, search: string, rating: string) => {
+    setLoading(true);
+    try {
+      const params = new URLSearchParams();
+      params.set("page", String(p));
+      params.set("limit", String(PAGE_SIZE));
+      if (search) params.set("search", search);
+      if (rating !== "all") params.set("rating", rating);
+
+      const r = await fetch(`/api/feedback?${params.toString()}`);
+      if (!r.ok) throw new Error("Failed");
+      const json: FeedbackResponse = await r.json();
+      setRes(json);
+    } catch {
+      setRes(null);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
-  const filteredFeedbacks = feedbacks.filter((fb) => {
-    const matchesSearch =
-      fb.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      fb.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      fb.comment.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesRating = filterRating === "all" || fb.rating === Number(filterRating);
-    return matchesSearch && matchesRating;
-  });
+  // Debounce search input
+  useEffect(() => {
+    if (searchTimer.current) clearTimeout(searchTimer.current);
+    searchTimer.current = setTimeout(() => {
+      setDebouncedSearch(searchQuery);
+      setPage(1);
+    }, 300);
+    return () => {
+      if (searchTimer.current) clearTimeout(searchTimer.current);
+    };
+  }, [searchQuery]);
+
+  // Fetch when deps change
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchFeedbacks(page, debouncedSearch, filterRating);
+  }, [page, debouncedSearch, filterRating, fetchFeedbacks]);
+
+  const handleFilterRating = (val: string) => {
+    setFilterRating(val);
+    setPage(1);
+  };
 
   const clearFilters = () => {
     setSearchQuery("");
     setFilterRating("all");
+    setPage(1);
   };
 
   const hasActiveFilters = searchQuery || filterRating !== "all";
+  const feedbacks = res?.data ?? [];
 
-  if (loading) return <div className={styles.loading}>Loading...</div>;
+  // Compute summary from all (API-side total, avg only from current page)
+  const pageAvg =
+    feedbacks.length > 0
+      ? (feedbacks.reduce((s, f) => s + f.rating, 0) / feedbacks.length).toFixed(1)
+      : "—";
 
   return (
     <div>
-      <h1 className={styles.heading}>Feedback</h1>
+      <div className={styles.pageHeader}>
+        <h1 className={styles.heading}>Feedback</h1>
+        {res && <span className={styles.totalCount}>{res.total.toLocaleString()} total</span>}
+      </div>
 
+      {/* Detail Modal */}
       {selected && (
         <div className={styles.detail} onClick={() => setSelected(null)}>
           <div className={styles.detailCard} onClick={(e) => e.stopPropagation()}>
@@ -83,20 +134,15 @@ export default function AdminFeedback() {
         </div>
       )}
 
-      {feedbacks.length === 0 && <p className={styles.empty}>No feedback yet.</p>}
-
+      {/* Summary cards */}
       <div className={styles.summary}>
         <div className={styles.summaryCard}>
-          <span className={styles.summaryNumber}>{feedbacks.length}</span>
+          <span className={styles.summaryNumber}>{res?.total ?? "—"}</span>
           <span className={styles.summaryLabel}>Total Feedback</span>
         </div>
         <div className={styles.summaryCard}>
-          <span className={styles.summaryNumber}>
-            {feedbacks.length > 0
-              ? (feedbacks.reduce((sum, f) => sum + f.rating, 0) / feedbacks.length).toFixed(1)
-              : "—"}
-          </span>
-          <span className={styles.summaryLabel}>Average Rating</span>
+          <span className={styles.summaryNumber}>{pageAvg}</span>
+          <span className={styles.summaryLabel}>Avg Rating (this page)</span>
         </div>
       </div>
 
@@ -104,14 +150,14 @@ export default function AdminFeedback() {
       <div className={styles.filters}>
         <input
           type="text"
-          placeholder="Search by name, email, or comment..."
+          placeholder="Search by name, email, or comment…"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className={styles.searchInput}
         />
         <select
           value={filterRating}
-          onChange={(e) => setFilterRating(e.target.value)}
+          onChange={(e) => handleFilterRating(e.target.value)}
           className={styles.filterSelect}
         >
           <option value="all">All Ratings</option>
@@ -128,27 +174,42 @@ export default function AdminFeedback() {
         )}
       </div>
 
-      {filteredFeedbacks.length === 0 && (
+      {/* List */}
+      {loading ? (
+        <div className={styles.loading}>Loading…</div>
+      ) : !res || feedbacks.length === 0 ? (
         <p className={styles.empty}>
           {hasActiveFilters ? "No feedback matches your filters." : "No feedback yet."}
         </p>
-      )}
-
-      <div className={styles.list}>
-        {filteredFeedbacks.map((fb) => (
-          <div key={fb.id} className={styles.item} onClick={() => setSelected(fb)}>
-            <div className={styles.itemInfo}>
-              <strong>{fb.name}</strong>
-              <span className={styles.itemEmail}>{fb.email}</span>
-              <span className={styles.itemStars}>
-                {"★".repeat(fb.rating)}
-                {"☆".repeat(5 - fb.rating)}
-              </span>
-            </div>
-            <span className={styles.itemDate}>{new Date(fb.created_at).toLocaleDateString()}</span>
+      ) : (
+        <>
+          <div className={styles.list}>
+            {feedbacks.map((fb) => (
+              <div key={fb.id} className={styles.item} onClick={() => setSelected(fb)}>
+                <div className={styles.itemInfo}>
+                  <strong>{fb.name}</strong>
+                  <span className={styles.itemEmail}>{fb.email}</span>
+                  <span className={styles.itemStars}>
+                    {"★".repeat(fb.rating)}
+                    {"☆".repeat(5 - fb.rating)}
+                  </span>
+                </div>
+                <span className={styles.itemDate}>
+                  {new Date(fb.created_at).toLocaleDateString()}
+                </span>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+
+          <Pagination
+            page={res.page}
+            totalPages={res.totalPages}
+            total={res.total}
+            pageSize={res.pageSize}
+            onPageChange={setPage}
+          />
+        </>
+      )}
     </div>
   );
 }

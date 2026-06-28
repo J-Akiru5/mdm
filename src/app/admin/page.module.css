@@ -1,40 +1,93 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
 .heading {
   font-size: 28px;
   font-weight: 700;
   color: #171717;
-  margin: 0 0 24px;
+  margin: 0;
 }
 
-.grid {
+.lastUpdated {
+  font-size: 13px;
+  color: #999;
+}
+
+.statGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
+  margin-bottom: 24px;
 }
 
-.card {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+@media (max-width: 1024px) {
+  .statGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .statGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chartsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  .chartsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chartCard {
   background: #fff;
-  border-radius: 0;
   padding: 24px;
-  text-decoration: none;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  transition: box-shadow 0.2s;
 }
 
-.card:hover {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+.chartTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #171717;
+  margin: 0 0 20px;
 }
 
-.cardValue {
-  font-size: 36px;
-  font-weight: 700;
-  color: #9e1115;
+.breakdownCard {
+  background: #fff;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  margin-top: 24px;
 }
 
-.cardLabel {
+.error {
+  color: #999;
+  text-align: center;
+  padding: 48px 0;
   font-size: 14px;
-  color: #666;
-  font-weight: 500;
+}
+
+/* Skeleton */
+.skeletonCard {
+  background: #fff;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.skeletonChart {
+  background: #fff;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

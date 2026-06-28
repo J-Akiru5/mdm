@@ -1,5 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { requireAuth } from "@/lib/api-auth";
+import { logAudit } from "@/lib/audit";
+
+function getRequestMeta(req: NextRequest) {
+  return {
+    ipAddress:
+      req.headers.get("x-forwarded-for")?.split(",")[0].trim() ??
+      req.headers.get("x-real-ip") ??
+      undefined,
+    userAgent: req.headers.get("user-agent") ?? undefined,
+  };
+}
 
 export async function GET(req: NextRequest) {
   try {
@@ -26,6 +38,8 @@ export async function GET(req: NextRequest) {
         sort_order: img.sortOrder,
       })),
       created_at: item.createdAt.toISOString(),
+      updated_at: item.updatedAt?.toISOString() ?? item.createdAt.toISOString(),
+      updated_by_email: item.updatedByEmail ?? null,
     }));
     return NextResponse.json(mapped);
   } catch {
@@ -33,7 +47,12 @@ export async function GET(req: NextRequest) {
   }
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
+  const auth = await requireAuth(req);
+  if (auth instanceof NextResponse) return auth;
+
+  const { ipAddress, userAgent } = getRequestMeta(req);
+
   try {
     const body = await req.json();
     const imagesData = Array.isArray(body.images)
@@ -50,20 +69,48 @@ export async function POST(req: Request) {
         imageUrl: body.image_url,
         clientLogo: body.client_logo || null,
         highlight: body.highlight || false,
+        updatedByUserId: auth.user.id,
+        updatedByEmail: auth.user.email,
         images: { create: imagesData },
       },
       include: { images: true },
     });
+
+    // Fire-and-forget audit
+    logAudit({
+      action: "CREATE",
+      entity: "Portfolio",
+      entityId: item.id,
+      actorId: auth.user.id,
+      actorEmail: auth.user.email,
+      ipAddress,
+      userAgent,
+      after: {
+        title: item.title,
+        category: item.category,
+        highlight: item.highlight,
+      },
+      metadata: { title: item.title },
+    });
+
     return NextResponse.json(item, { status: 201 });
   } catch {
     return NextResponse.json({ error: "Failed to create item" }, { status: 500 });
   }
 }
 
-export async function PUT(req: Request) {
+export async function PUT(req: NextRequest) {
+  const auth = await requireAuth(req);
+  if (auth instanceof NextResponse) return auth;
+
+  const { ipAddress, userAgent } = getRequestMeta(req);
+
   try {
     const body = await req.json();
     const { id, images, ...data } = body;
+
+    // Capture before snapshot
+    const before = await prisma.portfolio.findUnique({ where: { id } });
 
     await prisma.portfolio.update({
       where: { id },
@@ -73,6 +120,8 @@ export async function PUT(req: Request) {
         imageUrl: data.image_url,
         clientLogo: data.client_logo || null,
         highlight: data.highlight || false,
+        updatedByUserId: auth.user.id,
+        updatedByEmail: auth.user.email,
       },
     });
 
@@ -93,13 +142,43 @@ export async function PUT(req: Request) {
       where: { id },
       include: { images: { orderBy: { sortOrder: "asc" } } },
     });
+
+    // Fire-and-forget audit
+    if (before) {
+      logAudit({
+        action: "UPDATE",
+        entity: "Portfolio",
+        entityId: id,
+        actorId: auth.user.id,
+        actorEmail: auth.user.email,
+        ipAddress,
+        userAgent,
+        before: {
+          title: before.title,
+          category: before.category,
+          highlight: before.highlight,
+        },
+        after: {
+          title: data.title,
+          category: data.category,
+          highlight: data.highlight,
+        },
+        metadata: { title: data.title },
+      });
+    }
+
     return NextResponse.json(item);
   } catch {
     return NextResponse.json({ error: "Failed to update item" }, { status: 500 });
   }
 }
 
-export async function PATCH(req: Request) {
+export async function PATCH(req: NextRequest) {
+  const auth = await requireAuth(req);
+  if (auth instanceof NextResponse) return auth;
+
+  const { ipAddress, userAgent } = getRequestMeta(req);
+
   try {
     const body = await req.json();
     const { id, highlight } = body;
@@ -108,22 +187,76 @@ export async function PATCH(req: Request) {
       return NextResponse.json({ error: "Missing id or highlight" }, { status: 400 });
     }
 
+    // Capture before
+    const before = await prisma.portfolio.findUnique({
+      where: { id },
+      select: { highlight: true, title: true },
+    });
+
     const item = await prisma.portfolio.update({
       where: { id },
-      data: { highlight },
+      data: {
+        highlight,
+        updatedByUserId: auth.user.id,
+        updatedByEmail: auth.user.email,
+      },
     });
+
+    // Fire-and-forget audit
+    logAudit({
+      action: "UPDATE",
+      entity: "Portfolio",
+      entityId: id,
+      actorId: auth.user.id,
+      actorEmail: auth.user.email,
+      ipAddress,
+      userAgent,
+      before: { highlight: before?.highlight },
+      after: { highlight },
+      metadata: { title: before?.title, field: "highlight" },
+    });
+
     return NextResponse.json(item);
   } catch {
     return NextResponse.json({ error: "Failed to update highlight" }, { status: 500 });
   }
 }
 
-export async function DELETE(req: Request) {
+export async function DELETE(req: NextRequest) {
+  const auth = await requireAuth(req);
+  if (auth instanceof NextResponse) return auth;
+
+  const { ipAddress, userAgent } = getRequestMeta(req);
+
   try {
     const { searchParams } = new URL(req.url);
     const id = searchParams.get("id");
     if (!id) return NextResponse.json({ error: "Missing id" }, { status: 400 });
+
+    // Capture before snapshot
+    const before = await prisma.portfolio.findUnique({ where: { id } });
+
     await prisma.portfolio.delete({ where: { id } });
+
+    // Fire-and-forget audit
+    if (before) {
+      logAudit({
+        action: "DELETE",
+        entity: "Portfolio",
+        entityId: id,
+        actorId: auth.user.id,
+        actorEmail: auth.user.email,
+        ipAddress,
+        userAgent,
+        before: {
+          title: before.title,
+          category: before.category,
+          highlight: before.highlight,
+        },
+        metadata: { title: before.title },
+      });
+    }
+
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({ error: "Failed to delete item" }, { status: 500 });

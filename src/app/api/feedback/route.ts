@@ -1,12 +1,46 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { sendFeedbackNotification } from "@/lib/email";
+import { requireAuth } from "@/lib/api-auth";
+import { Prisma } from "@prisma/client";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const auth = await requireAuth(req);
+  if (auth instanceof NextResponse) return auth;
+
   try {
-    const feedbacks = await prisma.feedback.findMany({
-      orderBy: { createdAt: "desc" },
-    });
-    const mapped = feedbacks.map((f) => ({
+    const { searchParams } = new URL(req.url);
+    const page = Math.max(1, parseInt(searchParams.get("page") ?? "1", 10));
+    const limit = Math.min(100, parseInt(searchParams.get("limit") ?? "20", 10));
+    const search = searchParams.get("search")?.trim() ?? "";
+    const ratingParam = searchParams.get("rating") ?? "";
+
+    const where: Prisma.FeedbackWhereInput = {};
+
+    if (ratingParam) {
+      const rating = parseInt(ratingParam, 10);
+      if (!isNaN(rating)) where.rating = rating;
+    }
+
+    if (search) {
+      where.OR = [
+        { name: { contains: search, mode: "insensitive" } },
+        { email: { contains: search, mode: "insensitive" } },
+        { comment: { contains: search, mode: "insensitive" } },
+      ];
+    }
+
+    const [total, feedbacks] = await Promise.all([
+      prisma.feedback.count({ where }),
+      prisma.feedback.findMany({
+        where,
+        orderBy: { createdAt: "desc" },
+        skip: (page - 1) * limit,
+        take: limit,
+      }),
+    ]);
+
+    const data = feedbacks.map((f) => ({
       id: f.id,
       name: f.name,
       email: f.email,
@@ -14,7 +48,14 @@ export async function GET() {
       comment: f.comment,
       created_at: f.createdAt.toISOString(),
     }));
-    return NextResponse.json(mapped);
+
+    return NextResponse.json({
+      data,
+      total,
+      page,
+      totalPages: Math.ceil(total / limit),
+      pageSize: limit,
+    });
   } catch (error) {
     console.error("Failed to fetch feedbacks:", error);
     return NextResponse.json({ error: "Failed to fetch feedbacks" }, { status: 500 });
@@ -49,6 +90,13 @@ export async function POST(req: NextRequest) {
         comment,
       },
     });
+
+    sendFeedbackNotification({
+      name: feedback.name,
+      email: feedback.email,
+      rating: feedback.rating,
+      comment: feedback.comment,
+    }).catch(console.error);
 
     return NextResponse.json({ success: true, data: feedback }, { status: 201 });
   } catch (error) {

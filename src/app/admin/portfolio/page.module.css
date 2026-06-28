@@ -586,3 +586,11 @@
     padding: 3px 8px;
   }
 }
+
+.lastTouched {
+  display: block;
+  font-size: 11px;
+  color: #b0b0bc;
+  margin-top: 3px;
+  font-style: italic;
+}

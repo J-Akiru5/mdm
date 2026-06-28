@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useToast } from "@/components/ui/Toast";
+import Pagination from "@/components/ui/Pagination";
 import styles from "./page.module.css";
 
 interface PortfolioImage {
@@ -20,6 +21,20 @@ interface PortfolioItem {
   highlight: boolean;
   images: PortfolioImage[];
   created_at: string;
+  updated_at: string;
+  updated_by_email: string | null;
+}
+
+function formatRelativeTime(dateStr: string): string {
+  const diff = Date.now() - new Date(dateStr).getTime();
+  const mins = Math.floor(diff / 60000);
+  const hours = Math.floor(mins / 60);
+  const days = Math.floor(hours / 24);
+  if (mins < 1) return "just now";
+  if (mins < 60) return `${mins}m ago`;
+  if (hours < 24) return `${hours}h ago`;
+  if (days < 7) return `${days}d ago`;
+  return new Date(dateStr).toLocaleDateString();
 }
 
 interface Category {
@@ -52,6 +67,10 @@ export default function AdminPortfolio() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterCategory, setFilterCategory] = useState("all");
   const [filterHighlight, setFilterHighlight] = useState("all");
+
+  // Pagination
+  const PAGE_SIZE = 12;
+  const [page, setPage] = useState(1);
 
   // Category CRUD
   const [newCategoryName, setNewCategoryName] = useState("");
@@ -91,6 +110,9 @@ export default function AdminPortfolio() {
       (filterHighlight === "not-highlighted" && !item.highlight);
     return matchesSearch && matchesCategory && matchesHighlight;
   });
+
+  const totalPages = Math.ceil(filteredItems.length / PAGE_SIZE);
+  const paginatedItems = filteredItems.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   const uploadFile = async (file: File): Promise<string | null> => {
     const supabase = createClient();
@@ -275,6 +297,7 @@ export default function AdminPortfolio() {
     setSearchQuery("");
     setFilterCategory("all");
     setFilterHighlight("all");
+    setPage(1);
   };
 
   const hasActiveFilters = searchQuery || filterCategory !== "all" || filterHighlight !== "all";
@@ -385,12 +408,18 @@ export default function AdminPortfolio() {
               type="text"
               placeholder="Search by title..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setPage(1);
+              }}
               className={styles.searchInput}
             />
             <select
               value={filterCategory}
-              onChange={(e) => setFilterCategory(e.target.value)}
+              onChange={(e) => {
+                setFilterCategory(e.target.value);
+                setPage(1);
+              }}
               className={styles.filterSelect}
             >
               <option value="all">All Categories</option>
@@ -402,7 +431,10 @@ export default function AdminPortfolio() {
             </select>
             <select
               value={filterHighlight}
-              onChange={(e) => setFilterHighlight(e.target.value)}
+              onChange={(e) => {
+                setFilterHighlight(e.target.value);
+                setPage(1);
+              }}
               className={styles.filterSelect}
             >
               <option value="all">All</option>
@@ -423,7 +455,7 @@ export default function AdminPortfolio() {
                 {hasActiveFilters ? "No items match your filters." : "No portfolio items yet."}
               </p>
             )}
-            {filteredItems.map((item, index) => (
+            {paginatedItems.map((item, index) => (
               <div
                 key={item.id}
                 className={styles.item}
@@ -441,6 +473,11 @@ export default function AdminPortfolio() {
                   {item.client_logo && <span className={styles.badge}>Has logo</span>}
                   {item.images && item.images.length > 0 && (
                     <span className={styles.badge}>{item.images.length} photos</span>
+                  )}
+                  {item.updated_by_email && (
+                    <span className={styles.lastTouched}>
+                      ✎ {item.updated_by_email} · {formatRelativeTime(item.updated_at)}
+                    </span>
                   )}
                 </div>
                 <div className={styles.itemActions}>
@@ -467,6 +504,14 @@ export default function AdminPortfolio() {
               </div>
             ))}
           </div>
+
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            total={filteredItems.length}
+            pageSize={PAGE_SIZE}
+            onPageChange={setPage}
+          />
         </>
       ) : activeTab === "form" ? (
         /* Form Tab */

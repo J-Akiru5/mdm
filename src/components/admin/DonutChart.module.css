@@ -1,0 +1,72 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.chartWrapper {
+  flex-shrink: 0;
+}
+
+.segment {
+  transition: opacity 0.2s;
+}
+
+.segment:hover {
+  opacity: 0.8;
+}
+
+.totalValue {
+  font-size: 28px;
+  font-weight: 700;
+  fill: #171717;
+  font-family: "DM Sans", sans-serif;
+}
+
+.totalLabel {
+  font-size: 12px;
+  fill: #666;
+  font-family: "DM Sans", sans-serif;
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-family: "DM Sans", sans-serif;
+}
+
+.legendDot {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+}
+
+.legendLabel {
+  color: #555;
+  min-width: 80px;
+}
+
+.legendValue {
+  font-weight: 600;
+  color: #171717;
+}
+
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  height: 160px;
+  color: #999;
+  font-size: 14px;
+  font-family: "DM Sans", sans-serif;
+}

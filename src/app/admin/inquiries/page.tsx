@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
+import Pagination from "@/components/ui/Pagination";
 import styles from "./page.module.css";
 
 interface Inquiry {
@@ -15,49 +16,91 @@ interface Inquiry {
   created_at: string;
 }
 
+interface InquiryResponse {
+  data: Inquiry[];
+  total: number;
+  page: number;
+  totalPages: number;
+  pageSize: number;
+}
+
+const PAGE_SIZE = 20;
 const eventTypes = ["corporate", "government", "launch", "festival", "exhibit", "other"];
 
 export default function AdminInquiries() {
-  const [inquiries, setInquiries] = useState<Inquiry[]>([]);
+  const [res, setRes] = useState<InquiryResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<Inquiry | null>(null);
 
-  // Filters
+  // Filters & pagination
   const [searchQuery, setSearchQuery] = useState("");
   const [filterEventType, setFilterEventType] = useState("all");
+  const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    fetch("/api/contact")
-      .then((r) => r.json())
-      .then((data) => {
-        if (Array.isArray(data)) setInquiries(data);
-        setLoading(false);
-      });
+  // Debounce search
+  const searchTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+
+  const fetchInquiries = useCallback(async (p: number, search: string, eventType: string) => {
+    setLoading(true);
+    try {
+      const params = new URLSearchParams();
+      params.set("page", String(p));
+      params.set("limit", String(PAGE_SIZE));
+      if (search) params.set("search", search);
+      if (eventType !== "all") params.set("eventType", eventType);
+
+      const r = await fetch(`/api/contact?${params.toString()}`);
+      if (!r.ok) throw new Error("Failed");
+      const json: InquiryResponse = await r.json();
+      setRes(json);
+    } catch {
+      setRes(null);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
-  const filteredInquiries = inquiries.filter((inq) => {
-    const matchesSearch =
-      inq.full_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      inq.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (inq.company && inq.company.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (inq.message && inq.message.toLowerCase().includes(searchQuery.toLowerCase()));
-    const matchesEventType = filterEventType === "all" || inq.event_type === filterEventType;
-    return matchesSearch && matchesEventType;
-  });
+  // Debounce search input
+  useEffect(() => {
+    if (searchTimer.current) clearTimeout(searchTimer.current);
+    searchTimer.current = setTimeout(() => {
+      setDebouncedSearch(searchQuery);
+      setPage(1);
+    }, 300);
+    return () => {
+      if (searchTimer.current) clearTimeout(searchTimer.current);
+    };
+  }, [searchQuery]);
+
+  // Fetch when deps change
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchInquiries(page, debouncedSearch, filterEventType);
+  }, [page, debouncedSearch, filterEventType, fetchInquiries]);
+
+  const handleFilterEventType = (val: string) => {
+    setFilterEventType(val);
+    setPage(1);
+  };
 
   const clearFilters = () => {
     setSearchQuery("");
     setFilterEventType("all");
+    setPage(1);
   };
 
   const hasActiveFilters = searchQuery || filterEventType !== "all";
-
-  if (loading) return <div className={styles.loading}>Loading...</div>;
+  const inquiries = res?.data ?? [];
 
   return (
     <div>
-      <h1 className={styles.heading}>Inquiries</h1>
+      <div className={styles.pageHeader}>
+        <h1 className={styles.heading}>Inquiries</h1>
+        {res && <span className={styles.totalCount}>{res.total.toLocaleString()} total</span>}
+      </div>
 
+      {/* Detail Modal */}
       {selected && (
         <div className={styles.detail} onClick={() => setSelected(null)}>
           <div className={styles.detailCard} onClick={(e) => e.stopPropagation()}>
@@ -98,20 +141,18 @@ export default function AdminInquiries() {
         </div>
       )}
 
-      {inquiries.length === 0 && <p className={styles.empty}>No inquiries yet.</p>}
-
       {/* Filters */}
       <div className={styles.filters}>
         <input
           type="text"
-          placeholder="Search by name, email, company, or message..."
+          placeholder="Search by name, email, company, or message…"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className={styles.searchInput}
         />
         <select
           value={filterEventType}
-          onChange={(e) => setFilterEventType(e.target.value)}
+          onChange={(e) => handleFilterEventType(e.target.value)}
           className={styles.filterSelect}
         >
           <option value="all">All Event Types</option>
@@ -128,24 +169,39 @@ export default function AdminInquiries() {
         )}
       </div>
 
-      {filteredInquiries.length === 0 && (
+      {/* List */}
+      {loading ? (
+        <div className={styles.loading}>Loading…</div>
+      ) : !res || inquiries.length === 0 ? (
         <p className={styles.empty}>
           {hasActiveFilters ? "No inquiries match your filters." : "No inquiries yet."}
         </p>
-      )}
-
-      <div className={styles.list}>
-        {filteredInquiries.map((inq) => (
-          <div key={inq.id} className={styles.item} onClick={() => setSelected(inq)}>
-            <div className={styles.itemInfo}>
-              <strong>{inq.full_name}</strong>
-              <span className={styles.itemEmail}>{inq.email}</span>
-              {inq.event_type && <span className={styles.itemBadge}>{inq.event_type}</span>}
-            </div>
-            <span className={styles.itemDate}>{new Date(inq.created_at).toLocaleDateString()}</span>
+      ) : (
+        <>
+          <div className={styles.list}>
+            {inquiries.map((inq) => (
+              <div key={inq.id} className={styles.item} onClick={() => setSelected(inq)}>
+                <div className={styles.itemInfo}>
+                  <strong>{inq.full_name}</strong>
+                  <span className={styles.itemEmail}>{inq.email}</span>
+                  {inq.event_type && <span className={styles.itemBadge}>{inq.event_type}</span>}
+                </div>
+                <span className={styles.itemDate}>
+                  {new Date(inq.created_at).toLocaleDateString()}
+                </span>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+
+          <Pagination
+            page={res.page}
+            totalPages={res.totalPages}
+            total={res.total}
+            pageSize={res.pageSize}
+            onPageChange={setPage}
+          />
+        </>
+      )}
     </div>
   );
 }

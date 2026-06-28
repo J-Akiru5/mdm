@@ -1,0 +1,62 @@
+.container {
+  width: 100%;
+}
+
+.chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  padding-bottom: 40px;
+  position: relative;
+}
+
+.barGroup {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  position: relative;
+}
+
+.barWrapper {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.bar {
+  width: 70%;
+  max-width: 48px;
+  transition:
+    height 0.4s ease,
+    opacity 0.2s;
+  min-height: 2px;
+}
+
+.bar:hover {
+  opacity: 0.8;
+}
+
+.barValue {
+  font-size: 12px;
+  font-weight: 600;
+  color: #171717;
+  margin-bottom: 4px;
+  font-family: "DM Sans", sans-serif;
+}
+
+.barLabel {
+  font-size: 11px;
+  color: #666;
+  text-align: center;
+  position: absolute;
+  bottom: -32px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: "DM Sans", sans-serif;
+}

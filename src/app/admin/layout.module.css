@@ -38,11 +38,18 @@
   font-size: 14px;
   font-weight: 500;
   transition: all 0.2s;
+  border-left: 3px solid transparent;
 }
 
 .navLink:hover {
   background: rgba(255, 255, 255, 0.06);
   color: #fff;
+}
+
+.navLinkActive {
+  color: #fff;
+  background: rgba(213, 28, 36, 0.12);
+  border-left-color: #d51c24;
 }
 
 .logoutForm {

@@ -1,0 +1,64 @@
+.link {
+  text-decoration: none;
+  display: block;
+}
+
+.card {
+  background: #fff;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s;
+}
+
+.link:hover .card {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(158, 17, 21, 0.08);
+  color: #9e1115;
+}
+
+.icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.trend {
+  font-size: 12px;
+  font-weight: 600;
+  color: #16a34a;
+  background: #dcfce7;
+  padding: 2px 8px;
+}
+
+.value {
+  display: block;
+  font-size: 36px;
+  font-weight: 700;
+  color: #171717;
+  line-height: 1.1;
+}
+
+.label {
+  display: block;
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+  margin-top: 4px;
+}

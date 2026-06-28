@@ -7,14 +7,17 @@ datasource db {
 }
 
 model Portfolio {
-  id         String           @id @default(uuid())
-  title      String
-  category   String
-  imageUrl   String           @map("image_url")
-  clientLogo String?          @map("client_logo")
-  highlight  Boolean          @default(false)
-  createdAt  DateTime         @default(now()) @map("created_at")
-  images     PortfolioImage[]
+  id                String           @id @default(uuid())
+  title             String
+  category          String
+  imageUrl          String           @map("image_url")
+  clientLogo        String?          @map("client_logo")
+  highlight         Boolean          @default(false)
+  createdAt         DateTime         @default(now()) @map("created_at")
+  updatedAt         DateTime         @default(now()) @updatedAt @map("updated_at")
+  updatedByUserId   String?          @map("updated_by_user_id")
+  updatedByEmail    String?          @map("updated_by_email")
+  images            PortfolioImage[]
 
   @@map("portfolio")
 }
@@ -45,10 +48,13 @@ model ContactSubmission {
 }
 
 model Category {
-  id        String   @id @default(uuid())
-  name      String   @unique
-  sortOrder Int      @default(0) @map("sort_order")
-  createdAt DateTime @default(now()) @map("created_at")
+  id              String   @id @default(uuid())
+  name            String   @unique
+  sortOrder       Int      @default(0) @map("sort_order")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @default(now()) @updatedAt @map("updated_at")
+  updatedByUserId String?  @map("updated_by_user_id")
+  updatedByEmail  String?  @map("updated_by_email")
 
   @@map("categories")
 }
@@ -63,3 +69,25 @@ model Feedback {
 
   @@map("feedbacks")
 }
+
+model AuditLog {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now()) @map("created_at")
+  action      String   // LOGIN | LOGIN_FAILED | LOGOUT | CREATE | UPDATE | DELETE
+  entity      String   // Portfolio | Category | Auth | ContactSubmission | Feedback
+  entityId    String?  @map("entity_id")
+  actorId     String?  @map("actor_id")
+  actorEmail  String?  @map("actor_email")
+  ipAddress   String?  @map("ip_address")
+  userAgent   String?  @map("user_agent")
+  before      Json?
+  after       Json?
+  metadata    Json?    // e.g. { title: "My Event" } for display label
+
+  @@index([action])
+  @@index([entity])
+  @@index([actorEmail])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+

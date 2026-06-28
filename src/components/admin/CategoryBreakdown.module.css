@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.label {
+  font-size: 13px;
+  color: #555;
+  min-width: 100px;
+  text-align: right;
+  font-family: "DM Sans", sans-serif;
+}
+
+.barTrack {
+  flex: 1;
+  height: 20px;
+  background: #f0f0f0;
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  transition: width 0.4s ease;
+}
+
+.count {
+  font-size: 14px;
+  font-weight: 600;
+  color: #171717;
+  min-width: 24px;
+  text-align: right;
+  font-family: "DM Sans", sans-serif;
+}
+
+.empty {
+  color: #999;
+  font-size: 14px;
+  text-align: center;
+  padding: 24px 0;
+}
