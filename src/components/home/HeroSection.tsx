@@ -25,7 +25,7 @@ export default function HeroSection({ onQuoteOpen }: HeroSectionProps) {
             COMMUNITIES.
           </h1>
           <p className={styles.subtitle}>
-            Full-service event management powered by technology — from concept to execution.
+            We plan, produce, and manage events that leave a lasting impact.
           </p>
           <div className={styles.actions}>
             <Button onClick={onQuoteOpen}>Request a Proposal</Button>
@@ -35,16 +35,29 @@ export default function HeroSection({ onQuoteOpen }: HeroSectionProps) {
           </div>
         </div>
 
-        {/* ── Right: Event photography ── */}
-        <div className={styles.imagePanel} aria-hidden="true">
-          <Image
-            src="/images/portfolio/corporate-conference.jpg"
-            alt="MDM Events - Corporate Event Production"
-            fill
-            style={{ objectFit: "cover" }}
-            priority
-            className={styles.eventImage}
-          />
+        {/* ── Right: Logo panel ── */}
+        <div className={styles.logoPanel} aria-hidden="true">
+          {/* Layered decorative rings */}
+          <div className={styles.logoRingOuter} />
+          <div className={styles.logoRing} />
+
+          {/* Red ambient glow */}
+          <div className={styles.logoGlow} />
+
+          {/* White faded background glow behind logo */}
+          <div className={styles.logoWhiteBg} aria-hidden="true" />
+
+          {/* Logo — transparent version */}
+          <div className={styles.logoWrap}>
+            <Image
+              src="/logo/mdm_logo_t.png"
+              alt="MDM Events Management"
+              fill
+              style={{ objectFit: "contain" }}
+              priority
+              className={styles.logoImg}
+            />
+          </div>
         </div>
       </div>
     </section>
