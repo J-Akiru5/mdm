@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./NotificationPanel.module.css";
 
 interface NotificationItem {
@@ -10,6 +11,7 @@ interface NotificationItem {
   subtitle: string;
   time: string;
   read: boolean;
+  href: string;
 }
 
 function formatRelative(dateStr: string): string {
@@ -29,6 +31,21 @@ const TYPE_ICONS: Record<string, { bg: string; color: string }> = {
   audit: { bg: "#fef3c7", color: "#92400e" },
 };
 
+const READ_KEY = "mdm_notifications_read";
+
+function getReadIds(): Set<string> {
+  try {
+    const raw = localStorage.getItem(READ_KEY);
+    return raw ? new Set(JSON.parse(raw)) : new Set();
+  } catch {
+    return new Set();
+  }
+}
+
+function saveReadIds(ids: Set<string>) {
+  localStorage.setItem(READ_KEY, JSON.stringify([...ids]));
+}
+
 export default function NotificationPanel({
   onClose,
   onRead,
@@ -36,19 +53,48 @@ export default function NotificationPanel({
   onClose: () => void;
   onRead?: () => void;
 }) {
+  const router = useRouter();
   const [items, setItems] = useState<NotificationItem[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const fetchNotifications = useCallback(() => {
     fetch("/api/admin/notifications")
       .then((r) => r.json())
       .then((d) => {
-        setItems(d.items ?? []);
+        const readIds = getReadIds();
+        const withRead = (d.items ?? []).map((item: NotificationItem) => ({
+          ...item,
+          read: readIds.has(item.id),
+        }));
+        setItems(withRead);
         setLoading(false);
         onRead?.();
       })
       .catch(() => setLoading(false));
   }, [onRead]);
+
+  useEffect(() => {
+    fetchNotifications();
+  }, [fetchNotifications]);
+
+  const unreadCount = items.filter((i) => !i.read).length;
+
+  const handleMarkAllRead = () => {
+    const readIds = getReadIds();
+    items.forEach((item) => readIds.add(item.id));
+    saveReadIds(readIds);
+    setItems((prev) => prev.map((item) => ({ ...item, read: true })));
+    onRead?.();
+  };
+
+  const handleClick = (item: NotificationItem) => {
+    const readIds = getReadIds();
+    readIds.add(item.id);
+    saveReadIds(readIds);
+    onRead?.();
+    onClose();
+    router.push(item.href);
+  };
 
   return (
     <>
@@ -56,7 +102,14 @@ export default function NotificationPanel({
       <div className={styles.panel}>
         <div className={styles.header}>
           <h3 className={styles.title}>Notifications</h3>
-          <span className={styles.count}>{items.length} new</span>
+          <div className={styles.headerRight}>
+            {unreadCount > 0 && (
+              <button className={styles.markAllRead} onClick={handleMarkAllRead}>
+                Mark all as read
+              </button>
+            )}
+            <span className={styles.count}>{unreadCount} new</span>
+          </div>
         </div>
         <div className={styles.list}>
           {loading ? (
@@ -65,7 +118,11 @@ export default function NotificationPanel({
             <div className={styles.empty}>No new notifications</div>
           ) : (
             items.map((item) => (
-              <div key={item.id} className={styles.item}>
+              <div
+                key={item.id}
+                className={`${styles.item} ${item.read ? styles.read : ""}`}
+                onClick={() => handleClick(item)}
+              >
                 <div
                   className={styles.icon}
                   style={{

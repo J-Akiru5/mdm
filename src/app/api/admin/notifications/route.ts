@@ -44,6 +44,7 @@ export async function GET(request: Request) {
       subtitle: `${i.eventType ?? "General"} inquiry`,
       time: i.createdAt.toISOString(),
       read: false,
+      href: "/admin/inquiries",
     })),
     ...feedback.map((f) => ({
       id: f.id,
@@ -52,6 +53,7 @@ export async function GET(request: Request) {
       subtitle: `${"★".repeat(f.rating)}${"☆".repeat(5 - f.rating)} rating`,
       time: f.createdAt.toISOString(),
       read: false,
+      href: "/admin/feedback",
     })),
     ...auditEvents.map((e) => ({
       id: e.id,
@@ -60,6 +62,7 @@ export async function GET(request: Request) {
       subtitle: e.actorEmail ?? "System",
       time: e.createdAt.toISOString(),
       read: false,
+      href: "/admin/audit-log",
     })),
   ].sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime());
 
