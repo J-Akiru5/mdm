@@ -1,15 +1,14 @@
-name: CI
+name: CI / CD
 
 on:
   push:
     branches: [main]
-    tags:
-      - "v*.*.*"
   pull_request:
     branches: [main]
 
 jobs:
   # ── Quality Gate ──────────────────────────────────────────────
+  # Runs on every push to main AND every PR targeting main.
   lint-and-build:
     name: Lint, Type-check & Build
     runs-on: ubuntu-latest
@@ -37,46 +36,37 @@ jobs:
       - name: Build
         run: npm run build
 
-  # ── GitHub Release ────────────────────────────────────────────
+  # ── Semantic Release ──────────────────────────────────────────
+  # Runs only on direct pushes to main (not PRs).
+  # Analyzes commits since the last release, determines the next
+  # version (MAJOR / MINOR / PATCH), updates CHANGELOG.md and
+  # package.json, commits them back, tags the release, and creates
+  # a GitHub Release — all automatically, no tokens to configure.
   release:
-    name: Create GitHub Release
+    name: Semantic Release
     needs: lint-and-build
     runs-on: ubuntu-latest
-    # Only run when a version tag is pushed (e.g. v1.0.0)
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     permissions:
-      contents: write   # Required to create a GitHub Release
+      contents: write       # push version bump commit + tag
+      issues: write         # comment on issues in release notes
+      pull-requests: write  # comment on PRs in release notes
 
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # Full history for changelog extraction
+          fetch-depth: 0   # full history required for commit analysis
 
-      - name: Extract version from tag
-        id: version
-        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
-
-      - name: Extract CHANGELOG section for this release
-        id: changelog
-        run: |
-          VERSION="${{ steps.version.outputs.VERSION }}"
-          # Extract lines between this version header and the next
-          NOTES=$(awk "/^## \[$VERSION\]/{found=1; next} found && /^## /{exit} found{print}" CHANGELOG.md)
-          # Trim leading/trailing blank lines
-          NOTES=$(echo "$NOTES" | sed '/^[[:space:]]*$/d')
-          # Write to file to preserve multiline content
-          echo "$NOTES" > release_notes.txt
-          echo "Extracted release notes:"
-          cat release_notes.txt
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+      - uses: actions/setup-node@v4
         with:
-          name: "v${{ steps.version.outputs.VERSION }}"
-          tag_name: ${{ github.ref_name }}
-          body_path: release_notes.txt
-          draft: false
-          prerelease: false
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Release
+        run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

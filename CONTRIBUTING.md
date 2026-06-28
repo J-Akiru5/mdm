@@ -149,25 +149,48 @@ feat(admin): add bulk-export for inquiries as CSV
 
 ## Versioning & Releases
 
-This project follows [Semantic Versioning](https://semver.org/):
+This project uses **[Semantic Release](https://semantic-release.gitbook.io/)** — versioning and releases are **fully automated** based on your commit messages. You never need to manually edit `package.json`, `CHANGELOG.md`, or create a Git tag.
 
-| Change                                  | Version bump    |
-| --------------------------------------- | --------------- |
-| Breaking change or major new capability | `MAJOR` (2.0.0) |
-| New feature, backward-compatible        | `MINOR` (1.1.0) |
-| Bug fix, backward-compatible            | `PATCH` (1.0.1) |
+### How It Works
 
-### Release Checklist
+Every merge to `main` triggers the CI release job, which:
 
-1. Update `CHANGELOG.md` — move items from `[Unreleased]` to a new `[X.Y.Z] — YYYY-MM-DD` section
-2. Bump `version` in `package.json`
-3. Commit: `chore: bump version to X.Y.Z`
-4. Tag:
-   ```bash
-   git tag -a vX.Y.Z -m "Release vX.Y.Z"
-   git push origin vX.Y.Z
-   ```
-5. GitHub Actions will automatically create a GitHub Release with the CHANGELOG notes
+1. Analyzes all commits since the last release
+2. Determines the correct next version based on [SemVer](https://semver.org/)
+3. Updates `package.json` and `CHANGELOG.md` automatically
+4. Commits those changes back to `main` with `[skip ci]` (prevents loops)
+5. Creates a `vX.Y.Z` Git tag
+6. Publishes a GitHub Release with auto-generated notes
+
+### Commit → Version Mapping
+
+| Commit prefix                        | Version bump              | Example                                           |
+| ------------------------------------ | ------------------------- | ------------------------------------------------- |
+| `feat:`                              | **MINOR** `1.0.0 → 1.1.0` | `feat(admin): add CSV export for inquiries`       |
+| `fix:`                               | **PATCH** `1.0.0 → 1.0.1` | `fix(auth): resolve session expiry redirect loop` |
+| `perf:`                              | **PATCH**                 | `perf(portfolio): lazy-load gallery images`       |
+| `refactor:`                          | **PATCH**                 | `refactor(api): extract auth middleware`          |
+| `BREAKING CHANGE:` in footer         | **MAJOR** `1.0.0 → 2.0.0` | Any commit with `BREAKING CHANGE:` in the body    |
+| `docs:`, `chore:`, `style:`, `test:` | **No release**            | Ignored by the release bot                        |
+
+> [!IMPORTANT]
+> A release is **only triggered** if at least one commit since the last release uses `feat:`, `fix:`, `perf:`, or `refactor:`. Pure `chore:`/`docs:` pushes produce no new release.
+
+### Adding to the Changelog
+
+You **do not** need to edit `CHANGELOG.md` manually — Semantic Release writes it for you.
+
+If you want a human-readable description beyond the commit subject, add it in the commit body:
+
+```
+feat(portfolio): add CSV export for inquiries
+
+Admins can now download all inquiries as a CSV file directly from
+the Inquiries page. Includes all fields: name, email, event type,
+date, and message.
+```
+
+The body text will appear in the GitHub Release notes.
 
 ---
 
