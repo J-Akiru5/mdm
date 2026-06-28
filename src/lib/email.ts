@@ -1,4 +1,5 @@
 import { Resend } from "resend";
+import { prisma } from "@/lib/prisma";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -6,6 +7,22 @@ const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@mdmevents.org";
 const FROM_EMAIL = "MDM Events <notifications@mdmevents.org>";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://mdmevents.org";
 const LOGO_URL = `${SITE_URL}/logo/mdm_logo.png`;
+
+async function getRecipients(type: "inquiry" | "feedback"): Promise<string[]> {
+  try {
+    const recipients = await prisma.notificationRecipient.findMany({
+      where: { active: true, types: { has: type } },
+      select: { email: true },
+    });
+    if (recipients.length > 0) {
+      return recipients.map((r) => r.email);
+    }
+  } catch {
+    // Table may not exist yet or query failed
+  }
+  // Fallback so emails never silently break
+  return [ADMIN_EMAIL];
+}
 
 function emailWrapper(content: string): string {
   return `
@@ -102,6 +119,8 @@ export async function sendInquiryNotification(inquiry: {
 }) {
   if (!process.env.RESEND_API_KEY) return;
 
+  const to = await getRecipients("inquiry");
+
   const eventType = inquiry.eventType
     ? inquiry.eventType.charAt(0).toUpperCase() + inquiry.eventType.slice(1)
     : "Not specified";
@@ -144,7 +163,7 @@ export async function sendInquiryNotification(inquiry: {
 
   await resend.emails.send({
     from: FROM_EMAIL,
-    to: ADMIN_EMAIL,
+    to,
     subject: `New Inquiry from ${inquiry.fullName} — ${eventType}`,
     html,
   });
@@ -157,6 +176,8 @@ export async function sendFeedbackNotification(feedback: {
   comment: string;
 }) {
   if (!process.env.RESEND_API_KEY) return;
+
+  const to = await getRecipients("feedback");
 
   const stars = "★".repeat(feedback.rating) + "☆".repeat(5 - feedback.rating);
 
@@ -189,7 +210,7 @@ export async function sendFeedbackNotification(feedback: {
 
   await resend.emails.send({
     from: FROM_EMAIL,
-    to: ADMIN_EMAIL,
+    to,
     subject: `New Feedback from ${feedback.name} — ${feedback.rating}★`,
     html,
   });

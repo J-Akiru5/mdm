@@ -91,3 +91,14 @@ model AuditLog {
   @@map("audit_logs")
 }
 
+model NotificationRecipient {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  active    Boolean  @default(true)
+  types     String[] @default(["inquiry", "feedback"])
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("notification_recipients")
+}
+

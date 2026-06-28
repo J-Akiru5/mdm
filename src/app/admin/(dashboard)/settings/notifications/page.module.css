@@ -1,0 +1,273 @@
+.page {
+  max-width: 720px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 12px;
+}
+
+.heading {
+  font-size: 24px;
+  font-weight: 700;
+  color: #171717;
+  margin: 0;
+}
+
+.totalBadge {
+  display: inline-flex;
+  align-items: center;
+  background: #f0f0f5;
+  color: #5a5a6e;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e8e8ec;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.cardTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: #171717;
+  margin: 0 0 20px;
+}
+
+/* Add form */
+.addForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.addFields {
+  display: flex;
+  gap: 12px;
+}
+
+.input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 0;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-color: #9e1115;
+}
+
+.typeCheckboxes {
+  display: flex;
+  gap: 16px;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+
+.checkbox {
+  accent-color: #d51c24;
+  width: 16px;
+  height: 16px;
+}
+
+.btn {
+  align-self: flex-start;
+  padding: 10px 24px;
+  background: #9e1115;
+  color: #fff;
+  border: none;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s;
+}
+
+.btn:hover {
+  background: #8a0f13;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Recipients list */
+.empty {
+  text-align: center;
+  padding: 32px;
+  color: #999;
+  font-size: 14px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: #f0f0f5;
+  border: 1px solid #e8e8ec;
+}
+
+.recipientRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  background: #fff;
+}
+
+.recipientRow:first-child {
+  border-radius: 0;
+}
+
+.recipientInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.recipientName {
+  font-size: 14px;
+  font-weight: 600;
+  color: #171717;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recipientEmail {
+  font-size: 13px;
+  color: #999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recipientTypes {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.typeBadge {
+  padding: 4px 10px;
+  border: 1px solid #ddd;
+  border-radius: 0;
+  background: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  color: #999;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.typeBadgeActive {
+  background: #d51c24;
+  color: #fff;
+  border-color: #d51c24;
+}
+
+.typeBadgeActive:hover {
+  background: #b01720;
+  border-color: #b01720;
+}
+
+.typeBadge:hover:not(.typeBadgeActive) {
+  border-color: #9e1115;
+  color: #9e1115;
+}
+
+.recipientActions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.toggleBtn {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  border-radius: 0;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  color: #999;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.toggleActive {
+  color: #065f46;
+  border-color: #065f46;
+  background: #d1fae5;
+}
+
+.toggleBtn:hover:not(.toggleActive) {
+  border-color: #9e1115;
+  color: #9e1115;
+}
+
+.deleteBtn {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  border-radius: 0;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  color: #999;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.deleteBtn:hover {
+  color: #c00;
+  border-color: #c00;
+}
+
+@media (max-width: 768px) {
+  .addFields {
+    flex-direction: column;
+  }
+
+  .recipientRow {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .recipientInfo {
+    width: 100%;
+  }
+
+  .recipientTypes {
+    flex-wrap: wrap;
+  }
+}
