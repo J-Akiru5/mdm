@@ -7,6 +7,7 @@ const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@mdmevents.org";
 const FROM_EMAIL = "MDM Events <notifications@mdmevents.org>";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://mdmevents.org";
 const LOGO_URL = `${SITE_URL}/logo/mdm_logo.png`;
+const HEADER_URL = `${SITE_URL}/images/OG/email-header.png`;
 
 async function getRecipients(type: "inquiry" | "feedback"): Promise<string[]> {
   try {
@@ -40,8 +41,8 @@ function emailWrapper(content: string): string {
 
           <!-- Header -->
           <tr>
-            <td style="background-color:#1a1a2e;padding:24px 40px;text-align:center;">
-              <img src="${LOGO_URL}" alt="MDM Events Management" width="120" style="display:block;margin:0 auto;height:auto;" />
+            <td style="padding:0;">
+              <img src="${HEADER_URL}" alt="MDM Events Management" width="600" style="display:block;width:100%;height:auto;" />
             </td>
           </tr>
 
