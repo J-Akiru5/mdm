@@ -6,6 +6,12 @@ import Link from "next/link";
 import NotificationPanel from "@/components/admin/NotificationPanel";
 import styles from "./TopBar.module.css";
 
+interface Profile {
+  email: string;
+  fullName: string;
+  avatarUrl: string;
+}
+
 const TITLES: Record<string, string> = {
   "/admin": "Dashboard",
   "/admin/portfolio": "Portfolio",
@@ -21,6 +27,7 @@ export default function TopBar() {
   const [time, setTime] = useState<string>("");
   const [showNotifications, setShowNotifications] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
+  const [profile, setProfile] = useState<Profile>({ email: "", fullName: "", avatarUrl: "" });
 
   useEffect(() => {
     const update = () => {
@@ -36,6 +43,13 @@ export default function TopBar() {
     update();
     const id = setInterval(update, 1000);
     return () => clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/admin/profile")
+      .then((r) => r.json())
+      .then((d) => setProfile(d))
+      .catch(() => {});
   }, []);
 
   const fetchCount = useCallback(() => {
@@ -101,8 +115,14 @@ export default function TopBar() {
           )}
         </div>
         <Link href="/admin/profile" className={styles.profileLink}>
-          <span className={styles.avatar}>A</span>
-          <span className={styles.profileName}>Admin</span>
+          <span className={styles.avatar}>
+            {profile.avatarUrl ? (
+              <img src={profile.avatarUrl} alt="" className={styles.avatarImg} />
+            ) : (
+              (profile.fullName?.charAt(0)?.toUpperCase() ?? "A")
+            )}
+          </span>
+          <span className={styles.profileName}>{profile.fullName || "Admin"}</span>
         </Link>
       </div>
     </header>
