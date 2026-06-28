@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { services } from "@/data/services";
+import { services, serviceCategories } from "@/data/services";
 import SectionHeading from "../ui/SectionHeading";
 import ScrollReveal from "../ui/ScrollReveal";
 import styles from "./WhatWeDo.module.css";
@@ -153,24 +153,36 @@ export default function WhatWeDo({ onQuoteOpen }: WhatWeDoProps) {
           dark
           align="center"
         />
-        <div className={styles.grid}>
-          {services.map((svc, i) => (
-            <ScrollReveal key={svc.id} delay={i * 0.1}>
-              <Link href={`/services/${svc.id}`} className={styles.card}>
-                <div className={styles.cardContent}>
-                  <div className={styles.iconWrap}>{serviceIcons[svc.id]}</div>
-                  <h3 className={styles.cardTitle}>{svc.title}</h3>
-                  <p className={styles.cardDesc}>{svc.tagline}</p>
-                </div>
-                <div className={styles.cardFooter}>
-                  <span className={styles.learnMore}>
-                    Learn More <span className={styles.arrow}>&rarr;</span>
-                  </span>
-                </div>
-              </Link>
-            </ScrollReveal>
-          ))}
-        </div>
+
+        {serviceCategories.map((cat) => {
+          const catServices = services.filter((s) => s.category === cat.id);
+          return (
+            <div key={cat.id} className={styles.categoryBlock}>
+              <div className={styles.categoryHeader}>
+                <h3 className={styles.categoryTitle}>{cat.title}</h3>
+                <p className={styles.categoryDesc}>{cat.description}</p>
+              </div>
+              <div className={styles.grid}>
+                {catServices.map((svc, i) => (
+                  <ScrollReveal key={svc.id} delay={i * 0.1}>
+                    <Link href={`/services/${svc.id}`} className={styles.card}>
+                      <div className={styles.cardContent}>
+                        <div className={styles.iconWrap}>{serviceIcons[svc.id]}</div>
+                        <h3 className={styles.cardTitle}>{svc.title}</h3>
+                        <p className={styles.cardDesc}>{svc.tagline}</p>
+                      </div>
+                      <div className={styles.cardFooter}>
+                        <span className={styles.learnMore}>
+                          Learn More <span className={styles.arrow}>&rarr;</span>
+                        </span>
+                      </div>
+                    </Link>
+                  </ScrollReveal>
+                ))}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );

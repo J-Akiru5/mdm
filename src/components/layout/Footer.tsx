@@ -58,7 +58,7 @@ export default function Footer() {
           <div className={styles.column}>
             <h4 className={styles.columnTitle}>Contact</h4>
             <ul className={styles.columnLinks}>
-              <li>mdmeventsmgt@gmail.com</li>
+              <li>hello@mdmevents.org</li>
               <li>+63 908 895 4818</li>
               <li>(033) 323 4864</li>
               <li>56 Quezon St. Arevalo, Iloilo City</li>

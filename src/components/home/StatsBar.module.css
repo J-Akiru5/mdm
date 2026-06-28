@@ -1,0 +1,22 @@
+.section {
+  padding: 60px 0;
+  background-color: var(--color-off-white);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 40px 0;
+  }
+
+  .inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+}

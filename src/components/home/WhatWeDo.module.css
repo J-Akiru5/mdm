@@ -36,11 +36,40 @@
   z-index: 1;
 }
 
+.categoryBlock:first-of-type {
+  margin-top: 56px;
+}
+
+.categoryBlock + .categoryBlock {
+  margin-top: 48px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.categoryHeader {
+  margin-bottom: 24px;
+}
+
+.categoryTitle {
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--color-primary-light);
+  margin: 0 0 6px;
+}
+
+.categoryDesc {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 24px;
-  margin-top: 48px;
 }
 
 .card {

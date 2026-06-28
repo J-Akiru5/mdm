@@ -4,28 +4,33 @@ import styles from "./WhyChooseUs.module.css";
 const reasons = [
   {
     number: "01",
-    title: "Personalized Service",
-    description: "Tailored to your unique needs.",
+    title: "One-Stop Event Solutions",
+    description: "Planning, production, and technology from one team.",
   },
   {
     number: "02",
-    title: "Creative Solutions",
-    description: "Innovative event solutions that stand out.",
+    title: "Technology-Driven Execution",
+    description: "Proprietary tools and platforms built for events.",
   },
   {
     number: "03",
-    title: "Attention to Detail",
-    description: "Meticulous planning and flawless execution.",
+    title: "Experienced Project Managers",
+    description: "8+ years of complex event delivery.",
   },
   {
     number: "04",
-    title: "Proven Track Record",
-    description: "A history of successful events.",
+    title: "Reliable Supplier Network",
+    description: "Vetted vendors across the Philippines.",
   },
   {
     number: "05",
-    title: "Strong Network",
-    description: "Trusted suppliers and partners.",
+    title: "Nationwide Capability",
+    description: "Events in Iloilo, Manila, Cebu, and beyond.",
+  },
+  {
+    number: "06",
+    title: "Dedicated On-Site Support",
+    description: "MDM team present from setup to teardown.",
   },
 ];
 

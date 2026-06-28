@@ -1,0 +1,80 @@
+.section {
+  padding: var(--space-2xl) 0;
+  background-color: var(--color-off-white);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.card {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-100);
+  border-radius: var(--border-radius-md);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+}
+
+.quoteIcon {
+  color: var(--color-primary);
+  opacity: 0.2;
+  margin-bottom: 16px;
+  line-height: 1;
+}
+
+.quote {
+  font-size: 15px;
+  color: var(--color-gray-600);
+  line-height: 1.7;
+  flex: 1;
+  margin: 0 0 24px;
+  font-style: italic;
+}
+
+.author {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-gray-100);
+}
+
+.name {
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-gray-900);
+}
+
+.role {
+  font-size: 13px;
+  color: var(--color-gray-300);
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 24px 20px;
+  }
+}

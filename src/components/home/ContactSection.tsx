@@ -67,7 +67,7 @@ export default function ContactSection() {
             <ul className={styles.details}>
               <li>
                 <strong>Email</strong>
-                <span>mdmeventsmgt@gmail.com</span>
+                <span>hello@mdmevents.org</span>
               </li>
               <li>
                 <strong>Mobile</strong>

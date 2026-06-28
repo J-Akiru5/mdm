@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     template: "%s — MDM Events Management",
   },
   description:
-    "MDM Events Management is a full-service events and activation partner that turns ideas into well-executed experiences. We plan, produce, and manage events that leave a lasting impact.",
+    "MDM Events Management is a technology-driven event solutions company in Iloilo, Philippines — offering full-service event planning, production, and end-to-end technology deployment for corporate, government, and brand events.",
   keywords: [
     "events management Iloilo",
     "event planner Iloilo City",
@@ -44,6 +44,11 @@ export const metadata: Metadata = {
     "corporate event planner",
     "event management services",
     "Iloilo event coordinator",
+    "technology-driven events Philippines",
+    "event registration system Philippines",
+    "hybrid event production Iloilo",
+    "brand activation Philippines",
+    "corporate event organizer Philippines",
   ],
   authors: [{ name: "MDM Events Management", url: siteUrl }],
   robots: {
@@ -61,7 +66,7 @@ export const metadata: Metadata = {
     url: siteUrl,
     title: "MDM Events Management — Events That Move People, Brands, and Communities",
     description:
-      "MDM Events Management is a full-service events and activation partner that turns ideas into well-executed experiences. We plan, produce, and manage events that leave a lasting impact.",
+      "MDM Events Management is a technology-driven event solutions company in Iloilo, Philippines — offering full-service event planning, production, and end-to-end technology deployment for corporate, government, and brand events.",
     images: [
       {
         url: "/images/OG/image.png",

@@ -15,6 +15,15 @@ interface PortfolioItem {
   client_logo: string | null;
 }
 
+const categoryColors: Record<string, string> = {
+  corporate: "#9B1B30",
+  government: "#1A1A2E",
+  launches: "#D4A853",
+  festivals: "#2E7D32",
+  production: "#1565C0",
+  exhibits: "#6A1B9A",
+};
+
 export default function PortfolioPreview() {
   const [items, setItems] = useState<PortfolioItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -25,7 +34,8 @@ export default function PortfolioPreview() {
       .then((data) => {
         if (Array.isArray(data)) setItems(data);
         setLoading(false);
-      });
+      })
+      .catch(() => setLoading(false));
   }, []);
 
   return (
@@ -56,7 +66,7 @@ export default function PortfolioPreview() {
         ) : (
           <>
             <div className={styles.gallery}>
-              {items.map((item) => (
+              {items.slice(0, 6).map((item) => (
                 <Link key={item.id} href={`/portfolio/${item.id}`} className={styles.galleryItem}>
                   <Image
                     src={item.image_url}
@@ -66,19 +76,23 @@ export default function PortfolioPreview() {
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     unoptimized
                   />
-                  {item.client_logo && (
-                    <img src={item.client_logo} alt="Client logo" className={styles.clientLogo} />
-                  )}
-                  <span className={styles.categoryBadge}>{item.category}</span>
-                  <div className={styles.label}>
-                    <span>{item.title}</span>
+                  <span
+                    className={styles.categoryBadge}
+                    style={{ backgroundColor: categoryColors[item.category] || "#9B1B30" }}
+                  >
+                    {item.category}
+                  </span>
+                  <div className={styles.overlay}>
+                    <div className={styles.overlayContent}>
+                      <span className={styles.overlayTitle}>{item.title}</span>
+                    </div>
                   </div>
                 </Link>
               ))}
             </div>
             <div className={styles.seeMoreWrap}>
               <Link href="/portfolio" className={styles.seeMoreBtn}>
-                See More
+                View Full Portfolio &rarr;
               </Link>
             </div>
           </>

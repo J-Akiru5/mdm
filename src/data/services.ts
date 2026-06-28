@@ -4,12 +4,19 @@ export interface Service {
   tagline: string;
   description: string;
   image: string;
+  category: string;
   offerings: string[];
   process: {
     step: string;
     title: string;
     description: string;
   }[];
+}
+
+export interface ServiceCategory {
+  id: string;
+  title: string;
+  description: string;
 }
 
 export const services: Service[] = [
@@ -20,6 +27,7 @@ export const services: Service[] = [
     description:
       "Every unforgettable event starts with a powerful idea. Our creative team works closely with you to conceptualize and design events that align with your brand, captivate your audience, and deliver measurable impact. From theme development to visual storytelling, we turn your vision into a compelling event blueprint.",
     image: "/images/services/conceptualization.jpg",
+    category: "creative",
     offerings: [
       "Creative concept and theme development",
       "Mood boards and visual storytelling",
@@ -56,6 +64,7 @@ export const services: Service[] = [
     description:
       "The venue sets the stage for your entire event. We leverage our extensive network of partners to find, negotiate, and manage the ideal venue for your occasion — whether it's a grand ballroom, an open-air festival ground, or an intimate corporate boardroom. We handle site inspections, contracts, and on-site coordination so you don't have to.",
     image: "/images/services/venue.jpg",
+    category: "management",
     offerings: [
       "Venue sourcing and shortlisting",
       "Site inspection coordination",
@@ -90,6 +99,7 @@ export const services: Service[] = [
     description:
       "Great food leaves a lasting impression. Our catering partners deliver culinary experiences tailored to your theme, audience, and dietary requirements — from elegant sit-down dinners and buffet spreads to vibrant cocktail receptions and festival food parks. Every menu is crafted to delight and satisfy.",
     image: "/images/services/catering.jpg",
+    category: "management",
     offerings: [
       "Menu planning and customization",
       "Fine dining, buffet, and cocktail setups",
@@ -126,6 +136,7 @@ export const services: Service[] = [
     description:
       "The right entertainment elevates any event from ordinary to extraordinary. We book, manage, and produce live performances — from top musical acts, hosts, and emcees to cultural performers, keynote speakers, and specialty acts. Our roster of talent is curated to match your audience and event theme perfectly.",
     image: "/images/services/entertainment.jpg",
+    category: "creative",
     offerings: [
       "Live band, DJ, and musical act booking",
       "Hosts, emcees, and keynote speakers",
@@ -159,6 +170,7 @@ export const services: Service[] = [
     description:
       "Flawless execution requires meticulous logistics. Our operations team manages transportation, accommodation, equipment rentals, on-ground staffing, and real-time coordination so that every moving part works in perfect harmony. We plan for every scenario so your event runs without a hitch.",
     image: "/images/services/logistics.jpg",
+    category: "management",
     offerings: [
       "Transportation and shuttle management",
       "Guest and VIP accommodation booking",
@@ -193,6 +205,7 @@ export const services: Service[] = [
     description:
       "An event is only as successful as its reach. We develop and execute targeted marketing campaigns that generate buzz, drive attendance, and extend your event's impact across digital and traditional channels. From social media and email marketing to PR and on-ground promotions, we make sure your audience shows up.",
     image: "/images/services/marketing.jpg",
+    category: "marketing",
     offerings: [
       "Social media campaign management",
       "Email marketing and guest invitations",
@@ -227,6 +240,7 @@ export const services: Service[] = [
     description:
       "Leverage the power of technology to elevate every touchpoint of your event. From live-streaming and hybrid event platforms to registration systems, LED walls, and interactive experiences, our tech team integrates the right digital solutions to ensure seamless connectivity and maximum audience engagement.",
     image: "/images/services/technology.png",
+    category: "technology",
     offerings: [
       "Hybrid and virtual event platform setup",
       "Live streaming and broadcast production",
@@ -263,6 +277,7 @@ export const services: Service[] = [
     description:
       "From the grandeur of a wedding to the joy of a child's birthday, we bring heart and expertise to life's most meaningful moments. Our personal events team handles every detail — coordination, styling, catering, and entertainment — so you can be fully present for the people who matter most.",
     image: "/images/services/planning.jpg",
+    category: "creative",
     offerings: [
       "Wedding & Debut Planning (On-the-Day, Semi, Full Coordination)",
       "Baptism Receptions & Christening Celebrations",
@@ -296,36 +311,26 @@ export const services: Service[] = [
   },
 ];
 
-export const serviceCategories = [
+export const serviceCategories: ServiceCategory[] = [
   {
-    id: "corporate",
-    title: "Corporate Events",
-    description: "Conferences, seminars, company events, and corporate gatherings.",
+    id: "management",
+    title: "Event Management",
+    description: "Planning, coordination, logistics, and production.",
   },
   {
-    id: "government",
-    title: "Government & Institutional",
-    description: "Official functions, ceremonies, and institutional programs.",
+    id: "creative",
+    title: "Creative Services",
+    description: "Stage design, branding, exhibits, and event styling.",
   },
   {
-    id: "brand-activations",
-    title: "Brand Activations & Launches",
-    description: "Product launches, brand experiences, and activation campaigns.",
+    id: "technology",
+    title: "Technology & Digital",
+    description: "Registration systems, event apps, AI, livestreaming, and custom software.",
   },
   {
-    id: "festivals",
-    title: "Festivals & Community Events",
-    description: "Festivals, fairs, and large-scale community celebrations.",
-  },
-  {
-    id: "exhibits",
-    title: "Exhibits & Trade Fairs",
-    description: "Trade show booths, exhibits, and exhibition management.",
-  },
-  {
-    id: "production",
-    title: "Production & Technical",
-    description: "Technical production, staging, and audiovisual solutions.",
+    id: "marketing",
+    title: "Marketing & Promotions",
+    description: "Brand activations, social media, product launches, and influencer engagement.",
   },
 ];
 

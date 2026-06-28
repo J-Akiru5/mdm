@@ -25,7 +25,7 @@ export default function HeroSection({ onQuoteOpen }: HeroSectionProps) {
             COMMUNITIES.
           </h1>
           <p className={styles.subtitle}>
-            We plan, produce, and manage events that leave a lasting impact.
+            Full-service event management powered by technology — from concept to execution.
           </p>
           <div className={styles.actions}>
             <Button onClick={onQuoteOpen}>Request a Proposal</Button>
