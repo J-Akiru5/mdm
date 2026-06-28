@@ -173,6 +173,7 @@ export async function sendInquiryNotification(inquiry: {
 export async function sendFeedbackNotification(feedback: {
   name: string;
   email: string;
+  company?: string | null;
   rating: number;
   comment: string;
 }) {
@@ -188,6 +189,7 @@ export async function sendFeedbackNotification(feedback: {
 
     <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:32px;">
       ${fieldRow("Name", feedback.name)}
+      ${feedback.company ? fieldRow("Company", feedback.company) : ""}
       ${fieldRow("Email", `<a href="mailto:${feedback.email}" style="color:#9e1115;text-decoration:none;">${feedback.email}</a>`)}
       <tr>
         <td style="padding:10px 0;color:#888;font-size:13px;text-transform:uppercase;letter-spacing:0.5px;vertical-align:top;width:130px;border-bottom:1px solid #f0f0f0;">Rating</td>

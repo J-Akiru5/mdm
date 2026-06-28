@@ -63,6 +63,13 @@
   color: var(--color-gray-300);
 }
 
+.stars {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--color-primary);
+  letter-spacing: 1px;
+}
+
 @media (max-width: 1024px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);

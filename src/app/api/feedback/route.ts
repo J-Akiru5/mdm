@@ -14,6 +14,7 @@ export async function GET(req: NextRequest) {
     const limit = Math.min(100, parseInt(searchParams.get("limit") ?? "20", 10));
     const search = searchParams.get("search")?.trim() ?? "";
     const ratingParam = searchParams.get("rating") ?? "";
+    const visibilityParam = searchParams.get("visibility") ?? "";
 
     const where: Prisma.FeedbackWhereInput = {};
 
@@ -22,11 +23,15 @@ export async function GET(req: NextRequest) {
       if (!isNaN(rating)) where.rating = rating;
     }
 
+    if (visibilityParam === "visible") where.isVisible = true;
+    else if (visibilityParam === "hidden") where.isVisible = false;
+
     if (search) {
       where.OR = [
         { name: { contains: search, mode: "insensitive" } },
         { email: { contains: search, mode: "insensitive" } },
         { comment: { contains: search, mode: "insensitive" } },
+        { company: { contains: search, mode: "insensitive" } },
       ];
     }
 
@@ -44,8 +49,10 @@ export async function GET(req: NextRequest) {
       id: f.id,
       name: f.name,
       email: f.email,
+      company: f.company,
       rating: f.rating,
       comment: f.comment,
+      is_visible: f.isVisible,
       created_at: f.createdAt.toISOString(),
     }));
 
@@ -65,7 +72,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { name, email, rating, comment } = body;
+    const { name, email, company, rating, comment } = body;
 
     if (!name || !email || rating === undefined || !comment) {
       return NextResponse.json(
@@ -86,6 +93,7 @@ export async function POST(req: NextRequest) {
       data: {
         name,
         email,
+        company: company || null,
         rating: ratingVal,
         comment,
       },
@@ -102,5 +110,50 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error("Failed to submit feedback:", error);
     return NextResponse.json({ error: "Invalid request or database error" }, { status: 400 });
+  }
+}
+
+export async function PATCH(req: NextRequest) {
+  const auth = await requireAuth(req);
+  if (auth instanceof NextResponse) return auth;
+
+  try {
+    const body = await req.json();
+    const { id, is_visible } = body;
+
+    if (!id || typeof is_visible !== "boolean") {
+      return NextResponse.json({ error: "id and is_visible are required" }, { status: 400 });
+    }
+
+    const feedback = await prisma.feedback.update({
+      where: { id },
+      data: { isVisible: is_visible },
+    });
+
+    return NextResponse.json({ success: true, data: feedback });
+  } catch (error) {
+    console.error("Failed to update feedback:", error);
+    return NextResponse.json({ error: "Failed to update feedback" }, { status: 500 });
+  }
+}
+
+export async function DELETE(req: NextRequest) {
+  const auth = await requireAuth(req);
+  if (auth instanceof NextResponse) return auth;
+
+  try {
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json({ error: "id is required" }, { status: 400 });
+    }
+
+    await prisma.feedback.delete({ where: { id } });
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("Failed to delete feedback:", error);
+    return NextResponse.json({ error: "Failed to delete feedback" }, { status: 500 });
   }
 }

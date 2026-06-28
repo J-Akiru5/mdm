@@ -67,8 +67,10 @@ model Feedback {
   id        String   @id @default(uuid())
   name      String
   email     String
+  company   String?
   rating    Int
   comment   String
+  isVisible Boolean  @default(false) @map("is_visible")
   createdAt DateTime @default(now()) @map("created_at")
 
   @@map("feedbacks")

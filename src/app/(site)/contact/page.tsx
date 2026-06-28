@@ -25,6 +25,7 @@ export default function ContactPage() {
   const [feedbackForm, setFeedbackForm] = useState({
     name: "",
     email: "",
+    company: "",
     rating: 5,
     comment: "",
   });
@@ -103,7 +104,7 @@ export default function ContactPage() {
       }
 
       setFeedbackSubmitted(true);
-      setFeedbackForm({ name: "", email: "", rating: 5, comment: "" });
+      setFeedbackForm({ name: "", email: "", company: "", rating: 5, comment: "" });
       setTimeout(() => setFeedbackSubmitted(false), 4000);
     } catch {
       alert("Network error. Please try again.");
@@ -432,6 +433,19 @@ export default function ContactPage() {
                           value={feedbackForm.email}
                           onChange={handleFeedbackChange}
                           required
+                        />
+                      </div>
+
+                      <div className={styles.formGroup}>
+                        <label htmlFor="feedbackCompany">Company / Organization</label>
+                        <input
+                          id="feedbackCompany"
+                          name="company"
+                          type="text"
+                          placeholder="Company Name (optional)"
+                          className={styles.input}
+                          value={feedbackForm.company}
+                          onChange={handleFeedbackChange}
                         />
                       </div>
 
