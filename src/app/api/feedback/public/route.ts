@@ -6,7 +6,7 @@ export async function GET() {
     const feedbacks = await prisma.feedback.findMany({
       where: { isVisible: true },
       orderBy: { createdAt: "desc" },
-      take: 50,
+      take: 3,
       select: {
         id: true,
         name: true,
