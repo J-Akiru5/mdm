@@ -37,8 +37,8 @@ export default function AboutPreview() {
             <div className={styles.photoGrid}>
               <div className={`${styles.photo} ${styles.photoMain}`}>
                 <Image
-                  src="/images/portfolio/corporate.jpg"
-                  alt="MDM Events - Corporate Event"
+                  src="/images/home/workshop-group.png"
+                  alt="MDM Events - Regional Workshop Group Photo"
                   fill
                   style={{ objectFit: "cover" }}
                   sizes="(max-width:768px) 100vw, 40vw"
@@ -47,8 +47,8 @@ export default function AboutPreview() {
               </div>
               <div className={`${styles.photo} ${styles.photoSub1}`}>
                 <Image
-                  src="/images/portfolio/festival.jpg"
-                  alt="MDM Events - Festival"
+                  src="/images/home/panel-discussion.png"
+                  alt="MDM Events - Panel Discussion"
                   fill
                   style={{ objectFit: "cover" }}
                   sizes="(max-width:768px) 50vw, 20vw"
@@ -57,8 +57,8 @@ export default function AboutPreview() {
               </div>
               <div className={`${styles.photo} ${styles.photoSub2}`}>
                 <Image
-                  src="/images/portfolio/launch.jpg"
-                  alt="MDM Events - Product Launch"
+                  src="/images/home/community-engagement.png"
+                  alt="MDM Events - Community Engagement"
                   fill
                   style={{ objectFit: "cover" }}
                   sizes="(max-width:768px) 50vw, 20vw"
