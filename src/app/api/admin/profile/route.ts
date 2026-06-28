@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { requireAuth } from "@/lib/api-auth";
-import { createClient } from "@supabase/supabase-js";
 
 export async function GET(request: Request) {
   const auth = await requireAuth(request);
@@ -20,14 +19,8 @@ export async function PATCH(request: Request) {
   const body = await request.json();
   const { fullName, avatarUrl } = body;
 
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
-  );
-
-  const { error } = await supabase.auth.admin.updateUserById(auth.user.id, {
-    user_metadata: {
-      ...auth.user.user_metadata,
+  const { error } = await auth.supabase.auth.updateUser({
+    data: {
       full_name: fullName ?? auth.user.user_metadata?.full_name,
       avatar_url: avatarUrl ?? auth.user.user_metadata?.avatar_url,
     },

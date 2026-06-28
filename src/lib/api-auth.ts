@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
+import type { SupabaseClient } from "@supabase/supabase-js";
 
 export interface AuthResult {
   user: { id: string; email: string; user_metadata: Record<string, unknown> };
+  supabase: SupabaseClient;
 }
 
 export async function requireAuth(request?: Request): Promise<AuthResult | NextResponse> {
@@ -45,5 +47,6 @@ export async function requireAuth(request?: Request): Promise<AuthResult | NextR
       email: user.email ?? "",
       user_metadata: (user.user_metadata as Record<string, unknown>) ?? {},
     },
+    supabase,
   };
 }

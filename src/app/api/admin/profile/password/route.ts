@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { requireAuth } from "@/lib/api-auth";
-import { createClient } from "@supabase/supabase-js";
 
 export async function POST(request: Request) {
   const auth = await requireAuth(request);
@@ -20,12 +19,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
-  );
-
-  const { error } = await supabase.auth.admin.updateUserById(auth.user.id, {
+  const { error } = await auth.supabase.auth.updateUser({
     password: newPassword,
   });
 
