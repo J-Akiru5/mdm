@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback, useRef } from "react";
+import { useToast } from "@/components/ui/Toast";
 import Pagination from "@/components/ui/Pagination";
 import styles from "./page.module.css";
 
@@ -35,6 +36,7 @@ export default function AdminFeedback() {
   const [filterRating, setFilterRating] = useState("all");
   const [filterVisibility, setFilterVisibility] = useState("all");
   const [page, setPage] = useState(1);
+  const { toast } = useToast();
 
   // Debounce search
   const searchTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -117,8 +119,9 @@ export default function AdminFeedback() {
           data: prev.data.map((f) => (f.id === fb.id ? { ...f, is_visible: !fb.is_visible } : f)),
         };
       });
+      toast("success", fb.is_visible ? "Approval revoked" : "Feedback approved for site");
     } catch {
-      alert("Failed to update visibility.");
+      toast("error", "Failed to update visibility.");
     }
   };
 
@@ -136,8 +139,9 @@ export default function AdminFeedback() {
           data: prev.data.filter((f) => f.id !== id),
         };
       });
+      toast("success", "Feedback deleted.");
     } catch {
-      alert("Failed to delete feedback.");
+      toast("error", "Failed to delete feedback.");
     }
   };
 

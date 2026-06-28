@@ -2,7 +2,18 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { sendFeedbackNotification } from "@/lib/email";
 import { requireAuth } from "@/lib/api-auth";
+import { logAudit } from "@/lib/audit";
 import { Prisma } from "@prisma/client";
+
+function getRequestMeta(req: NextRequest) {
+  return {
+    ipAddress:
+      req.headers.get("x-forwarded-for")?.split(",")[0].trim() ??
+      req.headers.get("x-real-ip") ??
+      undefined,
+    userAgent: req.headers.get("user-agent") ?? undefined,
+  };
+}
 
 export async function GET(req: NextRequest) {
   const auth = await requireAuth(req);
@@ -117,6 +128,8 @@ export async function PATCH(req: NextRequest) {
   const auth = await requireAuth(req);
   if (auth instanceof NextResponse) return auth;
 
+  const meta = getRequestMeta(req);
+
   try {
     const body = await req.json();
     const { id, is_visible } = body;
@@ -125,9 +138,26 @@ export async function PATCH(req: NextRequest) {
       return NextResponse.json({ error: "id and is_visible are required" }, { status: 400 });
     }
 
+    const before = await prisma.feedback.findUnique({
+      where: { id },
+      select: { isVisible: true, name: true },
+    });
+
     const feedback = await prisma.feedback.update({
       where: { id },
       data: { isVisible: is_visible },
+    });
+
+    logAudit({
+      action: "UPDATE",
+      entity: "Feedback",
+      entityId: id,
+      actorId: auth.user.id,
+      actorEmail: auth.user.email,
+      ...meta,
+      before: { isVisible: before?.isVisible },
+      after: { isVisible: is_visible },
+      metadata: { title: before?.name, field: "isVisible" },
     });
 
     return NextResponse.json({ success: true, data: feedback });
@@ -141,6 +171,8 @@ export async function DELETE(req: NextRequest) {
   const auth = await requireAuth(req);
   if (auth instanceof NextResponse) return auth;
 
+  const meta = getRequestMeta(req);
+
   try {
     const { searchParams } = new URL(req.url);
     const id = searchParams.get("id");
@@ -149,7 +181,30 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ error: "id is required" }, { status: 400 });
     }
 
+    const before = await prisma.feedback.findUnique({
+      where: { id },
+      select: { name: true, email: true, rating: true, isVisible: true },
+    });
+
     await prisma.feedback.delete({ where: { id } });
+
+    if (before) {
+      logAudit({
+        action: "DELETE",
+        entity: "Feedback",
+        entityId: id,
+        actorId: auth.user.id,
+        actorEmail: auth.user.email,
+        ...meta,
+        before: {
+          name: before.name,
+          email: before.email,
+          rating: before.rating,
+          isVisible: before.isVisible,
+        },
+        metadata: { title: before.name },
+      });
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {
