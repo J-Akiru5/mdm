@@ -97,13 +97,31 @@
   border-color: #d51c24;
 }
 
-.itemBadge {
-  font-size: 11px;
-  color: #666;
-  background: #f0f0f0;
-  padding: 2px 8px;
-  display: inline-block;
-  width: fit-content;
+.summary {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.summaryCard {
+  background: #fff;
+  padding: 20px 28px;
+  border-radius: 0;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.summaryNumber {
+  font-size: 28px;
+  font-weight: 700;
+  color: #d51c24;
+}
+
+.summaryLabel {
+  font-size: 12px;
+  color: #999;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -144,6 +162,12 @@
 .itemEmail {
   font-size: 13px;
   color: #999;
+}
+
+.itemStars {
+  font-size: 13px;
+  color: #d51c24;
+  letter-spacing: 1px;
 }
 
 .itemDate {
@@ -213,6 +237,11 @@
   margin: 0;
 }
 
+.stars {
+  color: #d51c24;
+  letter-spacing: 2px;
+}
+
 .detailMessage {
   margin-bottom: 16px;
 }
@@ -237,4 +266,66 @@
 .detailDate {
   font-size: 12px;
   color: #bbb;
+}
+
+@media (max-width: 768px) {
+  .heading {
+    font-size: 22px;
+  }
+
+  .summary {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .summaryCard {
+    padding: 14px 20px;
+  }
+
+  .filters {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .searchInput {
+    min-width: auto;
+    width: 100%;
+  }
+
+  .filterSelect {
+    width: 100%;
+  }
+
+  .clearFilters {
+    width: 100%;
+    text-align: center;
+  }
+
+  .item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 14px;
+  }
+
+  .itemDate {
+    align-self: flex-end;
+  }
+
+  .detail {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .detailCard {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 12px 12px 0 0;
+    padding: 24px;
+  }
+
+  .detailGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
 }

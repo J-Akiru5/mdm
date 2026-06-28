@@ -1,0 +1,99 @@
+.page {
+  max-width: 560px;
+}
+
+.heading {
+  font-size: 24px;
+  font-weight: 700;
+  color: #171717;
+  margin: 0 0 24px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e8e8ec;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.cardTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: #171717;
+  margin: 0 0 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.field input {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 0;
+  font-size: 14px;
+  font-family: inherit;
+  background: #fff;
+  color: #171717;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.field input:focus {
+  border-color: #9e1115;
+}
+
+.disabledInput {
+  background: #f8f8f8 !important;
+  color: #999 !important;
+  cursor: not-allowed;
+}
+
+.message {
+  font-size: 13px;
+  color: #065f46;
+  background: #d1fae5;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+}
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: #9e1115;
+  color: #fff;
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s;
+}
+
+.btn:hover {
+  background: #8a0f13;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .page {
+    max-width: 100%;
+  }
+}
