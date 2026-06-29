@@ -2,6 +2,29 @@
 
 All notable changes to **MDM Events Management** are documented here.
 
+This project adheres to [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+# [1.2.0](https://github.com/J-Akiru5/mdm/compare/v1.1.0...v1.2.0) (2026-06-29)
+
+### Bug Fixes
+
+- **api:** lazy-init Resend client to prevent build crash when env key is missing ([6c7dd07](https://github.com/J-Akiru5/mdm/commit/6c7dd0740e847f9f4035bf362540ce5735ff54a7))
+- restore hero section to original 1.0.0 release design ([bd557cd](https://github.com/J-Akiru5/mdm/commit/bd557cd6e60b5516ab7eaf684825e6dd7af6594f))
+
+### Features
+
+- **chatbot:** add Gemini-powered chat widget with feedback entry mode ([39cf315](https://github.com/J-Akiru5/mdm/commit/39cf315abd8f720ca2881b6fe60d5f92cf1820bc))
+- add hero event photography, portfolio case study narratives, and admin form fields ([a9af5ed](https://github.com/J-Akiru5/mdm/commit/a9af5ed4c1f215cde59b7365bf63810ac517afd4))
+- **mobile:** add Settings route to BottomTabBar More sheet ([350ec2e](https://github.com/J-Akiru5/mdm/commit/350ec2e0b8b40550dad9edefb43079fb4c08df53))
+- **feedback:** dynamic testimonials with admin approval workflow ([1fc1bb4](https://github.com/J-Akiru5/mdm/commit/1fc1bb49bff3255ee989a097e2893abc5a1ac607))
+- implement website enhancement action plan ([5bfbdf9](https://github.com/J-Akiru5/mdm/commit/5bfbdf9aca6b63e53361209afc8dfa34878637a6))
+- **admin:** sync TopBar profile, add notifications feed page under Settings tabs ([7d16d95](https://github.com/J-Akiru5/mdm/commit/7d16d95b33a2bffcdda70021abee8aff0d8bdd82))
+- **feedback:** toast notifications and audit logging for admin actions ([0811273](https://github.com/J-Akiru5/mdm/commit/0811273e35ff280958d8173bb98fe10e526b5644))
+
+# Changelog
+
+All notable changes to **MDM Events Management** are documented here.
+
 This project adheres to [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
