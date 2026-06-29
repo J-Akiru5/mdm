@@ -9,6 +9,35 @@ and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- **Gemini chatbot widget** — Floating chat bubble (bottom-right) powered by Google Gemini 2.5 Flash with MDM context (services, portfolio, testimonials, stats); conversation persisted to localStorage
+- **Feedback mode in chatbot** — Toggle between Chat and Feedback modes; submit name, email, company, star rating, and comment via `/api/feedback/public`
+- **`/api/chat` endpoint** — Server-side Gemini integration with system prompt built from MDM data; history filtering for valid message ordering
+- **Site-wide chat widget** — Integrated into the public site layout (`(site)/layout.tsx`); visible on all public pages
+- **Admin notification feed** — Dedicated notifications page under Settings tabs with full list view
+- **Settings route in BottomTabBar** — Mobile navigation entry for notification settings
+- **Hero event photography** — New hero image with event photography
+- **Portfolio case study narratives** — Challenge, solution, and result fields added to portfolio items
+- **Admin form fields** — New fields for portfolio case study content
+- **Dynamic testimonials with admin approval** — Public testimonials loaded from database with admin visibility toggle
+- **Toast notifications for admin actions** — Success/error toasts on feedback and inquiry management
+- **Audit logging for feedback/inquiry admin actions** — `UPDATE` and `DELETE` operations tracked
+- **"Mark all as read" for notifications** — Bulk action in notification panel
+- **Clickable notifications** — Navigate to relevant section on click
+
+### Fixed
+
+- **Bell badge count** — Now respects localStorage read state to show accurate unread count
+- **Hero section** — Restored to original 1.0.0 release design
+
+### Changed
+
+- **About page** — Updated "Who We Are" text and replaced placeholder images with actual event photos from MDM portfolio
+- **Home AboutPreview** — Reverted to original 3-photo grid layout
+- **Public testimonials** — Limited to 3 most recent entries
+- **Email header** — Now uses event banner image as template
+
 ---
 
 ## [1.0.0] — 2026-06-28
