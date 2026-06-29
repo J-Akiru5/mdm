@@ -1,7 +1,9 @@
 import { Resend } from "resend";
 import { prisma } from "@/lib/prisma";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResend() {
+  return new Resend(process.env.RESEND_API_KEY);
+}
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@mdmevents.org";
 const FROM_EMAIL = "MDM Events <notifications@mdmevents.org>";
@@ -162,7 +164,7 @@ export async function sendInquiryNotification(inquiry: {
     </table>
   `);
 
-  await resend.emails.send({
+  await getResend().emails.send({
     from: FROM_EMAIL,
     to,
     subject: `New Inquiry from ${inquiry.fullName} — ${eventType}`,
@@ -211,7 +213,7 @@ export async function sendFeedbackNotification(feedback: {
     </table>
   `);
 
-  await resend.emails.send({
+  await getResend().emails.send({
     from: FROM_EMAIL,
     to,
     subject: `New Feedback from ${feedback.name} — ${feedback.rating}★`,
