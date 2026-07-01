@@ -8,6 +8,7 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import Button from "@/components/ui/Button";
 import Image from "next/image";
 import { stats } from "@/data/stats";
+import { teamMembers } from "@/data/team";
 import HeroGlobe from "@/components/ui/HeroGlobe";
 import WhyChooseUs from "@/components/home/WhyChooseUs";
 import AffiliationsGrid from "@/components/about/AffiliationsGrid";
@@ -133,6 +134,47 @@ export default function AboutPage() {
                 seamless workflow.
               </p>
             </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Team */}
+      <section className={styles.teamSection}>
+        <div className="container">
+          <SectionHeading subtitle="Meet the Team" title="Our Team" align="center" />
+          <div className={styles.teamStack}>
+            {teamMembers.map((member) => (
+              <ScrollReveal key={member.id} animation="fadeInUp">
+                <div className={styles.teamCard}>
+                  <ScrollReveal animation="fadeInLeft" className={styles.teamImageWrap}>
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      width={260}
+                      height={260}
+                      className={styles.teamImage}
+                      unoptimized
+                    />
+                  </ScrollReveal>
+                  <ScrollReveal animation="fadeInRight" className={styles.teamBio}>
+                    <h3 className={styles.teamName}>{member.name}</h3>
+                    <span className={styles.teamRole}>{member.role}</span>
+                    {member.bio.map((paragraph, i) => (
+                      <p key={i} className={styles.teamText}>
+                        {paragraph}
+                      </p>
+                    ))}
+                    {member.company && member.companyUrl && (
+                      <span className={styles.teamCompany}>
+                        <a href={member.companyUrl} target="_blank" rel="noopener noreferrer">
+                          {member.company}
+                        </a>
+                      </span>
+                    )}
+                  </ScrollReveal>
+                </div>
+              </ScrollReveal>
+            ))}
           </div>
         </div>
       </section>
