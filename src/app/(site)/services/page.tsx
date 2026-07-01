@@ -27,10 +27,10 @@ export default function ServicesPage() {
         <HeroGlobe />
         <div className="container heroContent" style={{ textAlign: "center" }}>
           <span className={styles.heroLabel}>OUR SERVICES</span>
-          <h1 className={styles.heroTitle}>Solutions for Every Type of Event.</h1>
+          <h1 className={styles.heroTitle}>Comprehensive Digital Solutions.</h1>
           <p className={styles.heroSub}>
-            From planning to production, we provide end-to-end event management services tailored to
-            your needs.
+            From strategic planning to execution, we deliver integrated technology, media, and
+            digital services tailored to your needs.
           </p>
         </div>
       </section>
@@ -81,7 +81,7 @@ export default function ServicesPage() {
           <SectionHeading
             subtitle="How We Work"
             title="Our Workflow"
-            description="A proven 6-step process from concept to completion."
+            description="A proven 6-step process from concept to digital impact."
             align="center"
           />
           <div className={styles.workflowGrid}>
@@ -90,23 +90,24 @@ export default function ServicesPage() {
                 <span className={styles.stepNumber}>01</span>
                 <h3 className={styles.stepTitle}>Discovery &amp; Consultation</h3>
                 <p className={styles.stepDesc}>
-                  We begin by understanding your vision, goals, audience, and brand identity.
+                  We understand your vision, goals, audience, and digital requirements.
                 </p>
               </div>
               <div className={styles.connector} aria-hidden="true" />
               <div className={styles.workflowStep}>
                 <span className={styles.stepNumber}>02</span>
-                <h3 className={styles.stepTitle}>Concept Development &amp; Proposal</h3>
+                <h3 className={styles.stepTitle}>Strategy &amp; Planning</h3>
                 <p className={styles.stepDesc}>
-                  We present a creative direction, theme, and strategy tailored to your objectives.
+                  We develop a tailored digital roadmap with clear milestones and measurable
+                  outcomes.
                 </p>
               </div>
               <div className={styles.connector} aria-hidden="true" />
               <div className={styles.workflowStep}>
                 <span className={styles.stepNumber}>03</span>
-                <h3 className={styles.stepTitle}>Planning &amp; Coordination</h3>
+                <h3 className={styles.stepTitle}>Design &amp; Development</h3>
                 <p className={styles.stepDesc}>
-                  Detailed project timeline, vendor sourcing, and logistics planning come together.
+                  We create custom digital solutions optimized for performance and user experience.
                 </p>
               </div>
             </div>
@@ -116,28 +117,25 @@ export default function ServicesPage() {
             <div className={styles.workflowRow}>
               <div className={styles.workflowStep}>
                 <span className={styles.stepNumber}>04</span>
-                <h3 className={styles.stepTitle}>Design &amp; Production</h3>
+                <h3 className={styles.stepTitle}>Implementation</h3>
                 <p className={styles.stepDesc}>
-                  We handle all aesthetics—stage, branding, tech, d&eacute;cor, and digital
-                  elements.
+                  We deploy and integrate your digital solutions with precision and care.
                 </p>
               </div>
               <div className={styles.connector} aria-hidden="true" />
               <div className={styles.workflowStep}>
                 <span className={styles.stepNumber}>05</span>
-                <h3 className={styles.stepTitle}>Event Execution</h3>
+                <h3 className={styles.stepTitle}>Launch &amp; Optimization</h3>
                 <p className={styles.stepDesc}>
-                  On-site management, coordination, and contingency handling&mdash;all hands on
-                  deck.
+                  We go live with full support and continuously optimize for peak performance.
                 </p>
               </div>
               <div className={styles.connector} aria-hidden="true" />
               <div className={styles.workflowStep}>
                 <span className={styles.stepNumber}>06</span>
-                <h3 className={styles.stepTitle}>Post-Event Evaluation</h3>
+                <h3 className={styles.stepTitle}>Analytics &amp; Growth</h3>
                 <p className={styles.stepDesc}>
-                  We wrap up with performance metrics, client feedback, and continuous improvement
-                  insights.
+                  We measure results, gather insights, and drive continuous improvement.
                 </p>
               </div>
             </div>
@@ -151,7 +149,7 @@ export default function ServicesPage() {
             <div>
               <h2 className={styles.ctaTitle}>Need a customized solution?</h2>
               <p className={styles.ctaText}>
-                We&apos;ll tailor our services to match your event goals and budget.
+                We&apos;ll tailor our digital services to match your goals and budget.
               </p>
             </div>
             <Button onClick={() => setQuoteOpen(true)}>Talk to Our Team</Button>

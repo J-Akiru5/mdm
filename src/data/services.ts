@@ -21,233 +21,214 @@ export interface ServiceCategory {
 
 export const services: Service[] = [
   {
-    id: "event-conceptualization-design",
-    title: "Event Conceptualization and Design",
-    tagline: "Where big ideas take shape.",
+    id: "digital-technology-incubation",
+    title: "Digital & Technology Incubation",
+    tagline: "Transform ideas into innovative digital solutions.",
     description:
-      "Every unforgettable event starts with a powerful idea. Our creative team works closely with you to conceptualize and design events that align with your brand, captivate your audience, and deliver measurable impact. From theme development to visual storytelling, we turn your vision into a compelling event blueprint.",
-    image: "/images/services/conceptualization.jpg",
-    category: "creative",
+      "We partner with organizations to turn bold ideas into viable digital products and services. From strategic planning and technology consulting to innovation workshops and startup incubation, we guide you through every stage of the digital journey — ensuring your initiatives are built for scale, sustainability, and real-world impact.",
+    image: "/images/services/technology.png",
+    category: "digital-solutions",
     offerings: [
-      "Creative concept and theme development",
-      "Mood boards and visual storytelling",
-      "Program flow and experience design",
-      "Budget-aligned creative proposals",
-      "Brand integration and messaging",
-      "Presentation decks and pitch materials",
+      "Digital Transformation Strategy",
+      "Technology Consulting",
+      "Innovation & Startup Incubation",
+      "Product Development Advisory",
+      "AI Adoption Planning",
+      "Digital Capability Building",
+      "Digital Innovation Workshops",
+    ],
+    process: [
+      {
+        step: "01",
+        title: "Assess",
+        description:
+          "We evaluate your organization's digital maturity, goals, and opportunities for innovation.",
+      },
+      {
+        step: "02",
+        title: "Strategize",
+        description:
+          "We develop a tailored digital roadmap with clear milestones and measurable outcomes.",
+      },
+      {
+        step: "03",
+        title: "Incubate",
+        description:
+          "We guide your idea from concept to prototype, providing technical expertise and mentorship along the way.",
+      },
+    ],
+  },
+  {
+    id: "websites-digital-platforms",
+    title: "Websites & Digital Platforms",
+    tagline: "Build a professional online presence that grows your community.",
+    description:
+      "From corporate websites to membership portals and online directories, we design and develop digital platforms that inform, engage, and convert. Every solution is built with performance, accessibility, and scalability in mind — giving your organization a powerful digital footprint.",
+    image: "/images/services/marketing.jpg",
+    category: "digital-solutions",
+    offerings: [
+      "Corporate Websites",
+      "Association & Membership Portals",
+      "Event Websites",
+      "Landing Pages",
+      "Online Directories",
+      "Website Maintenance",
+      "Web Hosting & Domain Management",
     ],
     process: [
       {
         step: "01",
         title: "Discover",
-        description:
-          "We dive deep into your brand, goals, audience, and budget to uncover the core idea.",
+        description: "We understand your audience, content needs, and business objectives.",
       },
       {
         step: "02",
-        title: "Conceptualize",
+        title: "Design & Build",
         description:
-          "We craft a creative direction, theme, and program flow that brings your vision to life.",
+          "We create a custom-designed, fully responsive website optimized for performance and user experience.",
       },
       {
         step: "03",
-        title: "Design",
+        title: "Launch & Support",
         description:
-          "We produce mood boards, renderings, and detailed proposals for your approval.",
+          "We deploy your platform and provide ongoing maintenance to keep it secure and up to date.",
       },
     ],
   },
   {
-    id: "venue-selection-management",
-    title: "Venue Selection and Management",
-    tagline: "The perfect setting for every moment.",
+    id: "ai-business-automation",
+    title: "AI & Business Automation",
+    tagline: "Improve efficiency with intelligent systems and automation.",
     description:
-      "The venue sets the stage for your entire event. We leverage our extensive network of partners to find, negotiate, and manage the ideal venue for your occasion — whether it's a grand ballroom, an open-air festival ground, or an intimate corporate boardroom. We handle site inspections, contracts, and on-site coordination so you don't have to.",
+      "Harness the power of artificial intelligence and automation to streamline operations, reduce manual work, and unlock new capabilities. From AI chatbots and workflow automation to CRM systems and custom web applications, we build intelligent solutions that work as hard as you do.",
+    image: "/images/services/conceptualization.jpg",
+    category: "digital-solutions",
+    offerings: [
+      "AI Chatbots",
+      "Workflow Automation",
+      "CRM & Membership Systems",
+      "Online Registration Systems",
+      "Business Process Automation",
+      "Custom Web Applications",
+      "Digital Forms & Approval Workflows",
+    ],
+    process: [
+      {
+        step: "01",
+        title: "Analyze",
+        description:
+          "We map your current workflows and identify automation opportunities for maximum ROI.",
+      },
+      {
+        step: "02",
+        title: "Automate",
+        description:
+          "We design and implement intelligent systems tailored to your operational needs.",
+      },
+      {
+        step: "03",
+        title: "Optimize",
+        description:
+          "We monitor performance and continuously refine your automation for peak efficiency.",
+      },
+    ],
+  },
+  {
+    id: "social-media-digital-marketing",
+    title: "Social Media & Digital Marketing",
+    tagline: "Expand your reach and strengthen your brand.",
+    description:
+      "Amplify your presence across digital channels with strategic social media management, content creation, and data-driven marketing campaigns. We help you connect with your audience, build community, and achieve measurable results across every platform that matters.",
     image: "/images/services/venue.jpg",
-    category: "management",
+    category: "creative-media",
     offerings: [
-      "Venue sourcing and shortlisting",
-      "Site inspection coordination",
-      "Contract negotiation and booking",
-      "Permits and compliance management",
-      "Floor plan and layout planning",
-      "On-site venue coordination",
-    ],
-    process: [
-      {
-        step: "01",
-        title: "Source",
-        description:
-          "We identify and shortlist venues that match your vision, guest count, and budget.",
-      },
-      {
-        step: "02",
-        title: "Secure",
-        description: "We negotiate contracts, manage deposits, and secure all necessary permits.",
-      },
-      {
-        step: "03",
-        title: "Manage",
-        description: "We coordinate with venue staff and oversee every on-site detail.",
-      },
-    ],
-  },
-  {
-    id: "catering-beverage-services",
-    title: "Catering and Beverage Services",
-    tagline: "Exceptional food, unforgettable experiences.",
-    description:
-      "Great food leaves a lasting impression. Our catering partners deliver culinary experiences tailored to your theme, audience, and dietary requirements — from elegant sit-down dinners and buffet spreads to vibrant cocktail receptions and festival food parks. Every menu is crafted to delight and satisfy.",
-    image: "/images/services/catering.jpg",
-    category: "management",
-    offerings: [
-      "Menu planning and customization",
-      "Fine dining, buffet, and cocktail setups",
-      "Dietary accommodation (halal, vegan, gluten-free)",
-      "Food tasting and quality control",
-      "Beverage bar and mixology services",
-      "Waitstaff and service team management",
-    ],
-    process: [
-      {
-        step: "01",
-        title: "Plan",
-        description:
-          "We work with you to design a menu that fits your theme, audience, and dietary needs.",
-      },
-      {
-        step: "02",
-        title: "Prepare",
-        description:
-          "Our catering partners source ingredients and prepare every dish to the highest standard.",
-      },
-      {
-        step: "03",
-        title: "Serve",
-        description:
-          "We manage food flow, service timing, and guest satisfaction throughout the event.",
-      },
-    ],
-  },
-  {
-    id: "entertainment-talent-management",
-    title: "Entertainment and Talent Management",
-    tagline: "Performances that captivate.",
-    description:
-      "The right entertainment elevates any event from ordinary to extraordinary. We book, manage, and produce live performances — from top musical acts, hosts, and emcees to cultural performers, keynote speakers, and specialty acts. Our roster of talent is curated to match your audience and event theme perfectly.",
-    image: "/images/services/entertainment.jpg",
-    category: "creative",
-    offerings: [
-      "Live band, DJ, and musical act booking",
-      "Hosts, emcees, and keynote speakers",
-      "Cultural and specialty performers",
-      "Sound check and rehearsal coordination",
-      "Performance schedule and run-of-show",
-      "Talent hospitality and rider management",
-    ],
-    process: [
-      {
-        step: "01",
-        title: "Curate",
-        description: "We recommend talent based on your event theme, audience, and budget.",
-      },
-      {
-        step: "02",
-        title: "Book",
-        description: "We handle contracts, scheduling, and all logistical arrangements for talent.",
-      },
-      {
-        step: "03",
-        title: "Produce",
-        description: "We manage rehearsals, sound checks, and live production on event day.",
-      },
-    ],
-  },
-  {
-    id: "logistics-coordination",
-    title: "Logistics and Coordination",
-    tagline: "Seamless operations behind the scenes.",
-    description:
-      "Flawless execution requires meticulous logistics. Our operations team manages transportation, accommodation, equipment rentals, on-ground staffing, and real-time coordination so that every moving part works in perfect harmony. We plan for every scenario so your event runs without a hitch.",
-    image: "/images/services/logistics.jpg",
-    category: "management",
-    offerings: [
-      "Transportation and shuttle management",
-      "Guest and VIP accommodation booking",
-      "Equipment and furniture rentals",
-      "On-ground staffing and crew management",
-      "Real-time timeline and run-of-show management",
-      "Contingency and crisis response planning",
-    ],
-    process: [
-      {
-        step: "01",
-        title: "Plan",
-        description:
-          "We build a detailed logistics roadmap covering every operational requirement.",
-      },
-      {
-        step: "02",
-        title: "Coordinate",
-        description: "Our team manages vendors, staff, and schedules across all event touchpoints.",
-      },
-      {
-        step: "03",
-        title: "Execute",
-        description: "We oversee load-in, on-ground operations, and load-out with precision.",
-      },
-    ],
-  },
-  {
-    id: "marketing-promotion",
-    title: "Marketing and Promotion",
-    tagline: "Amplify your event's reach.",
-    description:
-      "An event is only as successful as its reach. We develop and execute targeted marketing campaigns that generate buzz, drive attendance, and extend your event's impact across digital and traditional channels. From social media and email marketing to PR and on-ground promotions, we make sure your audience shows up.",
-    image: "/images/services/marketing.jpg",
-    category: "marketing",
-    offerings: [
-      "Social media campaign management",
-      "Email marketing and guest invitations",
-      "Press releases and media relations",
-      "On-ground signage and promotional materials",
-      "Event photography and videography",
-      "Post-event reporting and analytics",
+      "Social Media Management",
+      "Content Strategy",
+      "Graphic Design",
+      "Video Content Creation",
+      "Email Marketing",
+      "Digital Advertising",
+      "Community Engagement",
+      "Brand Campaigns",
     ],
     process: [
       {
         step: "01",
         title: "Strategize",
         description:
-          "We develop a marketing plan tailored to your target audience and event goals.",
+          "We develop a content and marketing plan aligned with your brand voice and audience.",
       },
       {
         step: "02",
-        title: "Create",
-        description: "We produce compelling content, visuals, and collateral across all channels.",
+        title: "Create & Publish",
+        description:
+          "We produce compelling content and manage publishing across all your digital channels.",
       },
       {
         step: "03",
-        title: "Amplify",
-        description: "We launch, monitor, and optimize campaigns to maximize reach and attendance.",
+        title: "Engage & Grow",
+        description:
+          "We monitor performance, engage your community, and optimize campaigns for growth.",
       },
     ],
   },
   {
-    id: "technology-digital-solutions",
-    title: "Technology and Digital Solutions",
-    tagline: "Powering events with cutting-edge tech.",
+    id: "creative-media-studio",
+    title: "Creative Media & Recording Studio",
+    tagline: "Create compelling content with professional production.",
     description:
-      "Leverage the power of technology to elevate every touchpoint of your event. From live-streaming and hybrid event platforms to registration systems, LED walls, and interactive experiences, our tech team integrates the right digital solutions to ensure seamless connectivity and maximum audience engagement.",
-    image: "/images/services/technology.png",
-    category: "technology",
+      "Bring your stories to life with our full-service creative media studio. From podcast recording and video production to motion graphics and livestream production, we deliver professional-quality content that captivates audiences and elevates your brand.",
+    image: "/images/services/entertainment.jpg",
+    category: "creative-media",
     offerings: [
-      "Hybrid and virtual event platform setup",
-      "Live streaming and broadcast production",
-      "Online and on-site registration systems",
-      "LED walls, screens, and digital signage",
-      "Event apps and audience interaction tools",
-      "Wi-Fi infrastructure and AV integration",
+      "Podcast Recording",
+      "Audio Recording & Voice-Over Services",
+      "Music & Jingle Production",
+      "Video Production & Editing",
+      "Photography",
+      "Livestream Production",
+      "Motion Graphics & Promotional Videos",
+      "Interviews & Talk Shows",
+      "Webinar & Online Course Production",
+      "Studio Rental",
+    ],
+    process: [
+      {
+        step: "01",
+        title: "Plan",
+        description: "We collaborate on content concepts, scripts, and production requirements.",
+      },
+      {
+        step: "02",
+        title: "Produce",
+        description:
+          "Our studio team handles recording, filming, and post-production with professional-grade equipment.",
+      },
+      {
+        step: "03",
+        title: "Deliver",
+        description:
+          "We deliver polished, ready-to-publish content optimized for your target platforms.",
+      },
+    ],
+  },
+  {
+    id: "event-technology-solutions",
+    title: "Event Technology Solutions",
+    tagline: "Deliver seamless, technology-enabled events.",
+    description:
+      "Elevate your events with cutting-edge technology solutions. From registration systems and QR code check-in to livestreaming, hybrid event platforms, and post-event analytics, we provide the digital infrastructure that makes modern events smarter, more engaging, and more measurable.",
+    image: "/images/services/technology.png",
+    category: "digital-solutions",
+    offerings: [
+      "Event Registration Systems",
+      "QR Code Check-in",
+      "Online Ticketing",
+      "Digital Certificates",
+      "Event Mobile Applications",
+      "Livestream Support",
+      "Hybrid Event Solutions",
+      "Post-Event Analytics",
     ],
     process: [
       {
@@ -271,41 +252,113 @@ export const services: Service[] = [
     ],
   },
   {
-    id: "personal-events",
-    title: "Personal Events",
-    tagline: "Every milestone, beautifully celebrated.",
+    id: "membership-payments-fundraising",
+    title: "Membership, Payments & Fundraising",
+    tagline: "Strengthen relationships while simplifying administration.",
     description:
-      "From the grandeur of a wedding to the joy of a child's birthday, we bring heart and expertise to life's most meaningful moments. Our personal events team handles every detail — coordination, styling, catering, and entertainment — so you can be fully present for the people who matter most.",
-    image: "/images/services/planning.jpg",
-    category: "creative",
+      "Build stronger communities with integrated membership management, online payments, and donation platforms. We help associations, nonprofits, and organizations streamline administration, increase engagement, and maximize revenue through digital-first solutions.",
+    image: "/images/services/logistics.jpg",
+    category: "business-tech",
     offerings: [
-      "Wedding & Debut Planning (On-the-Day, Semi, Full Coordination)",
-      "Baptism Receptions & Christening Celebrations",
-      "Kiddie Parties & Themed Birthday Parties",
-      "Private Gathering & Intimate Event Management",
-      "Food & Beverage Coordination and Staffing Management",
-      "Venue Styling, Floral Design & Decor",
-      "Staging, Lights & Sounds, Iwata Fans",
-      "Aisle Carpets, LED / LCD TV & Projectors",
+      "Membership Management Systems",
+      "Online Membership Renewal",
+      "Digital Member IDs",
+      "Online Payment Integration",
+      "Donation Platforms",
+      "Sponsorship Portals",
+      "Member Communications",
     ],
     process: [
       {
         step: "01",
-        title: "Consult",
+        title: "Map",
         description:
-          "We sit down with you to understand your story, vision, and the experience you want to create for your guests.",
+          "We analyze your membership structure, payment workflows, and engagement touchpoints.",
       },
       {
         step: "02",
-        title: "Design",
+        title: "Build",
         description:
-          "We craft a personalized event plan — from styling and florals to catering and program flow.",
+          "We implement integrated systems for membership, payments, and donor management.",
       },
       {
         step: "03",
-        title: "Celebrate",
+        title: "Grow",
         description:
-          "On the day, our team handles everything so you can relax, enjoy, and make memories.",
+          "We provide tools and insights to increase retention, engagement, and revenue.",
+      },
+    ],
+  },
+  {
+    id: "analytics-business-intelligence",
+    title: "Analytics & Business Intelligence",
+    tagline: "Turn information into better decisions.",
+    description:
+      "Transform raw data into actionable insights with executive dashboards, analytics reporting, and AI-powered intelligence. We help you understand your audience, measure performance, and make data-driven decisions that drive real results.",
+    image: "/images/services/planning.jpg",
+    category: "business-tech",
+    offerings: [
+      "Executive Dashboards",
+      "Website Analytics",
+      "Membership Analytics",
+      "Event Performance Reports",
+      "Audience Insights",
+      "AI-Powered Reporting",
+    ],
+    process: [
+      {
+        step: "01",
+        title: "Collect",
+        description:
+          "We set up data collection across your digital touchpoints for comprehensive visibility.",
+      },
+      {
+        step: "02",
+        title: "Analyze",
+        description:
+          "We build custom dashboards and reports that surface the metrics that matter most.",
+      },
+      {
+        step: "03",
+        title: "Act",
+        description:
+          "We translate insights into recommendations and help you implement data-driven strategies.",
+      },
+    ],
+  },
+  {
+    id: "managed-digital-services",
+    title: "Managed Digital Services",
+    tagline: "Keep your digital ecosystem secure, reliable, and up to date.",
+    description:
+      "Focus on your core mission while we manage your digital infrastructure. From technical support and cloud services to cybersecurity and data backup, we provide comprehensive managed services that keep your technology running smoothly and securely.",
+    image: "/images/services/marketing.jpg",
+    category: "business-tech",
+    offerings: [
+      "Technical Support",
+      "Website Maintenance",
+      "Cloud Services",
+      "Cybersecurity",
+      "Data Backup & Recovery",
+      "Systems Administration",
+      "Ongoing Digital Support",
+    ],
+    process: [
+      {
+        step: "01",
+        title: "Audit",
+        description: "We assess your current digital infrastructure and identify gaps and risks.",
+      },
+      {
+        step: "02",
+        title: "Secure & Optimize",
+        description: "We implement security measures, backups, and performance optimizations.",
+      },
+      {
+        step: "03",
+        title: "Monitor & Support",
+        description:
+          "We provide 24/7 monitoring, proactive maintenance, and responsive technical support.",
       },
     ],
   },
@@ -313,31 +366,26 @@ export const services: Service[] = [
 
 export const serviceCategories: ServiceCategory[] = [
   {
-    id: "management",
-    title: "Event Management",
-    description: "Planning, coordination, logistics, and production.",
+    id: "digital-solutions",
+    title: "Digital Solutions",
+    description: "Technology-driven platforms, AI, and digital transformation.",
   },
   {
-    id: "creative",
-    title: "Creative Services",
-    description: "Stage design, branding, exhibits, and event styling.",
+    id: "creative-media",
+    title: "Creative & Media",
+    description: "Content creation, marketing, and professional production services.",
   },
   {
-    id: "technology",
-    title: "Technology & Digital",
-    description: "Registration systems, event apps, AI, livestreaming, and custom software.",
-  },
-  {
-    id: "marketing",
-    title: "Marketing & Promotions",
-    description: "Brand activations, social media, product launches, and influencer engagement.",
+    id: "business-tech",
+    title: "Business & Technology",
+    description: "Membership, payments, analytics, and managed digital services.",
   },
 ];
 
 export const coreValues = [
-  { title: "Strategic Planning", icon: "target" },
-  { title: "Creative Design", icon: "pen-tool" },
-  { title: "Professional Execution", icon: "shield" },
-  { title: "On-Ground Management", icon: "map" },
-  { title: "Memorable Experiences", icon: "star" },
+  { title: "Innovation", icon: "lightbulb" },
+  { title: "Technical Excellence", icon: "cpu" },
+  { title: "Client Partnership", icon: "users" },
+  { title: "Creative Excellence", icon: "palette" },
+  { title: "Measurable Impact", icon: "bar-chart" },
 ];

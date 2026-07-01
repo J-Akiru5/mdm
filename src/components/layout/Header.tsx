@@ -35,10 +35,14 @@ export default function Header() {
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
       <div className={styles.inner}>
         {/* Brand/Logo */}
-        <Link href="/" className={styles.logo} aria-label="MDM Events Management Home">
+        <Link
+          href="/"
+          className={styles.logo}
+          aria-label="MDM Digital, Media & Technology Services Home"
+        >
           <Image
             src="/logo/mdm_logo.png"
-            alt="MDM Events Management Logo"
+            alt="MDM Digital, Media & Technology Services Logo"
             width={102}
             height={58}
             className={styles.logoImg}

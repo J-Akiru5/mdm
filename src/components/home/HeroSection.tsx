@@ -17,20 +17,18 @@ export default function HeroSection({ onQuoteOpen }: HeroSectionProps) {
         {/* ── Left: Text content ── */}
         <div className={styles.content}>
           <h1 className={styles.title}>
-            EVENTS THAT <br />
-            <span className={styles.highlight}>MOVE</span> PEOPLE,
+            FROM <span className={styles.highlight}>IDEAS</span> TO
             <br />
-            <span className={styles.highlight}>BRANDS,</span> AND
-            <br />
-            COMMUNITIES.
+            DIGITAL <span className={styles.highlight}>IMPACT</span>.
           </h1>
           <p className={styles.subtitle}>
-            We plan, produce, and manage events that leave a lasting impact.
+            We empower organizations to innovate, connect, and grow through technology, creativity,
+            and digital transformation.
           </p>
           <div className={styles.actions}>
-            <Button onClick={onQuoteOpen}>Request a Proposal</Button>
+            <Button onClick={onQuoteOpen}>Start Your Digital Journey</Button>
             <Button variant="outline" as="a" href="#about">
-              Talk to Our Team
+              Explore Our Services
             </Button>
           </div>
         </div>

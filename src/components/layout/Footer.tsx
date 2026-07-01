@@ -10,9 +10,9 @@ const quickLinks = [
 ];
 
 const serviceLinks = [
-  { href: "/services", label: "Corporate Events" },
-  { href: "/services", label: "Brand Activations" },
-  { href: "/services", label: "Production & Technical" },
+  { href: "/services", label: "Digital Solutions" },
+  { href: "/services", label: "Creative & Media" },
+  { href: "/services", label: "Business & Technology" },
 ];
 
 export default function Footer() {
@@ -24,13 +24,13 @@ export default function Footer() {
             <Link href="/" className={styles.logo}>
               <Image
                 src="/logo/mdm_logo.jpg"
-                alt="MDM Events Management Logo"
+                alt="MDM Digital, Media & Technology Services Logo"
                 width={106}
                 height={60}
                 className={styles.logoImg}
               />
             </Link>
-            <p className={styles.tagline}>Events That Move People, Brands, and Communities.</p>
+            <p className={styles.tagline}>From Ideas to Digital Impact.</p>
           </div>
 
           <div className={styles.column}>
@@ -69,7 +69,8 @@ export default function Footer() {
         <div className={styles.bottomBar}>
           <div className={styles.copyrightGroup}>
             <p className={styles.copyright}>
-              &copy; {new Date().getFullYear()} MDM Events Management. All Rights Reserved.
+              &copy; {new Date().getFullYear()} MDM Digital, Media & Technology Services. All Rights
+              Reserved.
             </p>
             <div className={styles.legalLinks}>
               <Link href="/privacy">Privacy Policy</Link>
@@ -93,7 +94,7 @@ export default function Footer() {
 
       {/* Huge modern watermark background with sharp design styling */}
       <div className={styles.watermark} aria-hidden="true">
-        MDMevents
+        MDMDigital
       </div>
     </footer>
   );

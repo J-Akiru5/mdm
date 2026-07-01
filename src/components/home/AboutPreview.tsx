@@ -12,20 +12,20 @@ export default function AboutPreview() {
             <div className={styles.textContent}>
               <span className={styles.subtitle}>WHO WE ARE</span>
               <h2 className={styles.title}>
-                Your Event.
+                Your Digital Partner.
                 <br />
-                <span className={styles.accent}>Professionally Handled.</span>
+                <span className={styles.accent}>From Concept to Execution.</span>
               </h2>
               <p className={styles.description}>
-                MDM Events Management combines strategic planning, creative execution, and
-                technology-driven solutions to produce memorable experiences for corporations,
-                government agencies, brands, and communities.
+                MDM Digital, Media & Technology Services empowers organizations to innovate,
+                connect, and grow through technology, creativity, and digital transformation. We
+                partner with associations, businesses, educational institutions, government
+                agencies, nonprofits, and communities to build meaningful digital experiences.
               </p>
               <p className={styles.description}>
-                Unlike traditional event companies, MDM integrates full-stack technology —
-                registration systems, event apps, AI assistants, livestreaming, and custom software
-                — directly into every project, giving clients a single, accountable partner from
-                concept to post-event analytics.
+                From strategic planning and technology incubation to websites, multimedia
+                production, AI solutions, and event technology, MDM delivers integrated services
+                that help organizations thrive in the digital age.
               </p>
               <Link href="/about" className={styles.textLink}>
                 Learn More About Us →

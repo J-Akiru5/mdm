@@ -25,16 +25,16 @@ export default function TechShowcase() {
       <div className="container-wide">
         <SectionHeading
           subtitle="Powered by Technology"
-          title="Technology-Enabled Events."
+          title="Digital Solutions & Capabilities"
           description={techUsp}
           dark
           align="center"
         />
 
         <p className={styles.positioning}>
-          Very few event companies in the Philippines can offer both full-service event management
-          and end-to-end technology deployment under one roof. At MDM, technology is not an
-          afterthought — it is embedded in every project we deliver.
+          MDM integrates technology into every service we deliver — from AI-powered automation and
+          custom web platforms to professional media production and data analytics. Technology is
+          not an afterthought — it is embedded in every project we deliver.
         </p>
 
         <div className={styles.grid}>

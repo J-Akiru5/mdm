@@ -5,7 +5,7 @@ export interface TechService {
 }
 
 export const techUsp =
-  "Beyond organizing events, MDM integrates technology that makes every event smarter, more engaging, and more measurable.";
+  "Beyond organizing events, MDM integrates technology that makes every initiative smarter, more engaging, and more measurable.";
 
 export const techServices: TechService[] = [
   {
@@ -77,7 +77,7 @@ export const techServices: TechService[] = [
   {
     title: "Custom Software Development",
     description:
-      "Bespoke web and mobile applications, APIs, data dashboards, and integrations tailored to your event.",
+      "Bespoke web and mobile applications, APIs, data dashboards, and integrations tailored to your needs.",
     icon: "⚙️",
   },
   {
