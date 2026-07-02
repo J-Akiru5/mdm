@@ -1,0 +1,7 @@
+# Playwright auth state
+.auth/
+test-results/
+playwright-report/
+
+# Vitest
+*.report.json

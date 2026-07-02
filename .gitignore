@@ -5,6 +5,8 @@
 
 # Testing
 /coverage
+/test-results
+/playwright-report
 
 # Next.js
 /.next/
@@ -31,3 +33,6 @@ yarn-error.log*
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
+
+# Playwright
+e2e/.auth/

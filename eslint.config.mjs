@@ -9,7 +9,7 @@ const eslintConfig = [
     },
   },
   {
-    ignores: ["node_modules/", ".next/", "out/", "prisma/", "*.config.*"],
+    ignores: ["node_modules/", ".next/", "out/", "prisma/", "e2e/", "*.config.*"],
   },
 ];
 
