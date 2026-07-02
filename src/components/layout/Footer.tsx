@@ -111,9 +111,17 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Full-width watermark — now truly edge-to-edge */}
-      <div className={styles.watermark} aria-hidden="true">
-        MDM Digital
+      {/* Dedicated watermark banner — its own in-flow space, no overlap */}
+      <div className={styles.watermarkBanner} aria-hidden="true">
+        {/* Decorative top line pair */}
+        <div className={styles.watermarkLines}>
+          <span />
+          <span />
+        </div>
+        {/* The big outlined brand name */}
+        <div className={styles.watermarkText}>MDMEVENTS</div>
+        {/* Red radial glow underneath the text */}
+        <div className={styles.watermarkGlow} />
       </div>
     </footer>
   );
