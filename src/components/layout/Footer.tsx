@@ -18,21 +18,28 @@ const serviceLinks = [
 export default function Footer() {
   return (
     <footer className={styles.footer}>
+      {/* Main content — full width with generous side padding */}
       <div className={styles.inner}>
+        {/* Top grid */}
         <div className={styles.grid}>
+          {/* Brand column */}
           <div className={styles.brand}>
             <Link href="/" className={styles.logo}>
               <Image
                 src="/logo/mdm_logo.jpg"
                 alt="MDM Digital, Media & Technology Services Logo"
-                width={106}
-                height={60}
+                width={90}
+                height={50}
                 className={styles.logoImg}
               />
             </Link>
             <p className={styles.tagline}>From Ideas to Digital Impact.</p>
+            <p className={styles.brandDesc}>
+              Empowering organizations through technology, creativity, and digital transformation.
+            </p>
           </div>
 
+          {/* Quick Links */}
           <div className={styles.column}>
             <h4 className={styles.columnTitle}>Quick Links</h4>
             <ul className={styles.columnLinks}>
@@ -44,6 +51,7 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Services */}
           <div className={styles.column}>
             <h4 className={styles.columnTitle}>Services</h4>
             <ul className={styles.columnLinks}>
@@ -55,22 +63,31 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Contact */}
           <div className={styles.column}>
             <h4 className={styles.columnTitle}>Contact</h4>
             <ul className={styles.columnLinks}>
-              <li>hello@mdmevents.org</li>
-              <li>+63 908 895 4818</li>
+              <li>
+                <a href="mailto:hello@mdmevents.org">hello@mdmevents.org</a>
+              </li>
+              <li>
+                <a href="tel:+639088954818">+63 908 895 4818</a>
+              </li>
               <li>(033) 323 4864</li>
               <li>56 Quezon St. Arevalo, Iloilo City</li>
             </ul>
           </div>
         </div>
 
+        {/* Divider */}
+        <div className={styles.divider} />
+
+        {/* Bottom bar */}
         <div className={styles.bottomBar}>
           <div className={styles.copyrightGroup}>
             <p className={styles.copyright}>
-              &copy; {new Date().getFullYear()} MDM Digital, Media & Technology Services. All Rights
-              Reserved.
+              &copy; {new Date().getFullYear()} MDM Digital, Media &amp; Technology Services. All
+              Rights Reserved.
             </p>
             <div className={styles.legalLinks}>
               <Link href="/privacy">Privacy Policy</Link>
@@ -78,13 +95,15 @@ export default function Footer() {
               <Link href="/terms">Terms of Service</Link>
             </div>
           </div>
+
           <div className={styles.creditPill}>
-            <span>Powered by</span>{" "}
+            <span className={styles.statusDot} aria-hidden="true" />
+            <span>Powered by&nbsp;</span>
             <a href="https://zenlabs.me/" target="_blank" rel="noopener noreferrer">
               ZenLabs
             </a>
             <span className={styles.creditDivider}>|</span>
-            <span>Built with</span>{" "}
+            <span>Built with&nbsp;</span>
             <a href="https://www.syntaxure.dev/" target="_blank" rel="noopener noreferrer">
               Syntaxure Labs
             </a>
@@ -92,9 +111,9 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Huge modern watermark background with sharp design styling */}
+      {/* Full-width watermark — now truly edge-to-edge */}
       <div className={styles.watermark} aria-hidden="true">
-        MDMDigital
+        MDM Digital
       </div>
     </footer>
   );
