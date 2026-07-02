@@ -276,15 +276,16 @@
   letter-spacing: -0.04em;
   line-height: 0.85;
   white-space: nowrap;
-  color: transparent;
-  /* Outlined — MDM brand red stroke */
-  -webkit-text-stroke: 1.5px rgba(158, 17, 21, 0.18);
-  text-stroke: 1.5px rgba(158, 17, 21, 0.18);
+  /* Subtle fill so the letters read clearly */
+  color: rgba(255, 255, 255, 0.06);
+  /* Thicker, more opaque red stroke for strong contrast */
+  -webkit-text-stroke: 2px rgba(200, 30, 36, 0.55);
+  text-stroke: 2px rgba(200, 30, 36, 0.55);
   pointer-events: none;
   user-select: none;
   /* Fade the bottom edge into the footer bg */
-  -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-  mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
 }
 
 /* Red radial ambient glow below the text */
