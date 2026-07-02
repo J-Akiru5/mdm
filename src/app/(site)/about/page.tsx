@@ -115,14 +115,22 @@ export default function AboutPage() {
             <ScrollReveal animation="fadeInRight" className={styles.leaderBio}>
               <h3 className={styles.leaderName}>Mary Ann Matiling</h3>
               <span className={styles.leaderRole}>
-                Managing Director, MDM Digital, Media & Technology Services
+                Chief Executive Officer (CEO) &amp; Managing Director, MDM Digital, Media &amp;
+                Technology Services
               </span>
               <p className={styles.leaderText}>
-                Mary Ann Matiling is a seasoned entrepreneur with a proven track record spanning
-                over 20 years in various fields, including events management, business development,
-                sales, marketing, and office administration. With her extensive experience, she has
-                developed strong organizational skills, attention to detail, and the ability to
-                multitask, making her a versatile professional.
+                Mary Ann Darroca-Matiling is a business leader with a passion for creating
+                exceptional events and meaningful client experiences. She brings strong expertise in
+                operations, client relations, and organizational leadership. As CEO of MDM Events,
+                she leads the company&apos;s vision, growth, and commitment to delivering
+                innovative, high-quality event solutions.
+              </p>
+              <p className={styles.leaderText}>
+                She is a seasoned entrepreneur with a proven track record spanning over 20 years in
+                various fields, including events management, business development, sales, marketing,
+                and office administration. With her extensive experience, she has developed strong
+                organizational skills, attention to detail, and the ability to multitask, making her
+                a versatile professional.
               </p>
               <p className={styles.leaderText}>
                 Ann has been managing events for over a decade; she oversees logistics, timelines,

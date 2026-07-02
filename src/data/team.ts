@@ -10,16 +10,6 @@ export interface TeamMember {
 
 export const teamMembers: TeamMember[] = [
   {
-    id: "mary-ann-matiling",
-    name: "Mary Ann Matiling",
-    role: "Chief Executive Officer (CEO)",
-    bio: [
-      "Mary Ann Darroca-Matiling is a business leader with a passion for creating exceptional events and meaningful client experiences.",
-      "She brings strong expertise in operations, client relations, and organizational leadership. As CEO of MDM Events, she leads the company's vision, growth, and commitment to delivering innovative, high-quality event solutions.",
-    ],
-    image: "/images/team/MaryAnn.png",
-  },
-  {
     id: "zeno-martinez",
     name: "Zeno Martinez",
     role: "Chief Strategy Officer (CSO)",
