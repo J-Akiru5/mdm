@@ -4,7 +4,14 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { services } from "@/data/services";
 import styles from "./ServiceCatalog.module.css";
 
-export default function ServiceCatalog() {
+interface ServiceCatalogProps {
+  /** Base path for "Learn More" deep links. Defaults to "/services/tech". */
+  basePath?: string;
+}
+
+export default function ServiceCatalog({
+  basePath: _basePath = "/services/tech",
+}: ServiceCatalogProps) {
   const [activeId, setActiveId] = useState<string>(services[0].id);
   const [visible, setVisible] = useState(false);
   const [collapsed, setCollapsed] = useState(false);

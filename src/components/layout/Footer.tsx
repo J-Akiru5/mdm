@@ -4,15 +4,15 @@ import styles from "./Footer.module.css";
 
 const quickLinks = [
   { href: "/about", label: "About Us" },
-  { href: "/services", label: "Services" },
+  { href: "/services/events", label: "Event Services" },
+  { href: "/services/tech", label: "Tech & Digital Solutions" },
   { href: "/portfolio", label: "Portfolio" },
   { href: "/contact", label: "Contact" },
 ];
 
 const serviceLinks = [
-  { href: "/services", label: "Digital Solutions" },
-  { href: "/services", label: "Creative & Media" },
-  { href: "/services", label: "Business & Technology" },
+  { href: "/services/events", label: "Event Services" },
+  { href: "/services/tech", label: "Tech & Digital Solutions" },
 ];
 
 export default function Footer() {

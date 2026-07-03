@@ -181,7 +181,7 @@ export default function WhatWeDo({ onQuoteOpen }: WhatWeDoProps) {
               <div className={styles.grid}>
                 {catServices.map((svc, i) => (
                   <ScrollReveal key={svc.id} delay={i * 0.1}>
-                    <Link href={`/services/${svc.id}`} className={styles.card}>
+                    <Link href={`/services/tech/${svc.id}`} className={styles.card}>
                       <div className={styles.cardContent}>
                         <div className={styles.iconWrap}>{serviceIcons[svc.id]}</div>
                         <h3 className={styles.cardTitle}>{svc.title}</h3>

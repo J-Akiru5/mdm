@@ -14,6 +14,8 @@ interface ServicePageLayoutProps {
   description: string;
   offerings: string[];
   process: { step: string; title: string; description: string }[];
+  backHref?: string;
+  backLabel?: string;
   children?: ReactNode;
 }
 
@@ -24,6 +26,8 @@ export default function ServicePageLayout({
   description,
   offerings,
   process,
+  backHref = "/services",
+  backLabel = "Back to Services",
   children,
 }: ServicePageLayoutProps) {
   const [quoteOpen, setQuoteOpen] = useState(false);
@@ -39,7 +43,7 @@ export default function ServicePageLayout({
       <section className={styles.hero}>
         <div className="container">
           <div className={styles.backContainer}>
-            <Link href="/services" className={styles.backButton}>
+            <Link href={backHref} className={styles.backButton}>
               <svg
                 width="16"
                 height="16"
@@ -54,7 +58,7 @@ export default function ServicePageLayout({
                 <line x1="19" y1="12" x2="5" y2="12"></line>
                 <polyline points="12 19 5 12 12 5"></polyline>
               </svg>
-              <span>Back to Services</span>
+              <span>{backLabel}</span>
             </Link>
           </div>
 

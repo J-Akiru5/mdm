@@ -9,7 +9,8 @@ import styles from "./Header.module.css";
 const navLinks = [
   { href: "/", label: "HOME" },
   { href: "/about", label: "ABOUT US" },
-  { href: "/services", label: "SERVICES" },
+  { href: "/services/events", label: "EVENT SERVICES" },
+  { href: "/services/tech", label: "TECH & DIGITAL SOLUTIONS" },
   { href: "/portfolio", label: "PORTFOLIO" },
   { href: "/contact", label: "CONTACT" },
 ];
@@ -65,16 +66,19 @@ export default function Header() {
           className={`${styles.nav} ${menuOpen ? styles.navOpen : ""}`}
           aria-label="Main navigation"
         >
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`${styles.navLink} ${pathname === link.href ? styles.active : ""}`}
-              onClick={() => setMenuOpen(false)}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`${styles.navLink} ${isActive ? styles.active : ""}`}
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
           <button className={`${styles.btn} ${styles.btnSmall}`} onClick={openQuoteModal}>
             GET A QUOTE
           </button>
