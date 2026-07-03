@@ -4,6 +4,20 @@ All notable changes to **MDM Events Management** are documented here.
 
 This project adheres to [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# [2.1.0](https://github.com/J-Akiru5/mdm/compare/v2.0.0...v2.1.0) (2026-07-03)
+
+### Bug Fixes
+
+- exclude e2e and test configs from TypeScript compilation ([7ea1470](https://github.com/J-Akiru5/mdm/commit/7ea14707355733c5e687fbe254df671d67fa9ff2))
+- **footer:** increase MDMEVENTS watermark stroke width and opacity for better visibility ([519b102](https://github.com/J-Akiru5/mdm/commit/519b10278ed4df9e74d385e764bc5f9cf4a28775))
+- merge Mary Ann Matiling's roles and bio in leadership section and remove duplicate from team list ([ec9476b](https://github.com/J-Akiru5/mdm/commit/ec9476be014730eec1c6dcf4601322120be5125b))
+
+### Features
+
+- **footer:** add dedicated MDMEVENTS watermark banner with own space, decorative lines and red glow ([e3d6242](https://github.com/J-Akiru5/mdm/commit/e3d624292dac5988c66e35d19a298916c67a5196))
+- redesign footer — full-width layout, modern MDM branding, outlined watermark, gradient divider, status dot ([34c19ff](https://github.com/J-Akiru5/mdm/commit/34c19ff1728959fd8510f8b092bfae36ad1457f7))
+- restructure services nav into Event Services and Tech & Digital Solutions ([0c00581](https://github.com/J-Akiru5/mdm/commit/0c00581291932d4efabe43a94da062ad50d09bb9))
+
 # [1.2.0](https://github.com/J-Akiru5/mdm/compare/v1.1.0...v1.2.0) (2026-06-29)
 
 ### Bug Fixes
