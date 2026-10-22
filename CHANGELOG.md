@@ -4,6 +4,12 @@ All notable changes to **MDM Events Management** are documented here.
 
 This project adheres to [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# [2.2.0](https://github.com/J-Akiru5/mdm/compare/v2.1.0...v2.2.0) (2026-10-22)
+
+### Features
+
+- **team:** add Mx. Toni Lopez profile ([9f832eb](https://github.com/J-Akiru5/mdm/commit/9f832eb9bd11be79fe4421b4c8305c299ac30183))
+
 # [2.1.0](https://github.com/J-Akiru5/mdm/compare/v2.0.0...v2.1.0) (2026-07-03)
 
 ### Bug Fixes
