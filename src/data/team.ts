@@ -33,4 +33,16 @@ export const teamMembers: TeamMember[] = [
     company: "Founder, Syntaxure Labs",
     companyUrl: "https://www.syntaxure.dev/",
   },
+  {
+    id: "toni-lopez",
+    name: "Mx. Toni Lopez",
+    role: "Chief Communications Officer (CCO)",
+    bio: [
+      "Mx. Toni Lopez is a communications, advocacy, media, and nonprofit leadership professional working across youth empowerment, sexual and reproductive health and rights, SOGIESC equality, digital storytelling, and community organizing in the Asia-Pacific. They previously served as Executive Director of Youth Voices Count (YVC), Inc., a regional NGO legally registered in Iloilo City that advances the rights, health, and leadership of LGBTIQ+ young people.",
+      "A graduate of Secondary Education major in English from Capiz State University, Mx. Toni has further trained in SRHR, advocacy, project management, global health, humanitarianism, and women's human rights through programs offered by Women Deliver Digital University, Stanford University, and the University of Manchester.",
+      "Their advocacy and media work includes serving as a reporter for Kabataan News Network and a contributor for MulatPinoy, alongside engagements with the Young Southeast Asian Leaders Initiative, Y-PEER Pilipinas, Y-Cap for SRHR, United Colours of CapSU, and the Women Deliver Young Leaders Program. In 2018, they were recognized as an SDG 5 Youth Champion for their work in gender equality.",
+      "Mx. Toni also served as president of the Roxas City AFS Intercultural Programs Philippines community, advancing youth leadership, intercultural exchange, and community-building.",
+    ],
+    image: "/images/team/Tony.jpg",
+  },
 ];
