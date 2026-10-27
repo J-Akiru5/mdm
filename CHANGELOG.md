@@ -4,6 +4,12 @@ All notable changes to **MDM Events Management** are documented here.
 
 This project adheres to [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# [2.3.0](https://github.com/J-Akiru5/mdm/compare/v2.2.0...v2.3.0) (2026-10-27)
+
+### Features
+
+- **admin:** add testimonials section visibility toggle ([fae3d1e](https://github.com/J-Akiru5/mdm/commit/fae3d1e2017103360e2a31b79277dd92ff52f74d))
+
 ## [Unreleased]
 
 ### Added
