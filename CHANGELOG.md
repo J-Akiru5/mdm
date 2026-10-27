@@ -4,6 +4,12 @@ All notable changes to **MDM Events Management** are documented here.
 
 This project adheres to [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- **admin:** show/hide toggle for the public testimonials section, persisted in a new `site_config` table and hidden by default
+
 # [2.2.0](https://github.com/J-Akiru5/mdm/compare/v2.1.0...v2.2.0) (2026-10-22)
 
 ### Features

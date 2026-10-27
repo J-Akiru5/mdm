@@ -31,6 +31,10 @@ export default function AdminFeedback() {
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<Feedback | null>(null);
 
+  // Testimonials section visibility on the public homepage (null = not loaded yet)
+  const [showTestimonials, setShowTestimonials] = useState<boolean | null>(null);
+  const [togglingTestimonials, setTogglingTestimonials] = useState(false);
+
   // Filters & pagination
   const [searchQuery, setSearchQuery] = useState("");
   const [filterRating, setFilterRating] = useState("all");
@@ -65,6 +69,39 @@ export default function AdminFeedback() {
     },
     [],
   );
+
+  // Fetch testimonials section visibility config
+  useEffect(() => {
+    fetch("/api/admin/site-config", { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((json) => setShowTestimonials(json.data?.show_testimonials === "true"))
+      .catch(() => setShowTestimonials(null));
+  }, []);
+
+  const toggleTestimonialsSection = async () => {
+    if (showTestimonials === null || togglingTestimonials) return;
+    setTogglingTestimonials(true);
+    const newValue = !showTestimonials;
+    try {
+      const r = await fetch("/api/admin/site-config", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ key: "show_testimonials", value: String(newValue) }),
+      });
+      if (!r.ok) throw new Error("Failed");
+      setShowTestimonials(newValue);
+      toast(
+        "success",
+        newValue
+          ? "Testimonials section is now visible on the homepage"
+          : "Testimonials section is now hidden from the homepage",
+      );
+    } catch {
+      toast("error", "Failed to update testimonials visibility.");
+    } finally {
+      setTogglingTestimonials(false);
+    }
+  };
 
   // Debounce search input
   useEffect(() => {
@@ -155,6 +192,31 @@ export default function AdminFeedback() {
       <div className={styles.pageHeader}>
         <h1 className={styles.heading}>Feedback</h1>
         {res && <span className={styles.totalCount}>{res.total.toLocaleString()} total</span>}
+      </div>
+
+      {/* Testimonials Section Toggle */}
+      <div className={styles.sectionToggle}>
+        <div className={styles.sectionToggleInfo}>
+          <strong>Testimonials Section</strong>
+          <span>
+            {showTestimonials === null
+              ? "Couldn't load the current visibility status — refresh to retry."
+              : showTestimonials
+                ? "Visible on the public homepage"
+                : "Hidden from the public homepage"}
+          </span>
+        </div>
+        <button
+          type="button"
+          role="switch"
+          aria-checked={showTestimonials ?? false}
+          aria-label="Show the testimonials section on the public homepage"
+          className={`${styles.toggleSwitch} ${showTestimonials ? styles.toggleOn : ""}`}
+          onClick={toggleTestimonialsSection}
+          disabled={showTestimonials === null || togglingTestimonials}
+        >
+          <span className={styles.toggleKnob} />
+        </button>
       </div>
 
       {/* Detail Modal */}

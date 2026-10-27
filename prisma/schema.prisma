@@ -108,3 +108,11 @@ model NotificationRecipient {
   @@map("notification_recipients")
 }
 
+model SiteConfig {
+  key       String   @id
+  value     String
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  @@map("site_config")
+}
+
